@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RFN Public Website</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        opacity: 0;
+        animation: fadeInPage 1.2s ease-in forwards;
+    }
+
+    @keyframes fadeInPage {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* NAVBAR */
+    nav {
+        background-color: #242424;
+        display: flex;
+        padding: 15px 30px;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        animation: slideDown 0.8s ease-out;
+    }
+
+    @keyframes slideDown {
+        from { transform: translateY(-60px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    nav .logo {
+        font-size: 22px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        transition: transform 0.3s ease;
+    }
+
+    nav .logo:hover {
+        transform: scale(1.08);
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    nav ul li a::after {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        background: white;
+        bottom: -4px;
+        left: 0;
+        transition: 0.3s;
+    }
+
+    nav ul li a:hover::after {
+        width: 100%;
+    }
+
+    /* PAGE SECTION ANIMATION */
+    .section {
+        padding: 50px;
+        background: white;
+        margin: 40px auto;
+        max-width: 900px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        animation: fadeUp 1s ease;
+    }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(35px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2 {
+        margin-top: 0;
+        animation: fadeUp 0.7s ease;
+    }
+
+    /* BUTTON EFFECTS */
+    button {
+        padding: 10px 18px;
+        font-size: 15px;
+        border: none;
+        background: #242424;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    button:hover {
+        transform: scale(1.06);
+        background: #3a3a3a;
+    }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+        background: #242424;
+        color: white;
+        animation: fadeUp 1s ease;
+    }
+
+    /* TERMS MODAL WITH ANIMATION */
+    .modal {
+        display: none;
+        position: fixed;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 50;
+        animation: fadeInModal 0.4s ease;
+    }
+
+    @keyframes fadeInModal {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .modal-content {
+        background: white;
+        margin: 5% auto;
+        padding: 20px;
+        width: 70%;
+        border-radius: 8px;
+        max-height: 80%;
+        overflow-y: auto;
+        animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .close {
+        float: right;
+        font-size: 22px;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .close:hover {
+        color: red;
+    }
+</style>
+
+</head>
+<body>
+
+<nav>
+    <div class="logo">RFN</div>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#employment">Employment</a></li>
+        <li><a href="#franchise">Open a Franchise</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="section">
+    <h1>Welcome to RFN</h1>
+    <p>
+      Welcome, Entrepreneurs and Visionaries!
+You’ve arrived at RFN, the home of innovation, leadership, and collaboration within the Roblox corporate world. Here, we unite creative minds who dream of building and managing their own franchise branches under one professional and structured network.
+
+At RFN, our goal is to bridge ambition with opportunity — giving driven individuals the platform to develop, manage, and grow Roblox organizations while maintaining excellence and unity under the RFN banner.
+
+🚀
+ What We Stand For:
+• Empowering leaders to create and operate successful branches
+• Encouraging professionalism, teamwork, and creative growth
+• Providing structure, resources, and guidance for sustainable success
+• Building a connected community of innovators and executives
+
+This is more than a network — it’s a movement. Together, we’re redefining what it means to be a Roblox professional.
+    </p>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="section">
+    <h2>About RFN</h2>
+    <p>
+RFN is a growing network dedicated to strengthening franchise operations across our community by promoting consistent standards, supporting staff development, ensuring accountability, and providing every location with the tools needed to operate with excellence and integrity.
+    </p>
+</div>
+
+<!-- EMPLOYMENT -->
+<div id="employment" class="section">
+    <h2>Employment Opportunities</h2>
+    <p> If you are an individual seeking a position within the RFN Corporate Team. Please read each question carefully and answer with full detail and professionalism. Your application will be reviewed by RFN Assistant Managers or higher. Dishonesty or incomplete responses will result in automatic denial.</p>
+
+    <p><strong>Apply below:</strong></p>
+    <a href="https://forms.gle/eLLPNg6UQJsW1q4r7" target="_blank">
+        <button>Employment Application</button>
+    </a>
+</div>
+
+<!-- FRANCHISE -->
+<div id="franchise" class="section">
+    <h2>Open an RFN Franchise</h2>
+    <p>
+        Join a powerful network of franchise owners. RFN offers support, structure,
+        and a professional onboarding experience to all new franchise partners.
+    </p>
+
+    <p><strong>Begin your franchise application:</strong></p>
+    <a href="https://forms.gle/3Jziu5i3VGXY3C726" target="_blank">
+        <button>Franchise Application</button>
+    </a>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section">
+    <h2>Contact Us</h2>
+    <p>Email: christophershelley257@gmail.com</p>
+    <p>Discord: https://discord.gg/MEMk4NarpA</p>
+</div>
+
+<footer>
+    <p>© 2025 RFN — All Rights Reserved.</p>
+    <button onclick="document.getElementById('tosModal').style.display='block'">
+        Terms of Service & Privacy Policy
+    </button>
+</footer>
+
+<!-- MODAL -->
+<div id="tosModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('tosModal').style.display='none'">&times;</span>
+        <h2>Terms of Service & Privacy Policy</h2>
+        <p>RFN provides its services, resources, website, franchise network, and corporate systems with the expectation that all users, employees, franchise owners, and visitors act responsibly, professionally, and in accordance with both these terms and all applicable Roblox and Discord rules. By accessing any RFN platform or participating in any RFN-operated program, you acknowledge that you are at least thirteen years old, that you understand these terms, and that your continued use indicates complete acceptance of all policies stated here and any updates that may occur at any time without prior notice. You agree that RFN may modify, add, or remove policies at its discretion and that it is your responsibility to remain informed of the latest version.
+
+Users of RFN services agree not only to follow all official guidelines but also to maintain honesty, courtesy, and accountability while engaging with RFN systems. You agree not to impersonate RFN personnel, not to bypass access systems, not to tamper with internal documents or portals, and not to misuse any part of our digital infrastructure. You further agree to provide accurate information, keep your login credentials secure, and understand that any misuse, dishonesty, or inappropriate behavior may result in removal, denial of employment, termination of franchise ownership, or any administrative action deemed necessary by RFN leadership.
+
+Franchise owners operating under the RFN name acknowledge that they represent the network as a whole and therefore must comply with every franchise guideline, evaluation requirement, and operational standard. You understand that RFN maintains partial administrative oversight for six to twelve months depending on the franchise agreement, that you will be expected to meet periodically with RFN leadership for evaluations, and that RFN provides no guarantee of success, growth, revenue, group activity, or public engagement. All franchises operate at their own risk, and RFN is not responsible for the outcome of your business. RFN reserves the right to audit, review, or terminate a franchise at any time due to inactivity, failure to uphold standards, misconduct, repeated poor evaluations, or any circumstance that threatens the integrity of the network. Decisions regarding premature termination may be made by the Board of Directors.
+
+Applicants for employment, corporate positions, or management roles acknowledge that submitting an application does not guarantee acceptance. RFN reserves full discretion to approve or deny any applicant for any reason. Employment or volunteer positions may be revoked at any time, with or without notice, especially in situations involving unprofessional conduct, dishonesty, inactivity, policy violations, or behaviors deemed harmful to RFN’s reputation or operations. RFN branding, including logos, names, documents, systems, and internal tools, is the sole property of RFN and may not be reproduced, altered, or distributed without express permission.
+
+By using RFN services, you understand that certain information may be collected to support organizational operations. This may include usernames, IDs, timestamps, application responses, franchise check-ins, no-hire list entries, and logs generated through corporate systems. You acknowledge that RFN may store this information for safety, accountability, or documentation purposes and that no-hire data may be retained indefinitely. RFN may share necessary information only with relevant internal teams such as Corporate Management, the Board of Directors, the CEO, or franchise owners when required for operational safety. RFN does not sell personal information to third parties; however, Roblox, Discord, and Google systems each have their own independent policies, and RFN is not responsible for external data practices.
+
+RFN is committed to reasonable data protection efforts but makes no guarantee of absolute security. You acknowledge that any digital platform carries inherent risk and that RFN is not liable for breaches, unauthorized access, data corruption, outages, or any damages arising from the use or inability to use RFN systems. You agree that RFN is not responsible for the loss of data, profits, opportunities, franchise performance, group activity, reputation, service availability, or any indirect, special, incidental, or consequential damages. All RFN services are offered “as is,” without warranties of any kind. You understand and agree that RFN’s total liability to you shall not exceed zero dollars, and you accept full responsibility for your use of RFN tools, websites, and programs.
+
+You acknowledge that RFN may restrict, suspend, or terminate access to any user, employee, or franchise at any time for violations of these terms or for behavior that jeopardizes the safety or integrity of the organization. Continued use of RFN platforms after updates to these terms constitutes acceptance of all changes. You may request to view or correct your stored information, though RFN may deny requests that interfere with safety, active investigations, or operational integrity. Users must be aware that RFN does not knowingly collect sensitive information from minors under thirteen and that age requirements for Roblox and Discord still apply.
+
+By engaging with RFN in any capacity, you agree that these terms are governed by the laws of the United States and interpreted under the administrative jurisdiction of RFN leadership. You affirm that you have read, understood, and accepted these terms, and that your continued use signifies that you willingly take part in RFN at your own risk, with no guarantees made or implied by RFN regarding success, growth, employment, popularity, or outcomes of any kind.</p>
+    </div>
+</div>
+
+<script>
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('tosModal');
+        if (event.target === modal) modal.style.display = "none";
+    }
+</script>
+
+</body>
+</html>
