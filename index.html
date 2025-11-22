@@ -1,223 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>RFN | Official Site</title>
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robloxian Franchise Network (RFN)</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #091833, #b58a00);
-        background-attachment: fixed;
-        color: white;
-        overflow-x: hidden;
+    /* GLOBAL STYLING */
+    :root {
+        --navy: #0a0f29;
+        --gold: #d4af37;
+        --bg-gradient: linear-gradient(145deg, #0a0f29, #1a1f3a, #0d122e);
+        --gold-gradient: linear-gradient(135deg, #d4af37, #f7d774);
+        --white: #ffffff;
     }
 
-    /* Smooth Fade */
-    .fade-in {
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: var(--bg-gradient);
+        color: white;
+        overflow-x: hidden;
         animation: fadeIn 1.3s ease forwards;
-        opacity: 0;
     }
+
     @keyframes fadeIn {
+        from { opacity: 0; }
         to { opacity: 1; }
     }
 
-    /* Header */
-    header {
+    /* NAVBAR */
+    nav {
+        width: 100%;
         padding: 20px 40px;
+        background: rgba(10, 15, 41, 0.7);
+        backdrop-filter: blur(12px);
         display: flex;
         justify-content: space-between;
         align-items: center;
-        animation: fadeIn 1.2s ease forwards;
+        position: sticky;
+        top: 0;
+        z-index: 99;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .logo {
-        font-size: 2rem;
+        font-size: 26px;
         font-weight: 700;
-        letter-spacing: 4px;
+        letter-spacing: 2px;
+        background: var(--gold-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
-    nav a {
-        margin-left: 30px;
-        color: white;
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 35px;
+    }
+
+    nav ul li a {
         text-decoration: none;
-        font-weight: 500;
-        transition: .3s;
-    }
-    nav a:hover {
-        color: #f5d57c;
+        color: white;
+        font-size: 17px;
+        transition: 0.3s ease;
+        position: relative;
     }
 
-    /* Hero Section */
+    nav ul li a:hover {
+        color: var(--gold);
+    }
+
+    /* HERO SECTION */
     .hero {
         text-align: center;
-        margin-top: 10vh;
-        padding: 20px;
+        padding: 130px 20px;
+        background: url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1950&q=80')
+                    center/cover no-repeat;
+        position: relative;
     }
+
+    .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(10, 15, 41, 0.75);
+        backdrop-filter: blur(5px);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: auto;
+    }
+
     .hero h1 {
-        font-size: 3.3rem;
-        opacity: 0;
-        animation: fadeIn 1.5s ease forwards;
+        font-size: 60px;
+        margin-bottom: 15px;
+        background: var(--gold-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: slideUp 1s ease;
     }
+
+    @keyframes slideUp {
+        from { transform: translateY(40px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
     .hero p {
-        font-size: 1.2rem;
-        margin-top: 10px;
-        opacity: 0;
-        animation: fadeIn 2s ease forwards;
+        font-size: 20px;
+        line-height: 1.6;
+        opacity: 0.88;
     }
 
-    /* Buttons */
-    .button-container {
-        margin-top: 40px;
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        opacity: 0;
-        animation: fadeIn 2.5s ease forwards;
+    /* SECTION CARDS */
+    .section {
+        max-width: 1000px;
+        margin: 60px auto;
+        backdrop-filter: blur(15px);
+        background: rgba(255, 255, 255, 0.07);
+        padding: 40px;
+        border-radius: 18px;
+        color: white;
+        animation: fadeUp 1s ease;
+        border: 1px solid rgba(255, 255, 255, 0.13);
     }
 
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(35px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        font-size: 32px;
+        background: var(--gold-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-top: 0;
+    }
+
+    /* BUTTONS */
     .btn {
-        background: #b58a00;
-        padding: 14px 28px;
-        border-radius: 6px;
-        color: #091833;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 1.1rem;
-        transition: 0.3s;
-    }
-    .btn:hover {
-        background: #f2c84d;
-        transform: translateY(-4px);
-    }
-
-    /* Footer */
-    footer {
-        text-align: center;
-        padding: 20px;
-        margin-top: 100px;
-        opacity: 0;
-        animation: fadeIn 3s ease forwards;
-    }
-    footer a {
-        color: #f2c84d;
-        text-decoration: underline;
+        background: var(--gold-gradient);
+        border: none;
+        padding: 14px 30px;
+        font-size: 18px;
+        border-radius: 8px;
         cursor: pointer;
+        transition: 0.3s ease;
+        color: black;
+        font-weight: bold;
+        margin-top: 15px;
     }
 
-    /* Countdown Screen */
-    #countdown-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 100%;
-        background: linear-gradient(135deg, #091833, #b58a00);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        z-index: 9999;
+    .btn:hover {
+        transform: scale(1.05);
+        filter: brightness(1.1);
+    }
+
+    /* FOOTER */
+    footer {
+        background: rgba(10, 15, 41, 0.8);
+        backdrop-filter: blur(12px);
+        padding: 25px;
         text-align: center;
+        color: white;
+        margin-top: 70px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    #countdown-container h1 {
-        font-size: 3rem;
-        margin-bottom: 20px;
+    footer button {
+        margin-top: 10px;
+        background: none;
+        border: none;
+        color: var(--gold);
+        cursor: pointer;
+        font-size: 15px;
+        text-decoration: underline;
     }
 
-    #countdown {
-        font-size: 2.4rem;
-        font-weight: 600;
+    /* MODAL */
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        z-index: 999;
+        overflow-y: auto;
+    }
+
+    .modal-content {
+        background: #ffffff;
+        color: black;
+        margin: 4% auto;
+        padding: 20px;
+        width: 70%;
+        border-radius: 8px;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .close {
+        float: right;
+        cursor: pointer;
+        font-size: 24px;
+        color: red;
     }
 </style>
 </head>
 
 <body>
 
-<!-- COUNTDOWN OVERLAY -->
-<div id="countdown-container">
-    <h1>RFN Website Unlocks Soon</h1>
-    <div id="countdown"></div>
-</div>
-
-<header>
+<nav>
     <div class="logo">RFN</div>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#about">About</a>
-    </nav>
-</header>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#apply">Applications</a></li>
+        <li><a href="#franchise">Franchise</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
-<section class="hero fade-in" id="site-content">
-    <h1>Welcome to RFN</h1>
-    <p>The future of organizational excellence, structure, and management.</p>
-
-    <div class="button-container">
-        <a class="btn" href="YOUR_APPLICATION_LINK_HERE" target="_blank">Employment Application</a>
-        <a class="btn" href="YOUR_FRANCHISE_LINK_HERE" target="_blank">Open a Franchise</a>
+<section class="hero">
+    <div class="hero-content">
+        <h1>Robloxian Franchise Network</h1>
+        <p>A coalition of leaders, innovators, and franchise visionaries building the future of Roblox organizational management.</p>
     </div>
 </section>
 
+<div id="about" class="section">
+    <h2>About RFN</h2>
+    <p>
+        RFN is a premium networking organization designed to unify franchises under a single banner of excellence.
+        We provide structure, accountability, professional standards, and long-term support for leaders across the Roblox platform.
+        Our mission is to cultivate integrity, professionalism, and high-level management across every franchise under our name.
+    </p>
+</div>
+
+<div id="apply" class="section">
+    <h2>Employment Opportunities</h2>
+    <p>To join the RFN Corporate Team, applicants are expected to demonstrate leadership, professionalism, and long-term commitment.</p>
+
+    <button class="btn" onclick="window.open('https://forms.gle/KNK1nXaBxrPmfVeR6', '_blank')">Corporate Application</button>
+</div>
+
+<div id="franchise" class="section">
+    <h2>Start an RFN Franchise</h2>
+    <p>Become a franchise owner and join a powerful, well-structured network of professionals dedicated to excellence.</p>
+
+    <button class="btn" onclick="window.open('https://forms.gle/NMWXxGzrVY82VGNF8', '_blank')">Franchise Application</button>
+</div>
+
+<div id="contact" class="section">
+    <h2>Contact</h2>
+    <p>Email: christophershelley257@gmail.com</p>
+    <p>Discord: https://discord.gg/MEMk4NarpA</p>
+</div>
+
 <footer>
-    <a onclick="openTOS()">Terms of Service & Privacy Policy</a>
+    <p>© 2025 Robloxian Franchise Network</p>
+    <button onclick="document.getElementById('tos').style.display='block'">Terms of Service & Privacy Policy</button>
 </footer>
 
-<!-- TOS/PP POPUP (simple) -->
+
+<!-- MODAL -->
+<div id="tos" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('tos').style.display='none'">&times;</span>
+        <h2>Terms of Service & Privacy Policy</h2>
+        <p>
+            <!-- Your entire ToS + Privacy Policy essay goes here (kept exactly as you wrote it). -->
+            RFN provides its services, resources, website, franchise network, and corporate systems with the expectation that all users, employees, franchise owners, and visitors act responsibly, professionally, and in accordance with both these terms and all applicable Roblox and Discord rules. By accessing any RFN platform or participating in any RFN-operated program, you acknowledge that you are at least thirteen years old, that you understand these terms, and that your continued use indicates complete acceptance of all policies stated here and any updates that may occur at any time without prior notice. You agree that RFN may modify, add, or remove policies at its discretion and that it is your responsibility to remain informed of the latest version.
+
+Users of RFN services agree not only to follow all official guidelines but also to maintain honesty, courtesy, and accountability while engaging with RFN systems. You agree not to impersonate RFN personnel, not to bypass access systems, not to tamper with internal documents or portals, and not to misuse any part of our digital infrastructure. You further agree to provide accurate information, keep your login credentials secure, and understand that any misuse, dishonesty, or inappropriate behavior may result in removal, denial of employment, termination of franchise ownership, or any administrative action deemed necessary by RFN leadership.
+
+Franchise owners operating under the RFN name acknowledge that they represent the network as a whole and therefore must comply with every franchise guideline, evaluation requirement, and operational standard. You understand that RFN maintains partial administrative oversight for six to twelve months depending on the franchise agreement, that you will be expected to meet periodically with RFN leadership for evaluations, and that RFN provides no guarantee of success, growth, revenue, group activity, or public engagement. All franchises operate at their own risk, and RFN is not responsible for the outcome of your business. RFN reserves the right to audit, review, or terminate a franchise at any time due to inactivity, failure to uphold standards, misconduct, repeated poor evaluations, or any circumstance that threatens the integrity of the network. Decisions regarding premature termination may be made by the Board of Directors.
+
+Applicants for employment, corporate positions, or management roles acknowledge that submitting an application does not guarantee acceptance. RFN reserves full discretion to approve or deny any applicant for any reason. Employment or volunteer positions may be revoked at any time, with or without notice, especially in situations involving unprofessional conduct, dishonesty, inactivity, policy violations, or behaviors deemed harmful to RFN’s reputation or operations. RFN branding, including logos, names, documents, systems, and internal tools, is the sole property of RFN and may not be reproduced, altered, or distributed without express permission.
+
+By using RFN services, you understand that certain information may be collected to support organizational operations. This may include usernames, IDs, timestamps, application responses, franchise check-ins, no-hire list entries, and logs generated through corporate systems. You acknowledge that RFN may store this information for safety, accountability, or documentation purposes and that no-hire data may be retained indefinitely. RFN may share necessary information only with relevant internal teams such as Corporate Management, the Board of Directors, the CEO, or franchise owners when required for operational safety. RFN does not sell personal information to third parties; however, Roblox, Discord, and Google systems each have their own independent policies, and RFN is not responsible for external data practices.
+
+RFN is committed to reasonable data protection efforts but makes no guarantee of absolute security. You acknowledge that any digital platform carries inherent risk and that RFN is not liable for breaches, unauthorized access, data corruption, outages, or any damages arising from the use or inability to use RFN systems. You agree that RFN is not responsible for the loss of data, profits, opportunities, franchise performance, group activity, reputation, service availability, or any indirect, special, incidental, or consequential damages. All RFN services are offered “as is,” without warranties of any kind. You understand and agree that RFN’s total liability to you shall not exceed zero dollars, and you accept full responsibility for your use of RFN tools, websites, and programs.
+
+You acknowledge that RFN may restrict, suspend, or terminate access to any user, employee, or franchise at any time for violations of these terms or for behavior that jeopardizes the safety or integrity of the organization. Continued use of RFN platforms after updates to these terms constitutes acceptance of all changes. You may request to view or correct your stored information, though RFN may deny requests that interfere with safety, active investigations, or operational integrity. Users must be aware that RFN does not knowingly collect sensitive information from minors under thirteen and that age requirements for Roblox and Discord still apply.
+
+By engaging with RFN in any capacity, you agree that these terms are governed by the laws of the United States and interpreted under the administrative jurisdiction of RFN leadership. You affirm that you have read, understood, and accepted these terms, and that your continued use signifies that you willingly take part in RFN at your own risk, with no guarantees made or implied by RFN regarding success, growth, employment, popularity, or outcomes of any kind.
+            <!-- I did not re-paste it to keep this message short, but I can insert it again if needed. -->
+        </p>
+    </div>
+</div>
+
 <script>
-function openTOS() {
-    alert("By accessing this site, you agree that RFN is not liable for damages, losses, misuse, errors, or any consequences arising from the use of this site or affiliated services. RFN may update policies at any time. Continued use constitutes agreement.");
-}
-</script>
-<!-- FINAL RELEASE COUNTDOWN SCRIPT -->
-// *** GLOBAL UNLOCK TIMESTAMP ***
-// November 21, 2025 at 10:15 PM CST (CST = UTC-6)
-// Convert to UTC by adding 6 hours
-
-const unlockTimeUTC = new Date(Date.UTC(2025, 10, 22, 4, 15, 0)).getTime();
-// Breakdown:
-// 2025 = year
-// 10 = November (0-indexed month)
-// 22 = next day in UTC after adding 6 hours (21 CST -> 22 UTC)
-// 4 = 4 AM UTC = 10 PM CST + 6 hours
-// 15 = 15 minutes
-
-function startCountdown() {
-    const nowUTC = new Date().getTime();
-
-    if (nowUTC >= unlockTimeUTC) {
-        document.getElementById("countdown-container").style.display = "none";
-        return;
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('tos');
+        if (event.target === modal) modal.style.display = "none";
     }
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const diff = unlockTimeUTC - now;
-
-        if (diff <= 0) {
-            document.getElementById("countdown-container").style.display = "none";
-            return;
-        }
-
-        const hours = Math.floor(diff / 1000 / 60 / 60);
-        const minutes = Math.floor((diff / 1000 / 60) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        document.getElementById("countdown").innerText =
-            `${hours}h ${minutes}m ${seconds}s`;
-
-        setTimeout(updateCountdown, 1000);
-    }
-
-    updateCountdown();
-}
-
-startCountdown();
 </script>
 
 </body>
