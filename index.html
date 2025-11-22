@@ -174,21 +174,24 @@ function openTOS() {
     alert("By accessing this site, you agree that RFN is not liable for damages, losses, misuse, errors, or any consequences arising from the use of this site or affiliated services. RFN may update policies at any time. Continued use constitutes agreement.");
 }
 </script>
-
 <!-- FINAL RELEASE COUNTDOWN SCRIPT -->
-<script>
-// *** GLOBAL UNLOCK TIMESTAMP (CST) ***
-// Set to today at 9:55 PM CST
-const unlockTimeUTC = new Date().setHours(21 + 6, 55, 0, 0); 
-// CST is UTC-6, so +6 converts CST time to UTC time
+// *** GLOBAL UNLOCK TIMESTAMP ***
+// November 21, 2025 at 10:15 PM CST (CST = UTC-6)
+// Convert to UTC by adding 6 hours
+
+const unlockTimeUTC = new Date(Date.UTC(2025, 10, 22, 4, 15, 0)).getTime();
+// Breakdown:
+// 2025 = year
+// 10 = November (0-indexed month)
+// 22 = next day in UTC after adding 6 hours (21 CST -> 22 UTC)
+// 4 = 4 AM UTC = 10 PM CST + 6 hours
+// 15 = 15 minutes
 
 function startCountdown() {
     const nowUTC = new Date().getTime();
 
     if (nowUTC >= unlockTimeUTC) {
-        // Countdown permanently disabled for ALL users
         document.getElementById("countdown-container").style.display = "none";
-        document.getElementById("site-content").style.opacity = "1";
         return;
     }
 
