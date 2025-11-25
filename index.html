@@ -1,314 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robloxian Franchise Network (RFN)</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RFN | Official Site</title>
 <style>
-/* ROOT COLORS */
-:root {
-    --navy1: #0a0f29;
-    --navy2: #152043;
-    --gold1: #d4af37;
-    --gold2: #f7d774;
-}
+    :root {
+        --gold: #d4af37;
+        --navy: #0a1a3c;
+        --bg-gradient: linear-gradient(135deg, var(--navy), var(--gold));
+    }
 
-/* GLOBAL */
-body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    color: #fff;
-    background: linear-gradient(135deg, var(--navy1), var(--navy2), var(--gold1));
-    background-size: 300% 300%;
-    animation: gradientShift 18s ease infinite;
-    overflow-x: hidden;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
 
-/* GRADIENT ANIMATION */
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+    body {
+        background: var(--bg-gradient);
+        min-height: 100vh;
+        color: white;
+        overflow-x: hidden;
+    }
 
-/* NAVIGATION */
-nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(10, 15, 41, 0.65);
-    backdrop-filter: blur(12px);
-    padding: 20px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    header {
+        width: 100%;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        background: rgba(10, 26, 60, 0.8);
+        backdrop-filter: blur(8px);
+        z-index: 99;
+    }
 
-.logo {
-    font-size: 26px;
-    font-weight: bold;
-    background: linear-gradient(90deg, var(--gold1), var(--gold2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: 2px;
-}
+    .logo {
+        font-size: 32px;
+        font-weight: bold;
+        letter-spacing: 3px;
+        background: var(--bg-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-nav ul {
-    display: flex;
-    gap: 30px;
-    list-style: none;
-    padding: 0;
-}
+    nav a {
+        margin-left: 30px;
+        font-size: 18px;
+        text-decoration: none;
+        color: white;
+        transition: opacity 0.3s;
+    }
+    nav a:hover {
+        opacity: 0.6;
+    }
 
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 17px;
-    position: relative;
-    transition: 0.3s;
-}
+    .hero {
+        height: 85vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        animation: fadeIn 1.5s ease;
+    }
 
-nav ul li a:hover {
-    color: var(--gold1);
-}
+    .hero h1 {
+        font-size: 56px;
+        max-width: 900px;
+    }
 
-/* HERO */
-.hero {
-    padding: 150px 20px;
-    text-align: center;
-    background: rgba(0,0,0,0.25);
-    backdrop-filter: blur(5px);
-    animation: fadeIn 1.5s ease-out forwards;
-}
+    .hero p {
+        margin-top: 20px;
+        font-size: 22px;
+        max-width: 750px;
+    }
 
-.hero h1 {
-    font-size: 64px;
-    font-weight: 700;
-    background: linear-gradient(90deg, var(--gold1), var(--gold2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0;
-    animation: slideUp 1.2s ease forwards;
-}
+    .buttons {
+        margin-top: 40px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
-.hero p {
-    font-size: 22px;
-    width: 70%;
-    margin: auto;
-    margin-top: 15px;
-    opacity: 0;
-    animation: fadeIn 1.8s ease forwards;
-}
+    .btn {
+        padding: 15px 40px;
+        font-size: 20px;
+        background: rgba(255,255,255,0.15);
+        border: 2px solid white;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
 
-/* SECTIONS */
-.section {
-    max-width: 1000px;
-    margin: 80px auto;
-    padding: 45px;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,255,255,0.15);
-    opacity: 0;
-    transform: translateY(40px);
-    transition: 1.1s ease;
-}
+    .btn:hover {
+        background: white;
+        color: black;
+    }
 
-.section.visible {
-    opacity: 1;
-    transform: translateY(0px);
-}
+    section {
+        padding: 80px 20px;
+        max-width: 1100px;
+        margin: auto;
+    }
 
-h2 {
-    background: linear-gradient(90deg, var(--gold1), var(--gold2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 0;
-    font-size: 34px;
-}
+    .section-card {
+        background: rgba(0,0,0,0.2);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.25);
+        backdrop-filter: blur(5px);
+        animation: slideUp 1.4s ease;
+    }
 
-/* BUTTONS */
-.btn {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--gold1), var(--gold2));
-    color: #000;
-    padding: 14px 32px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 20px;
-    transition: 0.3s ease;
-}
+    footer {
+        padding: 40px;
+        background: rgba(10, 26, 60, 0.9);
+        text-align: center;
+        margin-top: 60px;
+    }
 
-.btn:hover {
-    filter: brightness(1.15);
-    transform: translateY(-3px);
-}
+    footer a {
+        color: var(--gold);
+        text-decoration: none;
+        font-size: 16px;
+    }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 25px;
-    margin-top: 60px;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(6px);
-}
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
 
-footer button {
-    margin-top: 8px;
-    background: none;
-    border: none;
-    color: var(--gold2);
-    cursor: pointer;
-    font-size: 15px;
-    text-decoration: underline;
-}
+    @keyframes slideUp {
+        from { transform: translateY(40px); opacity: 0; }
+        to { transform: translateY(0px); opacity: 1; }
+    }
 
-/* MODAL */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0,0,0,0.8);
-    z-index: 1000;
-}
-
-.modal-content {
-    width: 70%;
-    max-height: 85vh;
-    overflow-y: auto;
-    margin: 4% auto;
-    padding: 25px;
-    background: #fff;
-    color: #000;
-    border-radius: 12px;
-}
-
-.close {
-    float: right;
-    font-size: 24px;
-    cursor: pointer;
-    color: red;
-}
-
-/* HERO ANIMATIONS */
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to   { transform: translateY(0px); opacity: 1; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
+    /* Mobile */
+    @media (max-width: 768px) {
+        .hero h1 { font-size: 42px; }
+        .hero p { font-size: 18px; }
+        header { padding: 15px 20px; }
+        nav a { margin-left: 15px; font-size: 16px; }
+        .btn { width: 100%; max-width: 300px; }
+    }
 </style>
 </head>
-
 <body>
 
-<nav>
+<header>
     <div class="logo">RFN</div>
-    <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#apply">Employment</a></li>
-        <li><a href="#franchise">Franchises</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#info">Information</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
 
-<section class="hero">
-    <h1>Robloxian Franchise Network</h1>
-    <p>A coalition of leaders shaping the future of Roblox organizational excellence, structure, and management.</p>
-</section>
+<div class="hero">
+    <h1>Welcome to the Official RFN Information Center</h1>
+    <p>Your centralized hub for public information, opportunities, and organizational updates for the RFN Network.</p>
 
-<div id="about" class="section">
-    <h2>About RFN</h2>
-    <p>
-        RFN exists to unify franchise leadership across Roblox into a single, elite network known for structure, integrity, and accountability. 
-        Our standard of professionalism allows franchise owners and corporate personnel to collaborate, exchange insights, and elevate their 
-        operations while receiving long-term support from a centralized management institution.
-    </p>
-</div>
-
-<div id="apply" class="section">
-    <h2>Employment Opportunities</h2>
-    <p>
-        RFN’s corporate division accepts individuals who demonstrate elite professionalism, communication skills, and leadership capability. 
-        Applicants are expected to uphold the highest standards of administrative excellence.
-    </p>
-    <button class="btn" onclick="window.open('https://forms.gle/NfBqHeiykfEP8gbV7', '_blank')">Corporate Application</button>
-</div>
-
-<div id="franchise" class="section">
-    <h2>Start an RFN Franchise</h2>
-    <p>
-        RFN Franchise Owners operate with full structural guidance, brand alignment, and oversight support.  
-        Joining RFN’s franchise network grants access to unified standards and growth opportunities.
-    </p>
-    <button class="btn" onclick="window.open('https://forms.gle/mZfRkoERSsMEr7Kx5', '_blank')">Franchise Application</button>
-</div>
-
-<div id="contact" class="section">
-    <h2>Contact Us</h2>
-    <p>Email: christophershelley257@gmail.com</p>
-    <p>Discord: https://discord.gg/MEMk4NarpA</p>
-</div>
-
-<footer>
-    <p>© 2025 Robloxian Franchise Network</p>
-    <button onclick="document.getElementById('tos').style.display='block'">Terms of Service & Privacy Policy</button>
-</footer>
-
-<!-- MODAL -->
-<div id="tos" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="document.getElementById('tos').style.display='none'">&times;</span>
-        <h2>Terms of Service & Privacy Policy</h2>
-        <p>
-           RFN provides its services, resources, website, franchise network, and corporate systems with the expectation that all users, employees, franchise owners, and visitors act responsibly, professionally, and in accordance with both these terms and all applicable Roblox and Discord rules. By accessing any RFN platform or participating in any RFN-operated program, you acknowledge that you are at least thirteen years old, that you understand these terms, and that your continued use indicates complete acceptance of all policies stated here and any updates that may occur at any time without prior notice. You agree that RFN may modify, add, or remove policies at its discretion and that it is your responsibility to remain informed of the latest version.
-
-Users of RFN services agree not only to follow all official guidelines but also to maintain honesty, courtesy, and accountability while engaging with RFN systems. You agree not to impersonate RFN personnel, not to bypass access systems, not to tamper with internal documents or portals, and not to misuse any part of our digital infrastructure. You further agree to provide accurate information, keep your login credentials secure, and understand that any misuse, dishonesty, or inappropriate behavior may result in removal, denial of employment, termination of franchise ownership, or any administrative action deemed necessary by RFN leadership.
-
-Franchise owners operating under the RFN name acknowledge that they represent the network as a whole and therefore must comply with every franchise guideline, evaluation requirement, and operational standard. You understand that RFN maintains partial administrative oversight for six to twelve months depending on the franchise agreement, that you will be expected to meet periodically with RFN leadership for evaluations, and that RFN provides no guarantee of success, growth, revenue, group activity, or public engagement. All franchises operate at their own risk, and RFN is not responsible for the outcome of your business. RFN reserves the right to audit, review, or terminate a franchise at any time due to inactivity, failure to uphold standards, misconduct, repeated poor evaluations, or any circumstance that threatens the integrity of the network. Decisions regarding premature termination may be made by the Board of Directors.
-
-Applicants for employment, corporate positions, or management roles acknowledge that submitting an application does not guarantee acceptance. RFN reserves full discretion to approve or deny any applicant for any reason. Employment or volunteer positions may be revoked at any time, with or without notice, especially in situations involving unprofessional conduct, dishonesty, inactivity, policy violations, or behaviors deemed harmful to RFN’s reputation or operations. RFN branding, including logos, names, documents, systems, and internal tools, is the sole property of RFN and may not be reproduced, altered, or distributed without express permission.
-
-By using RFN services, you understand that certain information may be collected to support organizational operations. This may include usernames, IDs, timestamps, application responses, franchise check-ins, no-hire list entries, and logs generated through corporate systems. You acknowledge that RFN may store this information for safety, accountability, or documentation purposes and that no-hire data may be retained indefinitely. RFN may share necessary information only with relevant internal teams such as Corporate Management, the Board of Directors, the CEO, or franchise owners when required for operational safety. RFN does not sell personal information to third parties; however, Roblox, Discord, and Google systems each have their own independent policies, and RFN is not responsible for external data practices.
-
-RFN is committed to reasonable data protection efforts but makes no guarantee of absolute security. You acknowledge that any digital platform carries inherent risk and that RFN is not liable for breaches, unauthorized access, data corruption, outages, or any damages arising from the use or inability to use RFN systems. You agree that RFN is not responsible for the loss of data, profits, opportunities, franchise performance, group activity, reputation, service availability, or any indirect, special, incidental, or consequential damages. All RFN services are offered “as is,” without warranties of any kind. You understand and agree that RFN’s total liability to you shall not exceed zero dollars, and you accept full responsibility for your use of RFN tools, websites, and programs.
-
-You acknowledge that RFN may restrict, suspend, or terminate access to any user, employee, or franchise at any time for violations of these terms or for behavior that jeopardizes the safety or integrity of the organization. Continued use of RFN platforms after updates to these terms constitutes acceptance of all changes. You may request to view or correct your stored information, though RFN may deny requests that interfere with safety, active investigations, or operational integrity. Users must be aware that RFN does not knowingly collect sensitive information from minors under thirteen and that age requirements for Roblox and Discord still apply.
-
-By engaging with RFN in any capacity, you agree that these terms are governed by the laws of the United States and interpreted under the administrative jurisdiction of RFN leadership. You affirm that you have read, understood, and accepted these terms, and that your continued use signifies that you willingly take part in RFN at your own risk, with no guarantees made or implied by RFN regarding success, growth, employment, popularity, or outcomes of any kind.
-        </p>
+    <div class="buttons">
+        <button class="btn" onclick="window.location.href='APPLICATION_LINK_HERE'">Apply for Employment (COMING SOON)</button>
+        <button class="btn" onclick="window.location.href='FRANCHISE_LINK_HERE'">Open a Franchise (COMING SOON)</button>
+        <button class="btn" onclick="window.location.href='CUSTOMER_PORTAL_LINK'">Customer Portal (COMING SOON)</button>
     </div>
 </div>
 
-<script>
-/* CLICK OUTSIDE MODAL TO CLOSE */
-window.onclick = function(event) {
-    const modal = document.getElementById('tos');
-    if (event.target === modal) modal.style.display = "none";
-};
+<section id="about">
+    <div class="section-card">
+        <h2>About RFN</h2>
+        <p>RFN is a multifaceted network specializing in organizational management, employment infrastructure, and community-operated franchises. Our mission is to provide high-quality leadership, structured operations, and opportunities for growth within all RFN-associated services. This website serves as an open public resource for information, professional engagement, and franchise inquiries.</p>
+    </div>
+</section>
 
-/* SCROLL REVEAL */
-const sections = document.querySelectorAll('.section');
+<section id="info">
+    <div class="section-card">
+        <h2>General Information</h2>
+        <p>Here you will find updates, public documents, and access points related to RFN operations. All applications are reviewed carefully, and franchise opportunities are evaluated based on alignment with our standards and operational policies.</p>
+    </div>
+</section>
 
-function revealOnScroll() {
-    const trigger = window.innerHeight * 0.85;
+<section id="contact">
+    <div class="section-card">
+        <h2>Contact</h2>
+        <p>For inquiries related to employment, franchising, or customer concerns, please use the Customer Portal or relevant application links above. Official communication channels will be added soon.</p>
+    </div>
+</section>
 
-    sections.forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top < trigger) sec.classList.add('visible');
-    });
-}
-
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
-</script>
+<footer>
+    <a href="#" onclick="alert('Terms of Service will open here.')">Terms of Service</a> | 
+    <a href="#" onclick="alert('Privacy Policy will open here.')">Privacy Policy</a>
+</footer>
 
 </body>
 </html>
