@@ -6,208 +6,204 @@
 <title>Robloxian Franchise Network (RFN)</title>
 
 <style>
-    /* GLOBAL STYLING */
-    :root {
-        --navy: #0a0f29;
-        --gold: #d4af37;
-        --bg-gradient: linear-gradient(145deg, #0a0f29, #1a1f3a, #0d122e);
-        --gold-gradient: linear-gradient(135deg, #d4af37, #f7d774);
-        --white: #ffffff;
-    }
+/* ROOT COLORS */
+:root {
+    --navy1: #0a0f29;
+    --navy2: #152043;
+    --gold1: #d4af37;
+    --gold2: #f7d774;
+}
 
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background: var(--bg-gradient);
-        color: white;
-        overflow-x: hidden;
-        animation: fadeIn 1.3s ease forwards;
-    }
+/* GLOBAL */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    color: #fff;
+    background: linear-gradient(135deg, var(--navy1), var(--navy2), var(--gold1));
+    background-size: 300% 300%;
+    animation: gradientShift 18s ease infinite;
+    overflow-x: hidden;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+/* GRADIENT ANIMATION */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-    /* NAVBAR */
-    nav {
-        width: 100%;
-        padding: 20px 40px;
-        background: rgba(10, 15, 41, 0.7);
-        backdrop-filter: blur(12px);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 99;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
+/* NAVIGATION */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 15, 41, 0.65);
+    backdrop-filter: blur(12px);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    .logo {
-        font-size: 26px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        background: var(--gold-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    background: linear-gradient(90deg, var(--gold1), var(--gold2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
 
-    nav ul {
-        list-style: none;
-        display: flex;
-        gap: 35px;
-    }
+nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+}
 
-    nav ul li a {
-        text-decoration: none;
-        color: white;
-        font-size: 17px;
-        transition: 0.3s ease;
-        position: relative;
-    }
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 17px;
+    position: relative;
+    transition: 0.3s;
+}
 
-    nav ul li a:hover {
-        color: var(--gold);
-    }
+nav ul li a:hover {
+    color: var(--gold1);
+}
 
-    /* HERO SECTION */
-    .hero {
-        text-align: center;
-        padding: 130px 20px;
-        background: url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1950&q=80')
-                    center/cover no-repeat;
-        position: relative;
-    }
+/* HERO */
+.hero {
+    padding: 150px 20px;
+    text-align: center;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 1.5s ease-out forwards;
+}
 
-    .hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(10, 15, 41, 0.75);
-        backdrop-filter: blur(5px);
-    }
+.hero h1 {
+    font-size: 64px;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--gold1), var(--gold2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    animation: slideUp 1.2s ease forwards;
+}
 
-    .hero-content {
-        position: relative;
-        z-index: 2;
-        max-width: 800px;
-        margin: auto;
-    }
+.hero p {
+    font-size: 22px;
+    width: 70%;
+    margin: auto;
+    margin-top: 15px;
+    opacity: 0;
+    animation: fadeIn 1.8s ease forwards;
+}
 
-    .hero h1 {
-        font-size: 60px;
-        margin-bottom: 15px;
-        background: var(--gold-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: slideUp 1s ease;
-    }
+/* SECTIONS */
+.section {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding: 45px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.15);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1.1s ease;
+}
 
-    @keyframes slideUp {
-        from { transform: translateY(40px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
+.section.visible {
+    opacity: 1;
+    transform: translateY(0px);
+}
 
-    .hero p {
-        font-size: 20px;
-        line-height: 1.6;
-        opacity: 0.88;
-    }
+h2 {
+    background: linear-gradient(90deg, var(--gold1), var(--gold2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 0;
+    font-size: 34px;
+}
 
-    /* SECTION CARDS */
-    .section {
-        max-width: 1000px;
-        margin: 60px auto;
-        backdrop-filter: blur(15px);
-        background: rgba(255, 255, 255, 0.07);
-        padding: 40px;
-        border-radius: 18px;
-        color: white;
-        animation: fadeUp 1s ease;
-        border: 1px solid rgba(255, 255, 255, 0.13);
-    }
+/* BUTTONS */
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold1), var(--gold2));
+    color: #000;
+    padding: 14px 32px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: 0.3s ease;
+}
 
-    @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(35px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+.btn:hover {
+    filter: brightness(1.15);
+    transform: translateY(-3px);
+}
 
-    h2 {
-        font-size: 32px;
-        background: var(--gold-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-top: 0;
-    }
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(6px);
+}
 
-    /* BUTTONS */
-    .btn {
-        background: var(--gold-gradient);
-        border: none;
-        padding: 14px 30px;
-        font-size: 18px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.3s ease;
-        color: black;
-        font-weight: bold;
-        margin-top: 15px;
-    }
+footer button {
+    margin-top: 8px;
+    background: none;
+    border: none;
+    color: var(--gold2);
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: underline;
+}
 
-    .btn:hover {
-        transform: scale(1.05);
-        filter: brightness(1.1);
-    }
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 1000;
+}
 
-    /* FOOTER */
-    footer {
-        background: rgba(10, 15, 41, 0.8);
-        backdrop-filter: blur(12px);
-        padding: 25px;
-        text-align: center;
-        color: white;
-        margin-top: 70px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
+.modal-content {
+    width: 70%;
+    max-height: 85vh;
+    overflow-y: auto;
+    margin: 4% auto;
+    padding: 25px;
+    background: #fff;
+    color: #000;
+    border-radius: 12px;
+}
 
-    footer button {
-        margin-top: 10px;
-        background: none;
-        border: none;
-        color: var(--gold);
-        cursor: pointer;
-        font-size: 15px;
-        text-decoration: underline;
-    }
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+    color: red;
+}
 
-    /* MODAL */
-    .modal {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.7);
-        z-index: 999;
-        overflow-y: auto;
-    }
+/* HERO ANIMATIONS */
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to   { transform: translateY(0px); opacity: 1; }
+}
 
-    .modal-content {
-        background: #ffffff;
-        color: black;
-        margin: 4% auto;
-        padding: 20px;
-        width: 70%;
-        border-radius: 8px;
-        max-height: 85vh;
-        overflow-y: auto;
-    }
-
-    .close {
-        float: right;
-        cursor: pointer;
-        font-size: 24px;
-        color: red;
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 </style>
 </head>
 
@@ -217,44 +213,46 @@
     <div class="logo">RFN</div>
     <ul>
         <li><a href="#about">About</a></li>
-        <li><a href="#apply">Applications</a></li>
-        <li><a href="#franchise">Franchise</a></li>
+        <li><a href="#apply">Employment</a></li>
+        <li><a href="#franchise">Franchises</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
 </nav>
 
 <section class="hero">
-    <div class="hero-content">
-        <h1>Robloxian Franchise Network</h1>
-        <p>A coalition of leaders, innovators, and franchise visionaries building the future of Roblox organizational management.</p>
-    </div>
+    <h1>Robloxian Franchise Network</h1>
+    <p>A coalition of leaders shaping the future of Roblox organizational excellence, structure, and management.</p>
 </section>
 
 <div id="about" class="section">
     <h2>About RFN</h2>
     <p>
-        RFN is a premium networking organization designed to unify franchises under a single banner of excellence.
-        We provide structure, accountability, professional standards, and long-term support for leaders across the Roblox platform.
-        Our mission is to cultivate integrity, professionalism, and high-level management across every franchise under our name.
+        RFN exists to unify franchise leadership across Roblox into a single, elite network known for structure, integrity, and accountability. 
+        Our standard of professionalism allows franchise owners and corporate personnel to collaborate, exchange insights, and elevate their 
+        operations while receiving long-term support from a centralized management institution.
     </p>
 </div>
 
 <div id="apply" class="section">
     <h2>Employment Opportunities</h2>
-    <p>To join the RFN Corporate Team, applicants are expected to demonstrate leadership, professionalism, and long-term commitment.</p>
-
-    <button class="btn" onclick="window.open('https://forms.gle/KNK1nXaBxrPmfVeR6', '_blank')">Corporate Application</button>
+    <p>
+        RFN’s corporate division accepts individuals who demonstrate elite professionalism, communication skills, and leadership capability. 
+        Applicants are expected to uphold the highest standards of administrative excellence.
+    </p>
+    <button class="btn" onclick="window.open('https://forms.gle/NfBqHeiykfEP8gbV7', '_blank')">Corporate Application</button>
 </div>
 
 <div id="franchise" class="section">
     <h2>Start an RFN Franchise</h2>
-    <p>Become a franchise owner and join a powerful, well-structured network of professionals dedicated to excellence.</p>
-
-    <button class="btn" onclick="window.open('https://forms.gle/NMWXxGzrVY82VGNF8', '_blank')">Franchise Application</button>
+    <p>
+        RFN Franchise Owners operate with full structural guidance, brand alignment, and oversight support.  
+        Joining RFN’s franchise network grants access to unified standards and growth opportunities.
+    </p>
+    <button class="btn" onclick="window.open('https://forms.gle/mZfRkoERSsMEr7Kx5', '_blank')">Franchise Application</button>
 </div>
 
 <div id="contact" class="section">
-    <h2>Contact</h2>
+    <h2>Contact Us</h2>
     <p>Email: christophershelley257@gmail.com</p>
     <p>Discord: https://discord.gg/MEMk4NarpA</p>
 </div>
@@ -264,15 +262,13 @@
     <button onclick="document.getElementById('tos').style.display='block'">Terms of Service & Privacy Policy</button>
 </footer>
 
-
 <!-- MODAL -->
 <div id="tos" class="modal">
     <div class="modal-content">
         <span class="close" onclick="document.getElementById('tos').style.display='none'">&times;</span>
         <h2>Terms of Service & Privacy Policy</h2>
         <p>
-            <!-- Your entire ToS + Privacy Policy essay goes here (kept exactly as you wrote it). -->
-            RFN provides its services, resources, website, franchise network, and corporate systems with the expectation that all users, employees, franchise owners, and visitors act responsibly, professionally, and in accordance with both these terms and all applicable Roblox and Discord rules. By accessing any RFN platform or participating in any RFN-operated program, you acknowledge that you are at least thirteen years old, that you understand these terms, and that your continued use indicates complete acceptance of all policies stated here and any updates that may occur at any time without prior notice. You agree that RFN may modify, add, or remove policies at its discretion and that it is your responsibility to remain informed of the latest version.
+           RFN provides its services, resources, website, franchise network, and corporate systems with the expectation that all users, employees, franchise owners, and visitors act responsibly, professionally, and in accordance with both these terms and all applicable Roblox and Discord rules. By accessing any RFN platform or participating in any RFN-operated program, you acknowledge that you are at least thirteen years old, that you understand these terms, and that your continued use indicates complete acceptance of all policies stated here and any updates that may occur at any time without prior notice. You agree that RFN may modify, add, or remove policies at its discretion and that it is your responsibility to remain informed of the latest version.
 
 Users of RFN services agree not only to follow all official guidelines but also to maintain honesty, courtesy, and accountability while engaging with RFN systems. You agree not to impersonate RFN personnel, not to bypass access systems, not to tamper with internal documents or portals, and not to misuse any part of our digital infrastructure. You further agree to provide accurate information, keep your login credentials secure, and understand that any misuse, dishonesty, or inappropriate behavior may result in removal, denial of employment, termination of franchise ownership, or any administrative action deemed necessary by RFN leadership.
 
@@ -287,17 +283,31 @@ RFN is committed to reasonable data protection efforts but makes no guarantee of
 You acknowledge that RFN may restrict, suspend, or terminate access to any user, employee, or franchise at any time for violations of these terms or for behavior that jeopardizes the safety or integrity of the organization. Continued use of RFN platforms after updates to these terms constitutes acceptance of all changes. You may request to view or correct your stored information, though RFN may deny requests that interfere with safety, active investigations, or operational integrity. Users must be aware that RFN does not knowingly collect sensitive information from minors under thirteen and that age requirements for Roblox and Discord still apply.
 
 By engaging with RFN in any capacity, you agree that these terms are governed by the laws of the United States and interpreted under the administrative jurisdiction of RFN leadership. You affirm that you have read, understood, and accepted these terms, and that your continued use signifies that you willingly take part in RFN at your own risk, with no guarantees made or implied by RFN regarding success, growth, employment, popularity, or outcomes of any kind.
-            <!-- I did not re-paste it to keep this message short, but I can insert it again if needed. -->
         </p>
     </div>
 </div>
 
 <script>
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-        const modal = document.getElementById('tos');
-        if (event.target === modal) modal.style.display = "none";
-    }
+/* CLICK OUTSIDE MODAL TO CLOSE */
+window.onclick = function(event) {
+    const modal = document.getElementById('tos');
+    if (event.target === modal) modal.style.display = "none";
+};
+
+/* SCROLL REVEAL */
+const sections = document.querySelectorAll('.section');
+
+function revealOnScroll() {
+    const trigger = window.innerHeight * 0.85;
+
+    sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < trigger) sec.classList.add('visible');
+    });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
 </script>
 
 </body>
