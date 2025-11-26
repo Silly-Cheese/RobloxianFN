@@ -203,61 +203,105 @@
 </body>
 </html>
 
-<!-- AGGRESSIVE TERMS MODAL -->
+<!-- ULTRA-AGGRESSIVE FORCED TOS/PRIVACY MODAL -->
 <div id="tosModal" style="
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999999;
+    position: fixed; top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.9);
+    display:none; justify-content:center; align-items:center;
+    z-index:9999999;
 ">
     <div style="
-        background: #fff;
-        padding: 35px;
-        border-radius: 12px;
-        max-width: 450px;
-        width: 90%;
-        text-align: center;
-        box-shadow: 0 0 30px rgba(255,0,0,0.7);
-        border: 4px solid red;
-        animation: pulseWarning 1.2s infinite;
+        background:white;
+        width:90%; max-width:550px;
+        padding:30px;
+        border-radius:12px;
+        border:5px solid red;
+        box-shadow:0 0 40px red;
+        animation:pulseWarning 1.2s infinite;
+        overflow:hidden;
     ">
-        <h2 style="color: red; font-weight: 900; font-size: 28px;">
+        <h2 style="text-align:center; color:red; font-size:28px; font-weight:900;">
             READ THE TERMS OF SERVICE AND PRIVACY POLICY!
         </h2>
 
-        <p style="font-size: 15px; margin-top: 10px; color: #111;">
-            FAILURE TO REVIEW THESE DOCUMENTS MAY RESULT IN LOSS OF ACCESS.
+        <p style="color:#111; font-size:16px; font-weight:700; text-align:center; margin-bottom:15px;">
+            YOU MUST SCROLL DOWN AND OPEN BOTH DOCUMENTS BEFORE CONTINUING.
         </p>
 
-        <label style="display:block; margin-top: 15px; font-size: 10px; color:#444;">
-            <input type="checkbox" id="dontShowAgain" style="transform: scale(0.6); margin-right:4px;">
+        <!-- SCROLL AREA -->
+        <div id="scrollBox" style="
+            height:140px;
+            overflow-y:scroll;
+            padding:15px;
+            border:2px solid #444;
+            background:#f8f8f8;
+            margin-bottom:15px;
+        ">
+            <p style="font-size:15px; color:#222; line-height:1.45;">
+                BY USING THIS WEBSITE YOU AGREE TO ALL TERMS, CONDITIONS, REQUIREMENTS,
+                DATA POLICIES, AND ANY FUTURE AMENDMENTS, WHETHER YOU READ THEM OR NOT.
+                FAILURE TO COMPLY MAY RESULT IN RESTRICTIONS, SUSPENSIONS, OR OTHER ACTIONS.
+                YOU ARE REQUIRED TO REVIEW THE TERMS OF SERVICE AND PRIVACY POLICY IN FULL.
+
+                SCROLL TO THE BOTTOM TO ACKNOWLEDGE YOU HAVE READ THIS WARNING.
+            </p>
+            <br><br><br><br>
+            <p style="font-weight:900; color:red; font-size:17px; text-align:center;">
+                YOU HAVE REACHED THE END OF THE WARNING.
+            </p>
+        </div>
+
+        <!-- REQUIRED ACTION BUTTONS -->
+        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:15px;">
+            <button id="openTosBtn" style="
+                padding:10px; background:#003366; color:white;
+                border:none; border-radius:6px; cursor:pointer; font-weight:700;
+            ">OPEN TERMS OF SERVICE</button>
+
+            <button id="openPrivacyBtn" style="
+                padding:10px; background:#003366; color:white;
+                border:none; border-radius:6px; cursor:pointer; font-weight:700;
+            ">OPEN PRIVACY POLICY</button>
+        </div>
+
+        <!-- TEXT INPUT REQUIREMENT -->
+        <label style="font-size:14px; font-weight:600; color:#111;">
+            Type "I understand" to confirm:
+        </label>
+        <input id="confirmInput" type="text" style="
+            width:100%; padding:8px; margin-top:5px; margin-bottom:15px;
+            border:2px solid #444; border-radius:6px;
+        ">
+
+        <!-- DON'T SHOW AGAIN -->
+        <label style="display:block; font-size:10px; margin-bottom:10px; color:#444;">
+            <input type="checkbox" id="dontShowAgain" style="transform:scale(0.55); margin-right:3px;">
             don't show again
         </label>
 
-        <button id="closeModalBtn" style="
-            margin-top: 20px;
-            padding: 10px 25px;
-            background:red;
+        <!-- CONTINUE BUTTON (LOCKED UNTIL REQUIREMENTS MET) -->
+        <button id="continueBtn" disabled style="
+            padding:12px 20px;
+            width:100%;
+            background:gray;
             color:white;
             border:none;
             border-radius:6px;
-            cursor:pointer;
-            font-weight:700;
+            font-weight:900;
+            cursor:not-allowed;
+            font-size:18px;
         ">
-            I UNDERSTAND
+            CONTINUE
         </button>
     </div>
 </div>
 
 <style>
 @keyframes pulseWarning {
-  0% { box-shadow: 0 0 20px rgba(255,0,0,0.6); }
-  50% { box-shadow: 0 0 40px rgba(255,0,0,1); }
-  100% { box-shadow: 0 0 20px rgba(255,0,0,0.6); }
+  0% { box-shadow:0 0 20px rgba(255,0,0,0.6); }
+  50% { box-shadow:0 0 50px rgba(255,0,0,1); }
+  100% { box-shadow:0 0 20px rgba(255,0,0,0.6); }
 }
 </style>
 
@@ -269,8 +313,55 @@ window.addEventListener("load", () => {
     }
 });
 
-// Close button logic
-document.getElementById("closeModalBtn").addEventListener("click", () => {
+// Track requirements
+let scrolled = false;
+let openedTOS = false;
+let openedPrivacy = false;
+
+// Scroll requirement
+const scrollBox = document.getElementById("scrollBox");
+scrollBox.addEventListener("scroll", () => {
+    const atBottom = scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 5;
+    if (atBottom) scrolled = true;
+    updateContinueButton();
+});
+
+// Buttons
+document.getElementById("openTosBtn").addEventListener("click", () => {
+    openedTOS = true;
+    window.open("https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing", "_blank");
+    updateContinueButton();
+});
+
+document.getElementById("openPrivacyBtn").addEventListener("click", () => {
+    openedPrivacy = true;
+    window.open("https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing", "_blank");
+    updateContinueButton();
+});
+
+// Confirm text
+document.getElementById("confirmInput").addEventListener("input", () => {
+    updateContinueButton();
+});
+
+// Update "Continue" button state
+function updateContinueButton() {
+    const textOk = document.getElementById("confirmInput").value.trim() === "I understand";
+    const btn = document.getElementById("continueBtn");
+
+    if (scrolled && openedTOS && openedPrivacy && textOk) {
+        btn.disabled = false;
+        btn.style.background = "red";
+        btn.style.cursor = "pointer";
+    } else {
+        btn.disabled = true;
+        btn.style.background = "gray";
+        btn.style.cursor = "not-allowed";
+    }
+}
+
+// Continue button (finally closes modal)
+document.getElementById("continueBtn").addEventListener("click", () => {
     const dontShow = document.getElementById("dontShowAgain").checked;
 
     if (dontShow) {
