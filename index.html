@@ -1,159 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<!-- ============================================================= -->
+<!-- META + TITLE -->
+<!-- ============================================================= -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>RFN | Official Site</title>
+<title>RFN | Official Information Network</title>
+
+<!-- ============================================================= -->
+<!-- ROOT VARIABLES -->
+<!-- ============================================================= -->
 <style>
-    :root {
-        --gold: #d4af37;
-        --navy: #0a1a3c;
-        --bg-gradient: linear-gradient(135deg, var(--navy), var(--gold));
-    }
+:root {
+    --gold: #d4af37;
+    --deep-gold: #b9982d;
+    --navy: #0a1a3c;
+    --navy-light: #102550;
+    --glass: rgba(255,255,255,0.12);
+    --glass-heavy: rgba(255,255,255,0.22);
+    --gradient-main: linear-gradient(135deg, var(--navy), var(--gold));
+    --gradient-dark: linear-gradient(135deg, #020617, #0f172a);
+    --gradient-light: linear-gradient(135deg, #1e293b, var(--navy));
+    --shadow-glow: 0 0 20px rgba(212,175,55,0.6);
+    --transition-fast: 0.25s ease;
+    --transition-mid: 0.45s ease;
+    --transition-slow: 0.8s ease;
+}
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-    }
+/* ============================================================= */
+/* UNIVERSAL ELEMENTS */
+/* ============================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-    body {
-        background: var(--bg-gradient);
-        min-height: 100vh;
-        color: white;
-        overflow-x: hidden;
-    }
+html, body {
+    scroll-behavior: smooth;
+    background: var(--gradient-main);
+    color: white;
+    min-height: 100vh;
+}
 
-    header {
-        width: 100%;
-        padding: 20px 40px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        background: rgba(10, 26, 60, 0.8);
-        backdrop-filter: blur(8px);
-        z-index: 99;
-    }
+/* Extra-long fade for page load */
+body {
+    opacity: 0;
+    animation: bodyFadeIn 2.5s ease forwards;
+}
+@keyframes bodyFadeIn {
+    to { opacity: 1; }
+}
 
-    .logo {
-        font-size: 32px;
-        font-weight: bold;
-        letter-spacing: 3px;
-        background: var(--bg-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
 
-    nav a {
-        margin-left: 30px;
-        font-size: 18px;
-        text-decoration: none;
-        color: white;
-        transition: opacity 0.3s;
-    }
-    nav a:hover {
-        opacity: 0.6;
-    }
+/* ============================================================= */
+/* LOADING SCREEN – EXTENDED VERSION */
+/* ============================================================= */
+#loadingScreen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: var(--gradient-main);
+    z-index: 999999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: loaderAutoFade 3.5s ease forwards;
+}
 
-    .hero {
-        height: 85vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-        animation: fadeIn 1.5s ease;
-    }
+@keyframes loaderAutoFade {
+    0% { opacity: 1; }
+    60% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
 
-    .hero h1 {
-        font-size: 56px;
-        max-width: 900px;
-    }
+#loadingLogo {
+    font-size: 80px;
+    font-weight: bold;
+    letter-spacing: 6px;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 50px rgba(255,255,255,0.4);
+    animation: logoPulse 2s infinite ease-in-out;
+}
+@keyframes logoPulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
 
-    .hero p {
-        margin-top: 20px;
-        font-size: 22px;
-        max-width: 750px;
-    }
+/* Loading dots */
+.loadingDots span {
+    font-size: 28px;
+    animation: dotFade 1.5s infinite;
+    margin: 0 5px;
+}
+.loadingDots span:nth-child(1) { animation-delay: 0s; }
+.loadingDots span:nth-child(2) { animation-delay: 0.3s; }
+.loadingDots span:nth-child(3) { animation-delay: 0.6s; }
 
-    .buttons {
-        margin-top: 40px;
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+@keyframes dotFade {
+    0% { opacity: 0.1; }
+    50% { opacity: 1; }
+    100% { opacity: 0.1; }
+}
 
-    .btn {
-        padding: 15px 40px;
-        font-size: 20px;
-        background: rgba(255,255,255,0.15);
-        border: 2px solid white;
-        color: white;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
 
-    .btn:hover {
-        background: white;
-        color: black;
-    }
+/* ============================================================= */
+/* HEADER - LONG VERSION */
+/* ============================================================= */
+header {
+    width: 100%;
+    padding: 25px 45px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(16px);
+    background: rgba(0,0,0,0.45);
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+    z-index: 1000;
+    animation: headerSlideDown 1.7s ease;
+}
 
-    section {
-        padding: 80px 20px;
-        max-width: 1100px;
-        margin: auto;
-    }
+@keyframes headerSlideDown {
+    0% { opacity: 0; transform: translateY(-50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
 
-    .section-card {
-        background: rgba(0,0,0,0.2);
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.25);
-        backdrop-filter: blur(5px);
-        animation: slideUp 1.4s ease;
-    }
+header .logo {
+    font-size: 40px;
+    font-weight: bold;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 4px;
+}
 
-    footer {
-        padding: 40px;
-        background: rgba(10, 26, 60, 0.9);
-        text-align: center;
-        margin-top: 60px;
-    }
+nav a {
+    margin-left: 40px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    position: relative;
+    transition: var(--transition-mid);
+}
 
-    footer a {
-        color: var(--gold);
-        text-decoration: none;
-        font-size: 16px;
-    }
+nav a:hover {
+    opacity: 0.6;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--gold);
+    transition: var(--transition-mid);
+}
+nav a:hover::after {
+    width: 100%;
+}
 
-    @keyframes slideUp {
-        from { transform: translateY(40px); opacity: 0; }
-        to { transform: translateY(0px); opacity: 1; }
-    }
 
-    /* Mobile */
-    @media (max-width: 768px) {
-        .hero h1 { font-size: 42px; }
-        .hero p { font-size: 18px; }
-        header { padding: 15px 20px; }
-        nav a { margin-left: 15px; font-size: 16px; }
-        .btn { width: 100%; max-width: 300px; }
-    }
+/* ============================================================= */
+/* HERO SECTION - MASSIVE UPGRADE */
+/* ============================================================= */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    background-image: url('https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?q=80&w=1200&auto=format');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    box-shadow: inset 0 0 300px rgba(0,0,0,0.8);
+    animation: heroFade 2.8s ease;
+}
+
+@keyframes heroFade {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1 {
+    font-size: 68px;
+    max-width: 1000px;
+    text-shadow: 0 0 20px rgba(0,0,0,0.9);
+    line-height: 1.2;
+    animation: textSlideUp 2s ease;
+}
+
+@keyframes textSlideUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.hero p {
+    margin-top: 25px;
+    max-width: 800px;
+    font-size: 26px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    animation: fadeInSlow 3s ease;
+}
+
+@keyframes fadeInSlow {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+/* BUTTON GROUP */
+.buttons {
+    display: flex;
+    gap: 25px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    padding: 18px 45px;
+    font-size: 22px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid white;
+    cursor: pointer;
+    transition: var(--transition-mid), box-shadow 0.5s ease;
+}
+.btn:hover {
+    background: white;
+    color: black;
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px white;
+}
+
+
+/* ============================================================= */
+/* SECTIONS - EXTENDED DECORATION */
+/* ============================================================= */
+section {
+    padding: 90px 25px;
+    max-width: 1150px;
+    margin: auto;
+}
+
+.section-card {
+    background: rgba(0,0,0,0.35);
+    padding: 55px;
+    border-radius: 14px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 45px rgba(0,0,0,0.45);
+    transition: var(--transition-mid);
+    animation: cardReveal 1.6s ease;
+}
+.section-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 55px rgba(255,255,255,0.15);
+}
+
+@keyframes cardReveal {
+    from { opacity: 0; transform: translateY(60px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-card h2 {
+    font-size: 42px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+.section-card p {
+    font-size: 22px;
+    line-height: 1.6;
+}
+
+
+/* ============================================================= */
+/* FOOTER - EXPANDED */
+footer {
+    background: rgba(0,0,0,0.65);
+    padding: 45px;
+    margin-top: 80px;
+    text-align: center;
+}
+
+footer a {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 18px;
+    transition: var(--transition-fast);
+}
+footer a:hover { opacity: 0.7; }
+
+
+/* ============================================================= */
+/* MOBILE OPTIMIZATION */
+/* ============================================================= */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 48px; }
+    .hero p { font-size: 20px; }
+    .btn { width: 100%; max-width: 340px; }
+    nav a { margin-left: 20px; font-size: 17px; }
+}
 </style>
 </head>
+
 <body>
 
+<!-- ============================================================= -->
+<!-- LOADING SCREEN -->
+<!-- ============================================================= -->
+<div id="loadingScreen">
+    <div id="loadingLogo">RFN</div>
+    <div class="loadingDots">
+        <span>•</span><span>•</span><span>•</span>
+    </div>
+</div>
+
+<!-- ============================================================= -->
+<!-- HEADER -->
+<!-- ============================================================= -->
 <header>
     <div class="logo">RFN</div>
     <nav>
@@ -163,212 +342,68 @@
     </nav>
 </header>
 
+<!-- ============================================================= -->
+<!-- HERO -->
+<!-- ============================================================= -->
 <div class="hero">
-    <h1>Welcome to the Official RFN Information Center</h1>
-    <p>Your centralized hub for public information, opportunities, and organizational updates for the RFN Network.</p>
+    <h1>The Official RFN Information Network</h1>
+    <p>Providing organized structure, employment opportunities, public access, community resources, and official RFN communication channels.</p>
 
     <div class="buttons">
         <button class="btn" onclick="window.location.href='https://forms.gle/UbhCPMT4nnNTh39Q9'">Apply for Employment</button>
         <button class="btn" onclick="window.location.href='https://forms.gle/mBvWUMTLhCDJCAmx9'">Open a Franchise</button>
         <button class="btn" onclick="window.location.href='https://script.google.com/macros/s/AKfycbyq6jn8fsTlGOY3ggVdl3mIlFRxbzY0sLjMevCDpbqYthJMgVkYsf9tOoG54Lyy4YjU2w/exec'">Customer Portal</button>
-        <button class="btn" onclick="window.location.href='https://discord.com/invite/MEMk4NarpA'">Join our Discord Server</button>
+        <button class="btn" onclick="window.location.href='https://discord.com/invite/MEMk4NarpA'">Join the Discord Server</button>
     </div>
 </div>
 
+<!-- ============================================================= -->
+<!-- ABOUT -->
+<!-- ============================================================= -->
 <section id="about">
     <div class="section-card">
         <h2>About RFN</h2>
-        <p>RFN is a multifaceted network specializing in organizational management, employment infrastructure, and community-operated franchises. Our mission is to provide high-quality leadership, structured operations, and opportunities for growth within all RFN-associated services. This website serves as an open public resource for information, professional engagement, and franchise inquiries.</p>
+        <p>
+            RFN is a structured, multi-sector network specializing in employee coordination, 
+            franchise oversight, public access systems, and organizational infrastructure...
+        </p>
     </div>
 </section>
 
+<!-- ============================================================= -->
+<!-- INFORMATION -->
+<!-- ============================================================= -->
 <section id="info">
     <div class="section-card">
         <h2>General Information</h2>
-        <p>Here you will find updates, public documents, and access points related to RFN operations. All applications are reviewed carefully, and franchise opportunities are evaluated based on alignment with our standards and operational policies.</p>
+        <p>
+            This section provides operational updates, public documentation, system access points,
+            resource information, broadcast announcements, and other high-level organizational material...
+        </p>
     </div>
 </section>
 
+<!-- ============================================================= -->
+<!-- CONTACT -->
+<!-- ============================================================= -->
 <section id="contact">
     <div class="section-card">
         <h2>Contact</h2>
-        <p>In order to contact the Robloxian Franchise Network, you may open a support ticket in our Discord, or you may email Executive_Eagle at: christophershelley257@gmail.com</p>
+        <p>
+            For communication, support requests, or business-related questions, you may contact
+            Executive_Eagle at: christophershelley257@gmail.com or open a support ticket in our Discord.
+        </p>
     </div>
 </section>
 
+<!-- ============================================================= -->
+<!-- FOOTER -->
+<!-- ============================================================= -->
 <footer>
-    <a href="#" onclick="alert('Copy and paste the link for the Google Document with our ToS and PP: https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing')">Terms of Service and Privacy Policy</a>
+    <a href="#" onclick="alert('Copy this link: https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing')">
+       Terms of Service & Privacy Policy
+    </a>
 </footer>
 
 </body>
 </html>
-
-<!-- ULTRA-AGGRESSIVE FORCED TOS/PRIVACY MODAL -->
-<div id="tosModal" style="
-    position: fixed; top:0; left:0;
-    width:100%; height:100%;
-    background: rgba(0,0,0,0.9);
-    display:none; justify-content:center; align-items:center;
-    z-index:9999999;
-">
-    <div style="
-        background:white;
-        width:90%; max-width:550px;
-        padding:30px;
-        border-radius:12px;
-        border:5px solid red;
-        box-shadow:0 0 40px red;
-        animation:pulseWarning 1.2s infinite;
-        overflow:hidden;
-    ">
-        <h2 style="text-align:center; color:red; font-size:28px; font-weight:900;">
-            READ THE TERMS OF SERVICE AND PRIVACY POLICY!
-        </h2>
-
-        <p style="color:#111; font-size:16px; font-weight:700; text-align:center; margin-bottom:15px;">
-            YOU MUST SCROLL DOWN AND OPEN BOTH DOCUMENTS BEFORE CONTINUING.
-        </p>
-
-        <!-- SCROLL AREA -->
-        <div id="scrollBox" style="
-            height:140px;
-            overflow-y:scroll;
-            padding:15px;
-            border:2px solid #444;
-            background:#f8f8f8;
-            margin-bottom:15px;
-        ">
-            <p style="font-size:15px; color:#222; line-height:1.45;">
-                BY USING THIS WEBSITE YOU AGREE TO ALL TERMS, CONDITIONS, REQUIREMENTS,
-                DATA POLICIES, AND ANY FUTURE AMENDMENTS, WHETHER YOU READ THEM OR NOT.
-                FAILURE TO COMPLY MAY RESULT IN RESTRICTIONS, SUSPENSIONS, OR OTHER ACTIONS.
-                YOU ARE REQUIRED TO REVIEW THE TERMS OF SERVICE AND PRIVACY POLICY IN FULL.
-
-                SCROLL TO THE BOTTOM TO ACKNOWLEDGE YOU HAVE READ THIS WARNING.
-            </p>
-            <br><br><br><br>
-            <p style="font-weight:900; color:red; font-size:17px; text-align:center;">
-                YOU HAVE REACHED THE END OF THE WARNING.
-            </p>
-        </div>
-
-        <!-- REQUIRED ACTION BUTTONS -->
-        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:15px;">
-            <button id="openTosBtn" style="
-                padding:10px; background:#003366; color:white;
-                border:none; border-radius:6px; cursor:pointer; font-weight:700;
-            ">OPEN TERMS OF SERVICE</button>
-
-            <button id="openPrivacyBtn" style="
-                padding:10px; background:#003366; color:white;
-                border:none; border-radius:6px; cursor:pointer; font-weight:700;
-            ">OPEN PRIVACY POLICY</button>
-        </div>
-
-        <!-- TEXT INPUT REQUIREMENT -->
-        <label style="font-size:14px; font-weight:600; color:#111;">
-            Type "I understand" to confirm:
-        </label>
-        <input id="confirmInput" type="text" style="
-            width:100%; padding:8px; margin-top:5px; margin-bottom:15px;
-            border:2px solid #444; border-radius:6px;
-        ">
-
-        <!-- DON'T SHOW AGAIN -->
-        <label style="display:block; font-size:10px; margin-bottom:10px; color:#444;">
-            <input type="checkbox" id="dontShowAgain" style="transform:scale(0.55); margin-right:3px;">
-            don't show again
-        </label>
-
-        <!-- CONTINUE BUTTON (LOCKED UNTIL REQUIREMENTS MET) -->
-        <button id="continueBtn" disabled style="
-            padding:12px 20px;
-            width:100%;
-            background:gray;
-            color:white;
-            border:none;
-            border-radius:6px;
-            font-weight:900;
-            cursor:not-allowed;
-            font-size:18px;
-        ">
-            CONTINUE
-        </button>
-    </div>
-</div>
-
-<style>
-@keyframes pulseWarning {
-  0% { box-shadow:0 0 20px rgba(255,0,0,0.6); }
-  50% { box-shadow:0 0 50px rgba(255,0,0,1); }
-  100% { box-shadow:0 0 20px rgba(255,0,0,0.6); }
-}
-</style>
-
-<script>
-// Show modal unless user opted out
-window.addEventListener("load", () => {
-    if (!localStorage.getItem("tos_acknowledged")) {
-        document.getElementById("tosModal").style.display = "flex";
-    }
-});
-
-// Track requirements
-let scrolled = false;
-let openedTOS = false;
-let openedPrivacy = false;
-
-// Scroll requirement
-const scrollBox = document.getElementById("scrollBox");
-scrollBox.addEventListener("scroll", () => {
-    const atBottom = scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 5;
-    if (atBottom) scrolled = true;
-    updateContinueButton();
-});
-
-// Buttons
-document.getElementById("openTosBtn").addEventListener("click", () => {
-    openedTOS = true;
-    window.open("https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing", "_blank");
-    updateContinueButton();
-});
-
-document.getElementById("openPrivacyBtn").addEventListener("click", () => {
-    openedPrivacy = true;
-    window.open("https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing", "_blank");
-    updateContinueButton();
-});
-
-// Confirm text
-document.getElementById("confirmInput").addEventListener("input", () => {
-    updateContinueButton();
-});
-
-// Update "Continue" button state
-function updateContinueButton() {
-    const textOk = document.getElementById("confirmInput").value.trim() === "I understand";
-    const btn = document.getElementById("continueBtn");
-
-    if (scrolled && openedTOS && openedPrivacy && textOk) {
-        btn.disabled = false;
-        btn.style.background = "red";
-        btn.style.cursor = "pointer";
-    } else {
-        btn.disabled = true;
-        btn.style.background = "gray";
-        btn.style.cursor = "not-allowed";
-    }
-}
-
-// Continue button (finally closes modal)
-document.getElementById("continueBtn").addEventListener("click", () => {
-    const dontShow = document.getElementById("dontShowAgain").checked;
-
-    if (dontShow) {
-        localStorage.setItem("tos_acknowledged", "true");
-    }
-
-    document.getElementById("tosModal").style.display = "none";
-});
-</script>
-
