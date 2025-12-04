@@ -1,280 +1,379 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RFN – V2 Coming Soon</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RFN — Version 2</title>
+<meta name="theme-color" content="#071933">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Segoe UI', sans-serif;
-        overflow: hidden;
-        background: linear-gradient(135deg, #0a1a3f, #d4af37);
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  :root{
+    --bg-900:#071627;
+    --bg-800:#0b2744;
+    --card: rgba(255,255,255,0.04);
+    --muted:#bcd3e6;
+    --gold:#d4af37;
+    --accent:#2aa3ff;
+    --glass: rgba(255,255,255,0.04);
+    --radius:14px;
+    --maxw:1200px;
+    --ease:cubic-bezier(.16,.84,.36,1);
+    --text:#eaf6ff;
+    --dark:0; /* 0 = dark, 1 = light toggled by JS */
+  }
 
-    /* ---------------- LOADING SPINNER ---------------- */
-    #loadingScreen {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%;
-        height: 100%;
-        background: #0a1a3f;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        transition: opacity 1s ease;
-    }
+  /* LIGHT MODE OVERRIDES */
+  :root.light {
+    --bg-900:#f5f7fb;
+    --bg-800:#e8eef9;
+    --card: rgba(6,18,36,0.03);
+    --muted:#25415a;
+    --gold:#b3861f;
+    --accent:#0a66ff;
+    --text:#07162b;
+  }
 
-    .spinner {
-        width: 70px;
-        height: 70px;
-        border: 8px solid rgba(255,255,255,0.2);
-        border-top: 8px solid #d4af37;
-        border-radius: 50%;
-        animation: spin 1.2s linear infinite;
-    }
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; color:var(--text); background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(212,175,55,0.06), transparent 8%),
+    linear-gradient(180deg,var(--bg-900),var(--bg-800)); -webkit-font-smoothing:antialiased;}
 
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
+  .wrap{max-width:var(--maxw);margin:28px auto;padding:20px;}
 
-    /* ---------------- CINEMATIC RFN INTRO ---------------- */
-    #introLogo {
-        position: fixed;
-        top: 50%; 
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.1);
-        font-size: 8rem;
-        font-weight: 800;
-        color: white;
-        letter-spacing: 8px;
-        z-index: 900;
-        opacity: 0;
-        animation: rfnIntro 3s ease forwards;
-        text-shadow: 0 0 20px rgba(255,255,255,0.9);
-    }
+  /* NAV */
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px}
+  .brand{display:flex;align-items:center;gap:14px}
+  .monogram-compact{width:56px;height:56px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));box-shadow:0 10px 30px rgba(2,8,18,0.45)}
+  .brand h1{font-size:18px;margin:0;font-weight:700}
+  nav{display:flex;gap:18px;align-items:center}
+  nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px;border-radius:8px;transition:all .18s var(--ease)}
+  nav a:hover{color:var(--text);background:rgba(255,255,255,0.02);transform:translateY(-3px)}
+  .controls{display:flex;gap:10px;align-items:center}
 
-    @keyframes rfnIntro {
-        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
-        40% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-        70% { transform: translate(-50%, -50%) scale(0.9); }
-        100% { opacity: 0; transform: translate(-50%, -50%) scale(20); }
-    }
+  /* MODE SWITCH */
+  .mode-switch{display:inline-flex;align-items:center;background:var(--card);padding:6px;border-radius:999px;gap:6px}
+  .mode-switch button{background:transparent;border:none;color:var(--muted);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
+  .mode-switch button.active{background:linear-gradient(90deg,var(--gold),#f1d77b);color:#071627}
 
-    /* ---------------- PARTICLES ---------------- */
-    #particles {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
-    }
+  /* HERO SLIDES */
+  .hero{position:relative;margin-top:18px;border-radius:16px;overflow:hidden;min-height:56vh;display:flex;align-items:center;justify-content:center}
+  .slide-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:40px}
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0;transform:translateY(20px);transition:all .9s var(--ease)}
+  .slide.active{opacity:1;transform:none;z-index:2}
+  .slide h2{font-size:clamp(24px,4.5vw,48px);margin:0;background:linear-gradient(90deg,var(--gold),#ffd57a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .slide p{max-width:900px;color:var(--muted);font-size:1.05rem;margin:0}
 
-    /* ---------------- PARALLAX BACKGROUND ---------------- */
-    #parallaxBG {
-        position: fixed;
-        width: 120%;
-        height: 120%;
-        top: -10%;
-        left: -10%;
-        background: url("https://images.unsplash.com/photo-1542281286-9e0a16bb7366") center/cover no-repeat;
-        opacity: 0.15;
-        z-index: 0;
-        transition: transform 0.2s ease-out;
-    }
+  /* slide controls */
+  .slidenav{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:6}
+  .dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.12);cursor:pointer}
+  .dot.active{background:linear-gradient(90deg,var(--gold),#ffd57a);box-shadow:0 6px 18px rgba(212,175,55,0.12)}
 
-    /* ---------------- SLIDES ---------------- */
-    .fade-container {
-        position: absolute;
-        text-align: center;
-        color: white;
-        width: 100%;
-        padding: 0 20px;
-        opacity: 0;
-        font-size: 2.4rem;
-        font-weight: 600;
-        z-index: 3;
-        animation: fadeSequence 18s forwards;
-    }
+  /* particle canvas sits full-screen behind hero */
+  #particleCanvas{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0}
 
-    @media (max-width:600px){
-        .fade-container {
-            font-size: 1.6rem;
-        }
-    }
+  /* CONTENT GRID */
+  .grid{display:grid;grid-template-columns:1fr 420px;gap:26px;margin-top:22px;z-index:3;position:relative}
+  .panel{background:var(--card);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+  .panel h3{margin-top:0;color:var(--gold)}
 
-    .slide1 { animation-delay: 0s; }
-    .slide2 { animation-delay: 6s; }
-    .slide3 { animation-delay: 12s; }
-    .slide4 { animation-delay: 18s; }
-    .slideFinal { animation-delay: 24s; }
+  /* TEAM CARDS */
+  .team{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px; text-align:center;transition:transform .28s var(--ease),box-shadow .28s var(--ease),background .28s var(--ease)}
+  .card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(2,8,18,0.55)}
+  .profile{width:110px;height:110px;border-radius:999px;margin:auto;border:4px solid rgba(212,175,55,0.9);object-fit:cover;background:linear-gradient(90deg,var(--gold),#ffd57a)}
+  .card h4{margin:10px 0 6px}
+  .card p{color:var(--muted);margin:0}
 
-    .finalMessage {
-        animation-delay: 24s !important;
-        font-size: 3rem;
-        letter-spacing: 1px;
-    }
+  /* TIMELINE */
+  .timeline{display:flex;flex-direction:column;gap:18px}
+  .timeline-item{display:flex;gap:14px;align-items:flex-start}
+  .timeline-dot{width:14px;height:14px;border-radius:50%;background:var(--gold);margin-top:6px;flex:0 0 14px}
+  .timeline-content{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+  .timeline-content h5{margin:0 0 6px;color:var(--gold)}
+  .timeline-content p{margin:0;color:var(--muted)}
 
-    @keyframes fadeSequence {
-        0% { opacity: 0; }
-        10% { opacity: 1; }
-        30% { opacity: 1; }
-        40% { opacity: 0; }
-        100% { opacity: 0; }
-    }
+  /* ANNOUNCEMENTS */
+  .ann-list{display:flex;flex-direction:column;gap:10px;max-height:420px;overflow:auto;padding-right:6px}
+  .ann{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+  .ann small{color:var(--muted);display:block;margin-top:6px}
 
-    /* ---------------- WATERMARK ---------------- */
-    .logo-watermark {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 4;
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: rgba(255,255,255,0.25);
-        letter-spacing: 8px;
-        animation: logoPulse 4s infinite alternate ease-in-out;
-    }
+  /* MEDIA PAGE */
+  .media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .media-card{background:var(--card);padding:10px;border-radius:10px;text-align:center}
 
-    @keyframes logoPulse {
-        from { opacity: 0.2; transform: scale(1); }
-        to { opacity: 0.4; transform: scale(1.1); }
-    }
+  /* footer */
+  footer{margin-top:30px;padding:20px;text-align:center;color:var(--muted)}
 
-    /* ---------------- MUSIC BUTTON ---------------- */
-    #musicToggle {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 5;
-        background: rgba(255,255,255,0.2);
-        border: 2px solid white;
-        padding: 10px 14px;
-        border-radius: 8px;
-        color: white;
-        font-size: 15px;
-        cursor: pointer;
-        backdrop-filter: blur(4px);
-        transition: 0.3s;
-    }
-    #musicToggle:hover {
-        background: rgba(255,255,255,0.35);
-    }
+  /* responsive */
+  @media(max-width:980px){ .grid{grid-template-columns:1fr} .team{grid-template-columns:repeat(1,1fr)} header{flex-direction:column;align-items:flex-start;gap:12px}}
 </style>
 </head>
-
 <body>
 
-<div id="loadingScreen">
-    <div class="spinner"></div>
+<!-- PARTICLE CANVAS (gold sparkles) -->
+<canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+<!-- LOADING + RFN SPIN -->
+<div id="loader" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg-900);z-index:9999">
+  <svg id="rfnSpin" width="110" height="110" viewBox="0 0 120 120" aria-hidden="true">
+    <defs>
+      <linearGradient id="g" x1="0" x2="1">
+        <stop offset="0" stop-color="#ffd57a"/>
+        <stop offset="1" stop-color="#c79a2b"/>
+      </linearGradient>
+    </defs>
+    <circle cx="60" cy="60" r="44" fill="none" stroke="url(#g)" stroke-width="10" stroke-linecap="round" stroke-dasharray="1 8" transform="rotate(-90 60 60)">
+      <animateTransform attributeName="transform" type="rotate" from="0 60 60" to="360 60 60" dur="1.6s" repeatCount="indefinite"/>
+    </circle>
+    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-weight="800" font-size="22" fill="#fff">RFN</text>
+  </svg>
 </div>
 
-<div id="introLogo">RFN</div>
+<div class="wrap" role="main">
 
-<div id="parallaxBG"></div>
+  <!-- HEADER -->
+  <header role="banner" aria-label="RFN header">
+    <div class="brand">
+      <div class="monogram-compact" aria-hidden="true">
+        <!-- inline animated SVG monogram (small) -->
+        <svg width="42" height="42" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><linearGradient id="mg" x1="0" x2="1"><stop offset="0" stop-color="#ffd57a"/><stop offset="1" stop-color="#c79a2b"/></linearGradient></defs>
+          <rect rx="14" width="100" height="100" fill="rgba(0,0,0,0.04)"/>
+          <text x="50" y="60" text-anchor="middle" fill="url(#mg)" font-weight="800" font-size="46" font-family="Inter, sans-serif">RFN</text>
+        </svg>
+      </div>
+      <div>
+        <h1>Robloxian Franchise Network</h1>
+        <div style="font-size:12px;color:var(--muted)">Structure · Responsibility · Excellence</div>
+      </div>
+    </div>
 
-<canvas id="particles"></canvas>
+    <nav role="navigation" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#team">Meet Our Team</a>
 
-<button id="musicToggle">Music: OFF</button>
+      <div class="controls" style="margin-left:8px;">
+        <div class="mode-switch" role="toolbar" aria-label="Color mode">
+          <button id="darkBtn" class="active" aria-pressed="true" title="Dark mode">DARK</button>
+          <button id="lightBtn" aria-pressed="false" title="Light mode">LIGHT</button>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-<div class="fade-container slide1">A new way to start a game</div>
-<div class="fade-container slide2">A smoother, faster, stronger experience</div>
-<div class="fade-container slide3">Built for owners and players alike</div>
-<div class="fade-container slide4">Innovation finally meets simplicity</div>
+  <!-- HERO / SLIDES -->
+  <section class="hero" aria-label="Intro trailer">
+    <div class="slide-wrap" aria-hidden="false">
+      <div class="slide slide1 active" role="article">
+        <h2>A new way to start a game</h2>
+        <p>Launch faster with structure and support — RFN gives owners the tools, standards, and connections to succeed.</p>
+      </div>
 
-<div class="fade-container slideFinal finalMessage">
-    Version 2, Coming Soon<br>A better way to launch a game 🚀
-</div>
+      <div class="slide slide2" role="article">
+        <h2>Built for owners and players alike</h2>
+        <p>Professional systems, strong oversight, and a community-first mindset make games better for everyone.</p>
+      </div>
 
-<div class="logo-watermark">RFN</div>
+      <div class="slide slide3" role="article">
+        <h2>Onboarding, evaluations, and growth</h2>
+        <p>Comprehensive onboarding and quarterly evaluations keep quality high and franchises accountable.</p>
+      </div>
 
-<audio id="bgMusic" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_65de26e5d0.mp3?filename=deep-space-ambient-110397.mp3" type="audio/mpeg">
-</audio>
+      <div class="slide slide4" role="article">
+        <h2>Innovation finally meets simplicity</h2>
+        <p>Tools and templates that let you focus on creativity while RFN handles the structure and standards.</p>
+      </div>
 
+      <div class="slide slideFinal" role="article">
+        <h2 style="font-size:2.6rem">Version 2 — NOW HERE!</h2>
+        <p style="font-weight:700">A better way to launch a game 🚀</p>
+      </div>
+
+      <!-- slide dots -->
+      <div class="slidenav" role="tablist" aria-label="Slide navigation"></div>
+    </div>
+  </section>
+
+  <!-- MAIN GRID: left content + right sidebar -->
+  <div class="grid" aria-live="polite">
+
+    <!-- LEFT: panels -->
+    <div style="display:flex;flex-direction:column;gap:18px;">
+
+      <!-- ABOUT PANEL -->
+      <section id="about" class="panel" aria-labelledby="aboutTitle">
+        <h3 id="aboutTitle">About RFN</h3>
+        <p>RFN supports Roblox creators and franchise owners with operational frameworks, branding guidance, onboarding packages, and quarterly evaluations so every project can scale professionally and sustainably.</p>
+      </section>
+
+      <!-- TIMELINE -->
+      <section class="panel" aria-labelledby="timelineTitle">
+        <h3 id="timelineTitle">RFN Timeline</h3>
+        <div class="timeline" id="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content"><h5>Founding</h5><p>RFN was founded to bring structure and accountability to Roblox franchises.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content"><h5>Onboarding Launched</h5><p>Standardized onboarding packages were rolled out to streamline franchise openings.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content"><h5>Version 2</h5><p>Major site and systems overhaul — new tools for creators and owners.</p></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- RIGHT: sidebar -->
+    <aside style="display:flex;flex-direction:column;gap:18px;">
+      <div class="panel" style="text-align:center;">
+        <h3>Quick Links</h3>
+        <!-- Replace placeholders with your actual URLs -->
+        <p style="margin:8px 0"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScmpm0IG1qlhmwG83gKLFujbdjgEZpW3Y3ZPtNYEeNSMFBiCQ/viewform?usp=sharing&ouid=102263017487212674940" target="_blank">Employment Application</a></p>
+        <p style="margin:8px 0"><a class="btn" href="https://forms.gle/LauFZkXr5GHafJvn6" target="_blank">Franchise Application</a></p>
+        <p style="margin:8px 0"><a class="btn" href="YOUR_RENEWAL_FORM" target="_blank">Renew RFN Agreement [COMING SOON]</a></p>
+        <p style="margin:8px 0"><a class="btn" href="https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing" target="_blank">Privacy Policy & Terms</a></p>
+      </div>
+
+      <div class="panel">
+        <h3>Meet Our Team</h3>
+        <div class="team">
+          <div class="card" role="button" tabindex="0" aria-pressed="false">
+            <h4>Executive_Eagle</h4>
+            <p>Founder & CEO</p>
+          </div>
+          <div class="card" role="button" tabindex="0" aria-pressed="false">
+            <h4>Cadeynm1</h4>
+            <p>President and Temporary Director of Operations</p>
+          </div>
+          <div class="card" role="button" tabindex="0" aria-pressed="false">
+            <h4>Cami</h4>
+            <p>Vice President and Temporary Director of Relations</p>
+          </div>
+          <div class="card" role="button" tabindex="0" aria-pressed="false">
+            <h4>Morga</h4>
+            <p>Vice President</p>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </div> <!-- end grid -->
+
+  <footer>
+    © 2025 Robloxian Franchise Network — Built with vision and structure.
+  </footer>
+
+</div> <!-- wrap -->
+
+<!-- SCRIPTS: particles, slideshow, loader, mode, announcements -->
 <script>
-/* ---------------- LOADING SCREEN ---------------- */
-window.onload = () => {
-    setTimeout(() => {
-        document.getElementById("loadingScreen").style.opacity = "0";
-        setTimeout(() => {
-            document.getElementById("loadingScreen").style.display = "none";
-        }, 1200);
-    }, 1200);
-};
-
-/* ---------------- MUSIC BUTTON ---------------- */
-const music = document.getElementById("bgMusic");
-const toggle = document.getElementById("musicToggle");
-let musicOn = false;
-
-toggle.onclick = () => {
-    if (!musicOn) {
-        music.play();
-        toggle.textContent = "Music: ON";
-        musicOn = true;
-    } else {
-        music.pause();
-        toggle.textContent = "Music: OFF";
-        musicOn = false;
-    }
-};
-
-/* ---------------- PARALLAX BACKGROUND ---------------- */
-document.addEventListener("mousemove", e => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    document.getElementById("parallaxBG").style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
+/* ----------------- LOADER (hide after intro) ----------------- */
+const loader = document.getElementById('loader');
+window.addEventListener('load', ()=> {
+  // small delay to let svg spin feel real
+  setTimeout(()=> loader.style.display='none', 900);
 });
 
-/* ---------------- PARTICLES ---------------- */
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-let w, h;
+/* ----------------- PARTICLE BACKGROUND (gold sparkles) ----------------- */
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = innerWidth;
+let H = canvas.height = innerHeight;
+window.addEventListener('resize', ()=>{ W = canvas.width = innerWidth; H = canvas.height = innerHeight; });
 
-function resize(){
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
+const sparks = [];
+for(let i=0;i<90;i++){
+  sparks.push({
+    x: Math.random()*W,
+    y: Math.random()*H,
+    r: Math.random()*2 + 0.6,
+    vx: (Math.random()-0.5)*0.3,
+    vy: -Math.random()*0.2 - 0.05,
+    alpha: Math.random()*0.8 + 0.2
+  });
 }
-resize();
-window.addEventListener("resize", resize);
+function drawSparks(){
+  ctx.clearRect(0,0,W,H);
+  for(const s of sparks){
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(212,175,55,"+s.alpha+")";
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+    s.x += s.vx;
+    s.y += s.vy;
+    if(s.x<0)s.x=W;
+    if(s.x>W)s.x=0;
+    if(s.y<0)s.y=H;
+  }
+  requestAnimationFrame(drawSparks);
+}
+drawSparks();
 
-const particles = [];
-for (let i=0;i<80;i++){
-    particles.push({
-        x:Math.random()*w,
-        y:Math.random()*h,
-        size:Math.random()*3+1,
-        speedX:(Math.random()-.5)*.5,
-        speedY:(Math.random()-.5)*.5,
-        color:"rgba(255,215,0,0.8)"
-    });
+/* ----------------- DARK / LIGHT MODE ----------------- */
+const root = document.documentElement;
+const darkBtn = document.getElementById('darkBtn');
+const lightBtn = document.getElementById('lightBtn');
+function applyMode(mode){
+  if(mode === 'light'){ root.classList.add('light'); lightBtn.classList.add('active'); darkBtn.classList.remove('active'); localStorage.setItem('rfn_mode','light'); lightBtn.setAttribute('aria-pressed','true'); darkBtn.setAttribute('aria-pressed','false'); }
+  else { root.classList.remove('light'); darkBtn.classList.add('active'); lightBtn.classList.remove('active'); localStorage.setItem('rfn_mode','dark'); darkBtn.setAttribute('aria-pressed','true'); lightBtn.setAttribute('aria-pressed','false'); }
 }
+const saved = localStorage.getItem('rfn_mode') || 'dark';
+applyMode(saved);
+darkBtn.onclick=()=>applyMode('dark');
+lightBtn.onclick=()=>applyMode('light');
 
-function animate(){
-    ctx.clearRect(0,0,w,h);
-    for (let p of particles){
-        ctx.fillStyle=p.color;
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-        ctx.fill();
-        p.x+=p.speedX;
-        p.y+=p.speedY;
-        if(p.x<0||p.x>w) p.speedX*=-1;
-        if(p.y<0||p.y>h) p.speedY*=-1;
-    }
-    requestAnimationFrame(animate);
+/* ----------------- HERO SLIDESHOW ----------------- */
+const slides = Array.from(document.querySelectorAll('.slide'));
+const navWrap = document.querySelector('.slidenav');
+let current = 0;
+let slideTimer = null;
+
+function buildDots(){
+  slides.forEach((s,i)=>{
+    const d = document.createElement('div');
+    d.className='dot'+(i===0?' active':'');
+    d.title = 'Go to slide '+(i+1);
+    d.role='tab';
+    d.addEventListener('click', ()=> goto(i, true));
+    navWrap.appendChild(d);
+  });
 }
-animate();
+function updateDots(){
+  navWrap.querySelectorAll('.dot').forEach((d,i)=> d.classList.toggle('active', i===current));
+}
+function show(i){
+  slides.forEach(s=>s.classList.remove('active'));
+  slides[i].classList.add('active');
+  updateDots();
+}
+function goto(i, manual=false){
+  current = (i + slides.length) % slides.length;
+  show(current);
+  if(manual){ // reset timer
+    clearInterval(slideTimer);
+    slideTimer = setInterval(()=> goto(current+1), 4500);
+  }
+}
+buildDots();
+show(0);
+slideTimer = setInterval(()=> goto(current+1), 4500);
+
+/* ----------------- ACCESSIBLE TEAM CARDS: hover + keyboard ----------------- */
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { card.classList.toggle('expanded'); e.preventDefault(); }});
+  card.addEventListener('click', ()=> { card.classList.toggle('expanded'); });
+});
+
+/* ----------------- OPTIONAL: meet-team expand details (example) ----------------- */
+/* You can later replace with real modal or link to bios. */
+
 </script>
-
 </body>
 </html>
