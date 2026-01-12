@@ -43,6 +43,67 @@ body {
     overflow-x: hidden;
 }
 
+/* SMALL LOADING SCREEN */
+.loader-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, #020617, #020617 40%, #0f172a 80%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.loader-overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-card {
+    padding: 20px 22px 18px 22px;
+    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.9);
+    max-width: 320px;
+    text-align: left;
+}
+
+.loader-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 20% 0%, #facc15, #f97316);
+    color: #111827;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    margin-bottom: 10px;
+}
+
+.loader-title {
+    font-size: 0.95rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.loader-sub {
+    font-size: 0.86rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.loader-footer {
+    font-size: 0.8rem;
+    color: #facc15;
+}
+
 /* STARFIELD BACKGROUND */
 .hero-stars {
     pointer-events: none;
@@ -374,13 +435,12 @@ body {
     pointer-events: none;
 }
 
-/* card content wrapper to sit above overlay */
+/* card content wrapper */
 .hero-card-inner {
     position: relative;
     z-index: 1;
 }
 
-/* orbit header */
 .hero-card-header {
     display: flex;
     align-items: center;
@@ -405,7 +465,6 @@ body {
     color: var(--muted);
 }
 
-/* cosmic ring */
 .hero-orbit-ring {
     position: relative;
     border-radius: 999px;
@@ -692,18 +751,6 @@ body {
     background: rgba(15, 23, 42, 0.9);
     border: 1px solid var(--border-soft);
     text-align: left;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 12px;
-    align-items: center;
-}
-
-.team-avatar {
-    width: 56px;
-    height: 56px;
-    border-radius: 999px;
-    border: 2px solid rgba(250, 204, 21, 0.9);
-    object-fit: cover;
 }
 
 .team-name {
@@ -829,6 +876,20 @@ body {
 </style>
 </head>
 <body>
+
+<!-- Loading screen -->
+<div id="loader" class="loader-overlay">
+    <div class="loader-card">
+        <div class="loader-logo">RFN</div>
+        <div class="loader-title">Loading RFN v2.5</div>
+        <div class="loader-sub">
+            Preparing your franchise network experience. 
+        </div>
+        <div class="loader-footer">
+            A personal congratulations to The Golden Mug on its Grand Opening.
+        </div>
+    </div>
+</div>
 
 <div class="hero-stars"></div>
 <div class="orb orb-1"></div>
@@ -999,7 +1060,6 @@ OFFICIAL RFN PRESS RELEASE
 From the Office of the Ownership Team of The Robloxian Franchise Network
 For Immediate Release.
 
-
 On behalf of the Robloxian Franchise Network, we want to extend a formal congratulations to The Golden Mug for their official grand opening. The ceremony was held today (January 11, 2026) at 2:00 PM Eastern Standard Time. The opening ceremony was tied together with wonderful speeches by members of their staff team. It was not only a pleasure to be there but also to help them to better themselves and us.
 
 We want to congratulate them on the many hours and all of the hard work that went into the development of their game. It has truly been a pleasure to work alongside the many hands that made it possible. 
@@ -1114,7 +1174,7 @@ Office of the Ownership for RFN
 
 <div class="divider"><div class="divider-line"></div></div>
 
-<!-- TEAM -->
+<!-- TEAM (NO PHOTOS) -->
 <section id="team" class="section" aria-labelledby="teamTitle">
     <div class="section-header">
         <div>
@@ -1130,35 +1190,23 @@ Office of the Ownership for RFN
 
     <div class="team-grid">
         <article class="team-card">
-            <img class="team-avatar" src="https://crummer.rollins.edu/resources/how-to-become-a-ceo-of-a-company-in-5-steps/" alt="Avatar for Executive_Eagle">
-            <div>
-                <div class="team-name">Executive_Eagle</div>
-                <div class="team-role">Founder & Chief Executive Officer</div>
-            </div>
+            <div class="team-name">Executive_Eagle</div>
+            <div class="team-role">Founder & Chief Executive Officer</div>
         </article>
 
         <article class="team-card">
-            <img class="team-avatar" src="https://magicdecor.in/collections/anime-wallpapers-for-wall/?srsltid=AfmBOoouHs8y9aENmtUSjX0v-_C72NA7LDANvpX80LDdrYUK8cKx4CWt" alt="Avatar for Cadeynm1">
-            <div>
-                <div class="team-name">Cadeynm1</div>
-                <div class="team-role">President & Temporary Director of Operations</div>
-            </div>
+            <div class="team-name">Cadeynm1</div>
+            <div class="team-role">President & Temporary Director of Operations</div>
         </article>
 
         <article class="team-card">
-            <img class="team-avatar" src="https://www.dreamstime.com/stunning-cosmic-images-image351308392" alt="Avatar for Cami">
-            <div>
-                <div class="team-name">Cami</div>
-                <div class="team-role">Vice President & Temporary Director of Relations</div>
-            </div>
+            <div class="team-name">Cami</div>
+            <div class="team-role">Vice President & Temporary Director of Relations</div>
         </article>
 
         <article class="team-card">
-            <img class="team-avatar" src="https://en.wikiquote.org/wiki/Black" alt="Avatar for Morgan">
-            <div>
-                <div class="team-name">Morgan</div>
-                <div class="team-role">Vice President</div>
-            </div>
+            <div class="team-name">Morgan</div>
+            <div class="team-role">Vice President</div>
         </article>
     </div>
 </section>
@@ -1253,7 +1301,7 @@ function decreaseFont() {
 
 function toggleContrast() {
     document.body.classList.toggle('contrast');
-    // optional: add a CSS rule for .contrast if you want a different palette
+    // optional: define .contrast in CSS if you want a different palette
 }
 
 function toggleMotion() {
@@ -1264,6 +1312,16 @@ function toggleMotion() {
         document.body.style.transition = '';
     }
 }
+
+/* Loader fade-out */
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (!loader) return;
+    loader.classList.add('hide');
+    setTimeout(() => {
+        loader.style.display = 'none';
+    }, 400);
+});
 </script>
 
 </body>
