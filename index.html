@@ -7,196 +7,534 @@
 
 <style>
 /* RESET */
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;scroll-behavior:smooth}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
+}
 
 /* THEME */
-:root{
-    --blue:#0d1b4c;
-    --blue-light:#162a70;
-    --navy:#09112f;
-    --gold:#f4c542;
-    --gold-light:#ffe58f;
-    --white:#fff;
-    --frost:rgba(255,255,255,0.12);
-    --blur:blur(18px);
+:root {
+    --blue: #0d1b4c;
+    --blue-light: #162a70;
+    --navy: #09112f;
+    --gold: #f4c542;
+    --gold-light: #ffe58f;
+    --white: #ffffff;
+    --frost: rgba(255, 255, 255, 0.12);
+    --blur: blur(18px);
 }
 
 /* BODY */
-body{
-    background:linear-gradient(135deg,var(--navy),var(--blue));
-    color:white;
-    overflow-x:hidden;
-    transition:.4s;
+body {
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color: var(--white);
+    overflow-x: hidden;
+    transition: background 0.4s, color 0.4s;
+    line-height: 1.5;
+}
+
+/* HIGH CONTRAST MODE */
+body.contrast-mode {
+    background: #000000;
+    color: #ffffff;
+}
+
+body.contrast-mode nav {
+    background: #000000;
+}
+
+body.contrast-mode .glass,
+body.contrast-mode .feature-card,
+body.contrast-mode .why-box,
+body.contrast-mode #accessibilityMenu,
+body.contrast-mode .announcement-banner-inner {
+    background: #000000 !important;
+    border-color: #ffffff !important;
+    box-shadow: none;
+}
+
+/* PERFORMANCE MODE (reduce heavy effects) */
+body.performance-mode .parallax {
+    background-attachment: scroll;
+}
+
+body.performance-mode * {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
 }
 
 /* PARALLAX BACKGROUND */
-.parallax{
-    background-attachment:fixed;
-    background-position:center;
-    background-size:cover;
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 /* NAVIGATION */
-nav{
-    width:100%;position:fixed;top:0;left:0;
-    padding:18px 10%;
-    display:flex;align-items:center;justify-content:space-between;
-    backdrop-filter:blur(12px);
-    background:rgba(0,0,0,.35);
-    z-index:1000;
+nav {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 18px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1000;
 }
-nav .logo{font-size:2.3rem;font-weight:900;color:var(--gold);letter-spacing:2px;}
-nav a{
-    margin-left:25px;text-decoration:none;color:white;
-    font-size:1.05rem;transition:.2s;
-}
-nav a:hover{color:var(--gold);}
 
-/* MONOGRAM INTRO */
-#intro{
-    height:100vh;
-    display:flex;align-items:center;justify-content:center;
-    position:relative;overflow:hidden;
+nav .logo {
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 2px;
 }
-#intro svg{
-    width:180px;height:180px;
-    animation:spinIn 2s ease forwards;
-    opacity:0;
+
+nav .nav-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
-@keyframes spinIn{
-    0%{transform:scale(0) rotate(0deg);opacity:0;}
-    100%{transform:scale(1) rotate(360deg);opacity:1;}
+
+nav .nav-links a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 1.05rem;
+    transition: color 0.2s, transform 0.2s;
+}
+
+nav .nav-links a:hover {
+    color: var(--gold);
+    transform: translateY(-1px);
+}
+
+/* INTRO MONOGRAM */
+#intro {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+}
+
+#intro svg {
+    width: 180px;
+    height: 180px;
+    animation: spinIn 2s ease forwards;
+    opacity: 0;
+}
+
+@keyframes spinIn {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+
+/* ANNOUNCEMENT BANNER */
+.announcement-banner {
+    margin-top: 90px;
+    padding: 30px 10%;
+}
+
+.announcement-banner-inner {
+    background: linear-gradient(120deg, var(--gold), var(--gold-light));
+    color: #1a1400;
+    border-radius: 22px;
+    padding: 28px 26px;
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.announcement-banner-inner::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6), transparent 60%);
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.announcement-tag {
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.announcement-heading {
+    font-size: 2rem;
+    margin-bottom: 6px;
+}
+
+.announcement-sub {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+.announcement-highlight {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.press-release-toggle {
+    margin-top: 10px;
+}
+
+.press-release-panel {
+    margin-top: 15px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.15);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding-top 0.4s ease, padding-bottom 0.4s ease;
+}
+
+.press-release-panel.open {
+    max-height: 600px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.press-release-placeholder {
+    font-size: 0.98rem;
+    opacity: 0.9;
 }
 
 /* HERO SLIDESHOW */
-.hero{
-    height:100vh;position:relative;
-    display:flex;justify-content:center;align-items:center;text-align:center;
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 10%;
 }
-.hero h1{
-    font-size:3.5rem;
-    text-shadow:0 0 20px black;
-    animation:fadeUp 1.3s ease forwards;
+
+.hero h1 {
+    font-size: 3.5rem;
+    text-shadow: 0 0 20px black;
+    animation: fadeUp 1.3s ease forwards;
 }
-.hero p{margin-top:12px;font-size:1.2rem;opacity:.9;}
 
-.slide{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:1.3s;}
-.slide.active{opacity:1;}
+.hero p {
+    margin-top: 12px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
 
-@keyframes fadeUp{
-    from{opacity:0;transform:translateY(40px);}
-    to{opacity:1;transform:translateY(0);}
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-inner {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* FLOATING GOLD STREAK DIVIDER */
-.divider{
-    width:100%;height:4px;
-    background:linear-gradient(90deg,transparent,var(--gold),transparent);
-    margin:80px 0;
-    animation:shimmer 3s infinite linear;
-    opacity:.7;
+.divider {
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 80px 0;
+    animation: shimmer 3s infinite linear;
+    background-size: 200px 4px;
+    opacity: 0.7;
 }
-@keyframes shimmer{
-    0%{background-position:-200px;}
-    100%{background-position:200px;}
+
+@keyframes shimmer {
+    0% { background-position: -200px 0; }
+    100% { background-position: 200px 0; }
 }
 
 /* GLASS CARDS */
-.glass{
-    background:var(--frost);backdrop-filter:var(--blur);
-    padding:40px;border-radius:20px;border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 0 25px rgba(0,0,0,.4);
-    transition:.3s;
+.glass {
+    background: var(--frost);
+    backdrop-filter: var(--blur);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-.glass:hover{
-    transform:scale(1.03);
-    box-shadow:0 0 35px rgba(255,215,0,.3);
+
+.glass:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 35px rgba(255, 215, 0, 0.3);
 }
 
 /* BUTTONS */
-.btn{
-    display:inline-block;
-    margin-top:25px;
-    padding:16px 34px;
-    border:none;border-radius:12px;
-    font-size:1.1rem;font-weight:bold;
-    background:var(--gold);color:black;
-    cursor:pointer;transition:.2s;text-decoration:none;
+.btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 16px 34px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    background: var(--gold);
+    color: black;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
 }
-.btn:hover{transform:scale(1.06);}
+
+.btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.4);
+}
 
 /* FEATURES SECTION */
-#features{padding:120px 10%;}
-.feature-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:35px;
+#features {
+    padding: 120px 10%;
 }
-.feature-card{
-    padding:25px;border-radius:18px;
-    background:rgba(255,255,255,.1);
-    backdrop-filter:blur(12px);
-    transition:.3s;text-align:center;
+
+#features h2 {
+    text-align: center;
+    font-size: 2.6rem;
+    margin-bottom: 50px;
 }
-.feature-card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 0 25px rgba(255,215,0,.35);
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+}
+
+.feature-card {
+    padding: 25px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    min-height: 175px;
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+}
+
+.feature-card p {
+    font-size: 0.98rem;
+    opacity: 0.92;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
 }
 
 /* WHY CHOOSE RFN */
-#why{
-    padding:120px 10%;text-align:center;
+#why {
+    padding: 120px 10%;
+    text-align: center;
 }
-#why h2{font-size:2.5rem;margin-bottom:25px;}
-.why-box{
-    margin-top:30px;padding:40px;
-    border-radius:18px;background:rgba(0,0,0,.35);
-    border:1px solid rgba(255,255,255,.18);
-    animation:fadeUp 1.2s ease;
+
+#why h2 {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+}
+
+.why-box {
+    margin-top: 30px;
+    padding: 40px;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    animation: fadeUp 1.2s ease;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* TEAM SECTION */
-#team{padding:120px 10%;}
-.team-row{
-    display:flex;justify-content:center;gap:40px;flex-wrap:wrap;
+#team {
+    padding: 120px 10%;
 }
-.team-card{
-    text-align:center;width:260px;
+
+#team h2 {
+    text-align: center;
+    font-size: 2.6rem;
+    margin-bottom: 40px;
 }
-.team-card img{
-    width:90px;height:90px;border-radius:50%;
-    border:3px solid var(--gold);
+
+.team-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
 }
-.team-card h3{margin-top:10px;color:var(--gold);}
+
+.team-card {
+    text-align: center;
+    width: 260px;
+}
+
+.team-card img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.team-card h3 {
+    margin-top: 5px;
+    color: var(--gold);
+}
+
+.team-card p {
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+/* ACTION BUTTONS SECTION */
+.action-section {
+    text-align: center;
+    padding: 90px 10%;
+}
+
+.action-section .btn {
+    margin: 10px 10px;
+}
 
 /* ACCESSIBILITY */
-#accessibilityToggle{
-    position:fixed;bottom:20px;left:20px;
-    background:var(--gold);color:black;
-    border:none;border-radius:50px;
-    padding:13px 20px;font-weight:bold;cursor:pointer;z-index:1001;
+#accessibilityToggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: var(--gold);
+    color: black;
+    border: none;
+    border-radius: 50px;
+    padding: 13px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
 }
-#accessibilityMenu{
-    position:fixed;bottom:80px;left:20px;width:190px;
-    background:var(--blue-light);
-    border:2px solid var(--gold);border-radius:15px;
-    padding:20px;display:none;z-index:1002;
+
+#accessibilityMenu {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    width: 210px;
+    background: var(--blue-light);
+    border: 2px solid var(--gold);
+    border-radius: 15px;
+    padding: 20px;
+    display: none;
+    z-index: 1002;
 }
-#accessibilityMenu button{
-    width:100%;margin-bottom:10px;padding:10px;
-    border:none;border-radius:8px;background:var(--gold);
-    font-weight:bold;cursor:pointer;
+
+#accessibilityMenu button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: var(--gold);
+    font-weight: bold;
+    cursor: pointer;
 }
 
 /* FOOTER */
-footer{
-    background:#050812;padding:45px;text-align:center;margin-top:100px;
+footer {
+    background: #050812;
+    padding: 45px;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 0.95rem;
+    opacity: 0.9;
 }
 
 /* MOBILE */
-@media(max-width:768px){
-    nav a{display:none;}
-    .hero h1{font-size:2.5rem;}
+@media (max-width: 768px) {
+    nav {
+        padding: 14px 6%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    nav .logo {
+        font-size: 1.9rem;
+    }
+
+    nav .nav-links {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    nav .nav-links a {
+        margin: 4px 12px 0 0;
+        font-size: 0.95rem;
+    }
+
+    #intro {
+        padding-top: 120px;
+    }
+
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .announcement-heading {
+        font-size: 1.6rem;
+    }
+
+    .announcement-banner-inner {
+        padding: 22px 18px;
+    }
+
+    .glass {
+        padding: 28px;
+    }
 }
 </style>
 </head>
@@ -205,155 +543,224 @@ footer{
 <!-- NAVBAR -->
 <nav>
     <div class="logo">RFN</div>
-    <div>
+    <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#team">Team</a>
-        <a href="https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing" target="_blank">Terms of Service and Privacy Policy</a>
-        <a href="https://forms.gle/YicvDZ7UUN51y7xw6" target="_blank">Renew Agreement</a>
+        <a href="https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Terms of Service and Privacy Policy</a>
+        <a href="https://forms.gle/YicvDZ7UUN51y7xw6" target="_blank" rel="noopener noreferrer">Renew Agreement</a>
     </div>
 </nav>
 
+<!-- ANNOUNCEMENT BANNER FOR THE GOLDEN MUG -->
+<section id="announcement" class="announcement-banner">
+    <div class="announcement-banner-inner">
+        <div class="announcement-tag">Official RFN Announcement</div>
+        <div class="announcement-heading">
+            Massive Congratulations to The Golden Mug on Your Grand Opening
+        </div>
+        <div class="announcement-sub">
+            On behalf of RFN leadership, this is a personal and heartfelt celebration of everything you have built.
+            The Golden Mug’s grand opening marks the beginning of a new chapter in excellence, creativity, and community.
+            We are honored to stand beside you as you open your doors and welcome your first guests.
+        </div>
+        <div class="announcement-sub">
+            May this launch be the first of many milestones, and may every guest who steps into The Golden Mug feel the
+            care, professionalism, and passion behind your work.
+            <span class="announcement-highlight">Congratulations on your Grand Opening.</span>
+        </div>
+        <div class="press-release-toggle">
+            <button class="btn" type="button" onclick="togglePressRelease()">View Press Release</button>
+        </div>
+        <div id="pressReleasePanel" class="press-release-panel">
+            <div class="press-release-placeholder">
+                OFFICIAL RFN PRESS RELEASE
+From the Office of the Ownership Team of The Robloxian Franchise Network
+For Immediate Release.
+On behalf of the Robloxian Franchise Network, we want to extend a formal congratulations to The Golden Mug for their official grand opening. The ceremony was held today (January 11, 2026) at 2:00 PM Eastern Standard Time. The opening ceremony was tied together with wonderful speeches by members of their staff team. It was not only a pleasure to be there but also to help them to better themselves and us.
+We want to congratulate them on the many hours and all of the hard work that went into the development of their game. It has truly been a pleasure to work alongside the many hands that made it possible. 
+We want to especially recognize the hard work of the group’s owner, RDAWG1112, for his never-ending support, development, and overall leadership of The Golden Mug. This launch serves not only as a new chapter for TGM but also as a great accomplishment to RDAWG1112
+We continue to support The Golden Mug as it moves onto its next chapter.
+Once again, the Robloxian Franchise Network extends a most sincere congratulations.
+Signed,
+Executive_Eagle
+Chief Executive Officer of the Robloxian Franchise Network
+Office of the Ownership for RFN
+
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- INTRO MONOGRAM -->
 <section id="intro">
-<svg viewBox="0 0 200 200">
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-          fill="none" stroke="gold" stroke-width="6" font-size="90" font-family="Arial" letter-spacing="8">
-        RFN
-    </text>
-</svg>
+    <svg viewBox="0 0 200 200" aria-labelledby="rfnMonogramTitle">
+        <title id="rfnMonogramTitle">RFN Monogram</title>
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+              fill="none" stroke="gold" stroke-width="6" font-size="90"
+              font-family="Arial" letter-spacing="8">
+            RFN
+        </text>
+    </svg>
 </section>
 
 <!-- HERO SLIDES -->
 <section class="hero parallax" id="hero">
     <div class="slide active">
-        <h1>A New Way to Start a Game</h1>
-        <p>Professional support for every creator.</p>
+        <div class="slide-inner">
+            <h1>A New Way to Start a Game</h1>
+            <p>Professional support for every creator.</p>
+        </div>
     </div>
     <div class="slide">
-        <h1>A System Built for Growth</h1>
-        <p>Tools, structure, and guidance.</p>
+        <div class="slide-inner">
+            <h1>A System Built for Growth</h1>
+            <p>Tools, structure, and guidance.</p>
+        </div>
     </div>
     <div class="slide">
-        <h1>Version 2 — The Future of Creators</h1>
-        <p>Here now!</p>
+        <div class="slide-inner">
+            <h1>Version 2 — The Future of Creators</h1>
+            <p>Here now.</p>
+        </div>
     </div>
 </section>
-
-<script>
-let slides=document.querySelectorAll('.slide');
-let i=0;
-setInterval(()=>{
-    slides[i].classList.remove('active');
-    i=(i+1)%slides.length;
-    slides[i].classList.add('active');
-},5000);
-</script>
 
 <div class="divider"></div>
 
 <!-- FEATURES -->
 <section id="features">
-<h2 style="text-align:center;font-size:2.6rem;margin-bottom:50px;">RFN Features</h2>
+    <h2>RFN Features</h2>
 
-<div class="feature-grid">
-    <div class="feature-card">
-        <h3>Franchise Infrastructure</h3>
-        <p>Full onboarding, support, and systems to launch your own project under RFN.</p>
-    </div>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>Franchise Infrastructure</h3>
+            <p>Full onboarding, support, and systems to launch your own project under RFN.</p>
+        </div>
 
-    <div class="feature-card">
-        <h3>Mobile Optimization</h3>
-        <p>A fully adaptive website crafted for all devices.</p>
-    </div>
+        <div class="feature-card">
+            <h3>Mobile Optimization</h3>
+            <p>A fully adaptive website crafted to look and function well on all devices.</p>
+        </div>
 
-    <div class="feature-card">
-        <h3>Glass-Morphism UI</h3>
-        <p>A premium, modern aesthetic built for professionalism.</p>
-    </div>
+        <div class="feature-card">
+            <h3>Glass-Morphism UI</h3>
+            <p>A premium, modern aesthetic built for professionalism and clarity.</p>
+        </div>
 
-    <div class="feature-card">
-        <h3>Accessibility Tools</h3>
-        <p>Font controls, contrast mode, and performance mode.</p>
+        <div class="feature-card">
+            <h3>Accessibility Tools</h3>
+            <p>Font controls, contrast mode, and performance mode for a smoother experience.</p>
+        </div>
     </div>
-</div>
 </section>
 
 <div class="divider"></div>
 
 <!-- WHY RFN -->
 <section id="why">
-<h2>Why Choose RFN?</h2>
-<div class="why-box glass">
-    RFN is built on structure, reliability, and long-term success.  
-    Every system we create is designed to give developers and owners a stable pathway  
-    to launch, grow, and manage their experiences professionally.  
-</div>
+    <h2>Why Choose RFN?</h2>
+    <div class="why-box glass">
+        RFN is built on structure, reliability, and long-term success.
+        Every system we create is designed to give developers and owners a stable pathway
+        to launch, grow, and manage their experiences professionally.
+        From foundational support to ongoing guidance, RFN exists to help creators build
+        projects that last.
+    </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- TEAM -->
 <section id="team">
-<h2 style="text-align:center;font-size:2.6rem;margin-bottom:40px;">Meet Our Team</h2>
+    <h2>Meet Our Team</h2>
 
-<div class="team-row">
-    <div class="team-card glass">
-        <img src="https://crummer.rollins.edu/resources/how-to-become-a-ceo-of-a-company-in-5-steps/">
-        <h3>Executive_Eagle</h3>
-        <p>Founder & Chief Executive Officer</p>
+    <div class="team-row">
+        <div class="team-card glass">
+            <img src="https://crummer.rollins.edu/resources/how-to-become-a-ceo-of-a-company-in-5-steps/" alt="Executive_Eagle avatar">
+            <h3>Executive_Eagle</h3>
+            <p>Founder & Chief Executive Officer</p>
+        </div>
+        <div class="team-card glass">
+            <img src="https://magicdecor.in/collections/anime-wallpapers-for-wall/?srsltid=AfmBOoouHs8y9aENmtUSjX0v-_C72NA7LDANvpX80LDdrYUK8cKx4CWt" alt="Cadeynm1 avatar">
+            <h3>Cadeynm1</h3>
+            <p>President and Temporary Director of Operations</p>
+        </div>
+        <div class="team-card glass">
+            <img src="https://www.dreamstime.com/stunning-cosmic-images-image351308392" alt="Cami avatar">
+            <h3>Cami</h3>
+            <p>Vice President and Temporary Director of Relations</p>
+        </div>
+        <div class="team-card glass">
+            <img src="https://en.wikiquote.org/wiki/Black" alt="Morgan avatar">
+            <h3>Morgan</h3>
+            <p>Vice President</p>
+        </div>
     </div>
-    <div class="team-card glass">
-        <img src="https://magicdecor.in/collections/anime-wallpapers-for-wall/?srsltid=AfmBOoouHs8y9aENmtUSjX0v-_C72NA7LDANvpX80LDdrYUK8cKx4CWt">
-        <h3>Cadeynm1</h3>
-        <p>President and Temporary Director of Operations</p>
-    </div>
-    <div class="team-card glass">
-        <img src="https://www.dreamstime.com/stunning-cosmic-images-image351308392">
-        <h3>Cami</h3>
-        <p>Vice President and Temporary Director of Relations</p>
-    </div>
-    <div class="team-card glass">
-        <img src="https://en.wikiquote.org/wiki/Black">
-        <h3>Morgan</h3>
-        <p>Vice President</p>
-    </div>
-</div>
 </section>
 
 <div class="divider"></div>
 
 <!-- ACTION BUTTONS -->
-<section style="text-align:center;padding:90px 0;">
-    <a class="btn" href="https://forms.gle/c9K4Xh6i7BNyiBo38" target="_blank">Employment Application</a>
-    <a class="btn" href="https://forms.gle/Coe8GAuuuXrgWTyx9" target="_blank">Agreement Renewal Request </a>
-    <a class="btn" href="https://forms.gle/ZRQwYsTGavBx7gKz9" target="_blank">Franchise Application</a>
-    <a class="btn" href="https://script.google.com/macros/s/AKfycbzm8hE-CWZbs5xx-E8LEDUuGiqr5l-fEZNytZgzOCaGqnsgyDwU6elkohpDNa4f4A1LkA/exec" target="_blank">Customer Portal</a>
+<section class="action-section">
+    <a class="btn" href="https://forms.gle/c9K4Xh6i7BNyiBo38" target="_blank" rel="noopener noreferrer">Employment Application</a>
+    <a class="btn" href="https://forms.gle/Coe8GAuuuXrgWTyx9" target="_blank" rel="noopener noreferrer">Agreement Renewal Request</a>
+    <a class="btn" href="https://forms.gle/ZRQwYsTGavBx7gKz9" target="_blank" rel="noopener noreferrer">Franchise Application</a>
+    <a class="btn" href="https://script.google.com/macros/s/AKfycbzm8hE-CWZbs5xx-E8LEDUuGiqr5l-fEZNytZgzOCaGqnsgyDwU6elkohpDNa4f4A1LkA/exec" target="_blank" rel="noopener noreferrer">Customer Portal</a>
 </section>
 
 <!-- ACCESSIBILITY -->
-<button id="accessibilityToggle">☰</button>
+<button id="accessibilityToggle" type="button">☰</button>
 <div id="accessibilityMenu">
-    <button onclick="increaseFont()">Increase Text</button>
-    <button onclick="decreaseFont()">Decrease Text</button>
-    <button onclick="toggleContrast()">High Contrast</button>
-    <button onclick="togglePerf()">Performance Mode</button>
+    <button type="button" onclick="increaseFont()">Increase Text</button>
+    <button type="button" onclick="decreaseFont()">Decrease Text</button>
+    <button type="button" onclick="toggleContrast()">High Contrast</button>
+    <button type="button" onclick="togglePerf()">Performance Mode</button>
 </div>
-
-<script>
-document.getElementById("accessibilityToggle").onclick = ()=>{
-    let m=document.getElementById("accessibilityMenu");
-    m.style.display=m.style.display==="block"?"none":"block";
-};
-function increaseFont(){document.body.style.fontSize="larger";}
-function decreaseFont(){document.body.style.fontSize="smaller";}
-function toggleContrast(){document.body.classList.toggle("contrast-mode");}
-function togglePerf(){document.body.classList.toggle("performance-mode");}
-</script>
 
 <!-- FOOTER -->
 <footer>
     © 2025 RFN — Designed for the future of Roblox game creation.
 </footer>
+
+<script>
+// HERO SLIDESHOW
+let slides = document.querySelectorAll('.slide');
+let slideIndex = 0;
+setInterval(() => {
+    if (!slides.length) return;
+    slides[slideIndex].classList.remove('active');
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add('active');
+}, 5000);
+
+// ACCESSIBILITY MENU TOGGLE
+document.getElementById("accessibilityToggle").onclick = () => {
+    const menu = document.getElementById("accessibilityMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+};
+
+// FONT SIZE CONTROLS
+function increaseFont() {
+    document.body.style.fontSize = "larger";
+}
+function decreaseFont() {
+    document.body.style.fontSize = "smaller";
+}
+
+// CONTRAST & PERFORMANCE MODE TOGGLES
+function toggleContrast() {
+    document.body.classList.toggle("contrast-mode");
+}
+function togglePerf() {
+    document.body.classList.toggle("performance-mode");
+}
+
+// PRESS RELEASE TOGGLE
+function togglePressRelease() {
+    const panel = document.getElementById("pressReleasePanel");
+    panel.classList.toggle("open");
+}
+</script>
 
 </body>
 </html>
