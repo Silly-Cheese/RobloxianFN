@@ -11,570 +11,992 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     scroll-behavior: smooth;
 }
 
 /* THEME */
 :root {
-    --blue: #0d1b4c;
-    --blue-light: #162a70;
-    --navy: #09112f;
-    --gold: #f4c542;
-    --gold-light: #ffe58f;
-    --white: #ffffff;
-    --frost: rgba(255, 255, 255, 0.12);
-    --blur: blur(18px);
+    --bg-deep: #020617;
+    --bg-alt: #020617;
+    --navy: #020617;
+    --blue: #0f172a;
+    --blue-soft: #1e293b;
+    --accent: #fbbf24;
+    --accent-soft: rgba(251, 191, 36, 0.13);
+    --accent-strong: #facc15;
+    --white: #f9fafb;
+    --muted: #9ca3af;
+    --glass: rgba(15, 23, 42, 0.75);
+    --border-soft: rgba(148, 163, 184, 0.4);
+    --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.9);
 }
 
 /* BODY */
 body {
-    background: linear-gradient(135deg, var(--navy), var(--blue));
+    background:
+        radial-gradient(circle at 10% 0%, rgba(251, 191, 36, 0.02), transparent 55%),
+        radial-gradient(circle at 90% 0%, rgba(59, 130, 246, 0.25), transparent 55%),
+        linear-gradient(145deg, var(--bg-deep), var(--blue));
     color: var(--white);
+    min-height: 100vh;
     overflow-x: hidden;
-    transition: background 0.4s, color 0.4s;
-    line-height: 1.5;
 }
 
-/* HIGH CONTRAST MODE */
-body.contrast-mode {
-    background: #000000;
-    color: #ffffff;
+/* STARFIELD BACKGROUND */
+.hero-stars {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.18) 0, transparent 50px),
+        radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.12) 0, transparent 45px),
+        radial-gradient(circle at 50% 85%, rgba(251, 191, 36, 0.16) 0, transparent 60px);
+    opacity: 0.18;
+    z-index: -3;
 }
 
-body.contrast-mode nav {
-    background: #000000;
+/* BLURRED ORBS */
+.orb {
+    position: fixed;
+    width: 420px;
+    height: 420px;
+    border-radius: 999px;
+    filter: blur(60px);
+    opacity: 0.2;
+    mix-blend-mode: screen;
+    z-index: -2;
+}
+.orb.orb-1 {
+    top: -80px;
+    left: -140px;
+    background: #22c55e;
+}
+.orb.orb-2 {
+    bottom: -160px;
+    right: -120px;
+    background: #fbbf24;
+}
+.orb.orb-3 {
+    top: 40%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    background: #3b82f6;
 }
 
-body.contrast-mode .glass,
-body.contrast-mode .feature-card,
-body.contrast-mode .why-box,
-body.contrast-mode #accessibilityMenu,
-body.contrast-mode .announcement-banner-inner {
-    background: #000000 !important;
-    border-color: #ffffff !important;
-    box-shadow: none;
-}
-
-/* PERFORMANCE MODE (reduce heavy effects) */
-body.performance-mode .parallax {
-    background-attachment: scroll;
-}
-
-body.performance-mode * {
-    animation: none !important;
-    transition: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-}
-
-/* PARALLAX BACKGROUND */
-.parallax {
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-}
-
-/* NAVIGATION */
-nav {
-    width: 100%;
+/* NAVBAR */
+.nav {
     position: fixed;
     top: 0;
     left: 0;
-    padding: 18px 10%;
+    width: 100%;
+    z-index: 40;
+    backdrop-filter: blur(20px);
+    background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.88));
+    border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+}
+
+.nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 14px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    backdrop-filter: blur(12px);
-    background: rgba(0, 0, 0, 0.35);
-    z-index: 1000;
 }
 
-nav .logo {
-    font-size: 2.3rem;
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: 2px;
-}
-
-nav .nav-links {
+.nav-left {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
+    gap: 10px;
 }
 
-nav .nav-links a {
-    margin-left: 25px;
-    text-decoration: none;
-    color: var(--white);
-    font-size: 1.05rem;
-    transition: color 0.2s, transform 0.2s;
-}
-
-nav .nav-links a:hover {
-    color: var(--gold);
-    transform: translateY(-1px);
-}
-
-/* INTRO MONOGRAM */
-#intro {
-    height: 100vh;
+.nav-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 20% 0%, #facc15, #f97316);
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.8),
+        0 16px 40px rgba(0, 0, 0, 0.9);
+}
+
+.nav-logo span {
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 1.4px;
+    color: #111827;
+}
+
+.nav-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-title-main {
+    font-size: 1.08rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.nav-title-sub {
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.nav-link {
+    font-size: 0.92rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 4px;
     position: relative;
-    overflow: hidden;
-    padding-top: 80px;
+    transition: color 0.2s ease;
 }
 
-#intro svg {
-    width: 180px;
-    height: 180px;
-    animation: spinIn 2s ease forwards;
-    opacity: 0;
-}
-
-@keyframes spinIn {
-    0% { transform: scale(0) rotate(0deg); opacity: 0; }
-    100% { transform: scale(1) rotate(360deg); opacity: 1; }
-}
-
-/* ANNOUNCEMENT BANNER */
-.announcement-banner {
-    margin-top: 90px;
-    padding: 30px 10%;
-}
-
-.announcement-banner-inner {
-    background: linear-gradient(120deg, var(--gold), var(--gold-light));
-    color: #1a1400;
-    border-radius: 22px;
-    padding: 28px 26px;
-    box-shadow: 0 0 28px rgba(0, 0, 0, 0.5);
-    position: relative;
-    overflow: hidden;
-}
-
-.announcement-banner-inner::before {
+.nav-link::after {
     content: "";
     position: absolute;
-    top: -40%;
-    right: -20%;
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6), transparent 60%);
-    opacity: 0.7;
-    pointer-events: none;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #facc15, #f97316);
+    transition: width 0.22s ease;
 }
 
-.announcement-tag {
-    font-size: 0.9rem;
-    font-weight: bold;
-    letter-spacing: 2px;
+.nav-link:hover {
+    color: var(--white);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-cta {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 0 0, #facc15, #f97316);
+    color: #111827;
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.7);
+    border: none;
+}
+
+/* MOBILE NAV TOGGLE */
+.nav-toggle {
+    display: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.95);
+    color: var(--white);
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+/* MOBILE NAV DROPDOWN */
+.nav-links-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 0 14px 0;
+}
+
+/* HERO */
+.hero {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 120px 20px 80px 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.3fr);
+    gap: 42px;
+    align-items: center;
+}
+
+.hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     margin-bottom: 10px;
 }
 
-.announcement-heading {
-    font-size: 2rem;
-    margin-bottom: 6px;
+.hero-eyebrow-pill {
+    width: 26px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #facc15, #3b82f6);
 }
 
-.announcement-sub {
-    font-size: 1.1rem;
+.hero-title {
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+}
+
+.hero-title span {
+    background: linear-gradient(120deg, #facc15, #f97316);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 30rem;
+    margin-bottom: 20px;
+}
+
+.hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.hero-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: radial-gradient(circle at center, #facc15, #f97316);
+}
+
+/* HERO BUTTONS */
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-bottom: 16px;
 }
 
-.announcement-highlight {
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.press-release-toggle {
-    margin-top: 10px;
-}
-
-.press-release-panel {
-    margin-top: 15px;
-    padding: 14px 16px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.15);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding-top 0.4s ease, padding-bottom 0.4s ease;
-}
-
-.press-release-panel.open {
-    max-height: 600px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-}
-
-.press-release-placeholder {
-    font-size: 0.98rem;
-    opacity: 0.9;
-}
-
-/* HERO SLIDESHOW */
-.hero {
-    height: 100vh;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 10%;
-}
-
-.hero h1 {
-    font-size: 3.5rem;
-    text-shadow: 0 0 20px black;
-    animation: fadeUp 1.3s ease forwards;
-}
-
-.hero p {
-    margin-top: 12px;
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
-
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.slide-inner {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.slide.active {
-    opacity: 1;
-}
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* FLOATING GOLD STREAK DIVIDER */
-.divider {
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 80px 0;
-    animation: shimmer 3s infinite linear;
-    background-size: 200px 4px;
-    opacity: 0.7;
-}
-
-@keyframes shimmer {
-    0% { background-position: -200px 0; }
-    100% { background-position: 200px 0; }
-}
-
-/* GLASS CARDS */
-.glass {
-    background: var(--frost);
-    backdrop-filter: var(--blur);
-    padding: 40px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.glass:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 35px rgba(255, 215, 0, 0.3);
-}
-
-/* BUTTONS */
-.btn {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 16px 34px;
+.btn-primary {
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
     border: none;
-    border-radius: 12px;
-    font-size: 1.05rem;
-    font-weight: bold;
-    background: var(--gold);
-    color: black;
+    background: radial-gradient(circle at 0 0, #facc15, #f97316);
+    color: #111827;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
     text-decoration: none;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
 }
 
-.btn:hover {
-    transform: scale(1.06);
-    box-shadow: 0 0 18px rgba(255, 215, 0, 0.4);
+.btn-ghost {
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.85);
+    color: var(--white);
+    cursor: pointer;
+    text-decoration: none;
 }
 
-/* FEATURES SECTION */
-#features {
-    padding: 120px 10%;
+/* GOLDEN MUG MINI RIBBON */
+.hero-ribbon {
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
-#features h2 {
-    text-align: center;
-    font-size: 2.6rem;
-    margin-bottom: 50px;
+.hero-ribbon span {
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(251, 191, 36, 0.12);
+    border: 1px solid rgba(251, 191, 36, 0.5);
+    color: #facc15;
 }
 
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 35px;
+/* HERO RIGHT PANEL (ORBIT CARD) */
+.hero-orbit {
+    position: relative;
+    min-height: 280px;
 }
 
-.feature-card {
-    padding: 25px;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-align: center;
-    min-height: 175px;
+.hero-card {
+    position: relative;
+    border-radius: 28px;
+    padding: 22px 22px 20px 22px;
+    background: radial-gradient(circle at 0 0, rgba(251, 191, 36, 0.1), rgba(15, 23, 42, 0.95));
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    overflow: hidden;
 }
 
-.feature-card h3 {
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-    color: var(--gold-light);
+/* subtle glow overlay */
+.hero-card::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background:
+        radial-gradient(circle at 10% 0%, rgba(250, 204, 21, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(96, 165, 250, 0.25), transparent 55%);
+    opacity: 0.9;
+    mix-blend-mode: screen;
+    pointer-events: none;
 }
 
-.feature-card p {
-    font-size: 0.98rem;
-    opacity: 0.92;
+/* card content wrapper to sit above overlay */
+.hero-card-inner {
+    position: relative;
+    z-index: 1;
 }
 
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
-}
-
-/* WHY CHOOSE RFN */
-#why {
-    padding: 120px 10%;
-    text-align: center;
-}
-
-#why h2 {
-    font-size: 2.5rem;
-    margin-bottom: 25px;
-}
-
-.why-box {
-    margin-top: 30px;
-    padding: 40px;
-    border-radius: 18px;
-    background: rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    animation: fadeUp 1.2s ease;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* TEAM SECTION */
-#team {
-    padding: 120px 10%;
-}
-
-#team h2 {
-    text-align: center;
-    font-size: 2.6rem;
-    margin-bottom: 40px;
-}
-
-.team-row {
+/* orbit header */
+.hero-card-header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.hero-card-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #e5e7eb;
+}
+
+.hero-card-tag {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    color: var(--muted);
+}
+
+/* cosmic ring */
+.hero-orbit-ring {
+    position: relative;
+    border-radius: 999px;
+    border: 1px dashed rgba(148, 163, 184, 0.6);
+    padding: 18px 18px 10px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hero-orbit-center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.hero-orbit-core {
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 20% 0%, #facc15, #f97316);
+    display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 40px;
+    color: #111827;
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+
+.hero-orbit-text {
+    font-size: 0.86rem;
+    color: #e5e7eb;
+    flex: 1;
+}
+
+.hero-orbit-meta {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
     flex-wrap: wrap;
 }
 
-.team-card {
-    text-align: center;
-    width: 260px;
+.hero-orbit-pill {
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-size: 0.73rem;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    color: var(--muted);
 }
 
-.team-card img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: 3px solid var(--gold);
-    object-fit: cover;
+/* orbit footer */
+.hero-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    font-size: 0.76rem;
+    color: var(--muted);
+}
+
+/* GOLDEN MUG ANNOUNCEMENT SECTION */
+.section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 40px 20px 0 20px;
+}
+
+.section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.section-eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+}
+
+.section-title span {
+    background: linear-gradient(120deg, #facc15, #f97316);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.section-subtitle {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* announcement card */
+.golden-card {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    padding: 20px 20px 18px 20px;
+    background: radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.15), rgba(15, 23, 42, 0.95));
+    border: 1px solid rgba(250, 204, 21, 0.5);
+    box-shadow: var(--shadow-soft);
+}
+
+.golden-card-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.golden-tagline {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #fef9c3;
+    margin-bottom: 6px;
+}
+
+.golden-headline {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+}
+
+.golden-body {
+    font-size: 0.9rem;
+    color: #fefce8;
     margin-bottom: 10px;
 }
 
-.team-card h3 {
-    margin-top: 5px;
-    color: var(--gold);
+.golden-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
 }
 
-.team-card p {
-    font-size: 0.95rem;
-    opacity: 0.95;
+.golden-pill {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    background: rgba(24, 16, 4, 0.9);
+    border: 1px solid rgba(250, 204, 21, 0.7);
+    color: #fef9c3;
 }
 
-/* ACTION BUTTONS SECTION */
-.action-section {
-    text-align: center;
-    padding: 90px 10%;
+/* press release */
+.press-toggle {
+    margin-top: 4px;
 }
 
-.action-section .btn {
-    margin: 10px 10px;
-}
-
-/* ACCESSIBILITY */
-#accessibilityToggle {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background: var(--gold);
-    color: black;
-    border: none;
-    border-radius: 50px;
-    padding: 13px 20px;
-    font-weight: bold;
+.btn-press {
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(15, 23, 42, 0.85);
+    font-size: 0.78rem;
+    background: rgba(250, 250, 250, 0.92);
+    color: #111827;
     cursor: pointer;
-    z-index: 1001;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
 }
 
-#accessibilityMenu {
-    position: fixed;
-    bottom: 80px;
-    left: 20px;
-    width: 210px;
-    background: var(--blue-light);
-    border: 2px solid var(--gold);
-    border-radius: 15px;
-    padding: 20px;
-    display: none;
-    z-index: 1002;
+.press-panel {
+    margin-top: 10px;
+    padding: 0 10px;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.9);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding-top 0.35s ease, padding-bottom 0.35s ease;
 }
 
-#accessibilityMenu button {
+.press-panel.open {
+    max-height: 520px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.press-text {
+    font-size: 0.86rem;
+    color: #e5e7eb;
+    white-space: pre-wrap;
+}
+
+/* DIVIDER */
+.divider {
+    max-width: 1120px;
+    margin: 44px auto;
+    padding: 0 20px;
+}
+
+.divider-line {
+    height: 1px;
     width: 100%;
+    background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.7), transparent);
+}
+
+/* FEATURES */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    position: relative;
+    padding: 18px 18px 16px 18px;
+    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid var(--border-soft);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+}
+
+.feature-pill {
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
     margin-bottom: 10px;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background: var(--gold);
-    font-weight: bold;
-    cursor: pointer;
+}
+
+.feature-title {
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.feature-body {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* WHY RFN */
+.why-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr);
+    gap: 24px;
+}
+
+.why-main {
+    border-radius: 22px;
+    padding: 20px 20px 18px 20px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid var(--border-soft);
+}
+
+.why-main p {
+    font-size: 0.95rem;
+    color: #e5e7eb;
+}
+
+.why-list {
+    display: grid;
+    gap: 12px;
+}
+
+.why-item {
+    border-radius: 18px;
+    padding: 12px 14px;
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    font-size: 0.86rem;
+    color: var(--muted);
+}
+
+/* TEAM */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+}
+
+.team-card {
+    border-radius: 20px;
+    padding: 18px 18px 16px 18px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid var(--border-soft);
+    text-align: left;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+}
+
+.team-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    border: 2px solid rgba(250, 204, 21, 0.9);
+    object-fit: cover;
+}
+
+.team-name {
+    font-size: 0.98rem;
+    margin-bottom: 2px;
+}
+
+.team-role {
+    font-size: 0.84rem;
+    color: var(--muted);
+}
+
+/* ACTION BUTTONS */
+.actions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 /* FOOTER */
-footer {
-    background: #050812;
-    padding: 45px;
-    text-align: center;
-    margin-top: 100px;
-    font-size: 0.95rem;
-    opacity: 0.9;
+.footer {
+    max-width: 1120px;
+    margin: 40px auto 0 auto;
+    padding: 24px 20px 40px 20px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-top: 1px solid rgba(148, 163, 184, 0.35);
 }
 
-/* MOBILE */
+/* ACCESSIBILITY FLOAT */
+.access-fab {
+    position: fixed;
+    bottom: 18px;
+    left: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 50;
+    font-size: 1.1rem;
+}
+
+.access-panel {
+    position: fixed;
+    bottom: 70px;
+    left: 18px;
+    width: 220px;
+    padding: 12px;
+    border-radius: 18px;
+    background: rgba(15, 23, 42, 0.97);
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    display: none;
+    z-index: 50;
+}
+
+.access-panel-title {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.access-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.access-btn {
+    flex: 1 1 48%;
+    font-size: 0.78rem;
+    padding: 6px 6px;
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    color: var(--muted);
+    cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 106px;
+    }
+    .hero-orbit {
+        order: -1;
+    }
+    .hero-card {
+        margin-top: 4px;
+    }
+}
+
 @media (max-width: 768px) {
-    nav {
-        padding: 14px 6%;
+    .nav-inner {
+        padding: 10px 16px;
+    }
+    .nav-links {
+        display: none;
+    }
+    .nav-toggle {
+        display: inline-flex;
+    }
+    .nav-links-mobile {
+        display: flex;
+    }
+    .footer {
         flex-direction: column;
         align-items: flex-start;
-        gap: 6px;
-    }
-
-    nav .logo {
-        font-size: 1.9rem;
-    }
-
-    nav .nav-links {
-        width: 100%;
-        flex-wrap: wrap;
-    }
-
-    nav .nav-links a {
-        margin: 4px 12px 0 0;
-        font-size: 0.95rem;
-    }
-
-    #intro {
-        padding-top: 120px;
-    }
-
-    .hero h1 {
-        font-size: 2.4rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .announcement-heading {
-        font-size: 1.6rem;
-    }
-
-    .announcement-banner-inner {
-        padding: 22px 18px;
-    }
-
-    .glass {
-        padding: 28px;
     }
 }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav>
-    <div class="logo">RFN</div>
-    <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#team">Team</a>
-        <a href="https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Terms of Service and Privacy Policy</a>
-        <a href="https://forms.gle/YicvDZ7UUN51y7xw6" target="_blank" rel="noopener noreferrer">Renew Agreement</a>
-    </div>
-</nav>
+<div class="hero-stars"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 
-<!-- ANNOUNCEMENT BANNER FOR THE GOLDEN MUG -->
-<section id="announcement" class="announcement-banner">
-    <div class="announcement-banner-inner">
-        <div class="announcement-tag">Official RFN Announcement</div>
-        <div class="announcement-heading">
-            Massive Congratulations to The Golden Mug on Your Grand Opening
+<!-- NAVBAR -->
+<header class="nav">
+    <div class="nav-inner">
+        <div class="nav-left">
+            <div class="nav-logo">
+                <span>RFN</span>
+            </div>
+            <div class="nav-title">
+                <div class="nav-title-main">Robloxian Franchise Network</div>
+                <div class="nav-title-sub">Structure for the next generation of creators</div>
+            </div>
         </div>
-        <div class="announcement-sub">
-            On behalf of RFN leadership, this is a personal and heartfelt celebration of everything you have built.
-            The Golden Mug’s grand opening marks the beginning of a new chapter in excellence, creativity, and community.
-            We are honored to stand beside you as you open your doors and welcome your first guests.
+
+        <nav class="nav-links" aria-label="Main navigation">
+            <a class="nav-link" href="#features">Features</a>
+            <a class="nav-link" href="#team">Team</a>
+            <a class="nav-link" href="https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Terms of Service & Privacy</a>
+            <a class="nav-link" href="https://forms.gle/YicvDZ7UUN51y7xw6" target="_blank" rel="noopener noreferrer">Renew Agreement</a>
+            <a class="nav-cta" href="#golden-mug">Golden Mug Grand Opening</a>
+        </nav>
+
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
+    </div>
+
+    <!-- Mobile dropdown -->
+    <div class="nav-inner" id="navMobile" style="display:none;">
+        <nav class="nav-links-mobile" aria-label="Mobile navigation">
+            <a class="nav-link" href="#features" onclick="closeNav()">Features</a>
+            <a class="nav-link" href="#team" onclick="closeNav()">Team</a>
+            <a class="nav-link" href="https://docs.google.com/document/d/1jdAVy_2bZVDnyId9I-Vwx7BQEujnhH7QqZITsC-Gmmc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Terms of Service & Privacy</a>
+            <a class="nav-link" href="https://forms.gle/YicvDZ7UUN51y7xw6" target="_blank" rel="noopener noreferrer">Renew Agreement</a>
+            <a class="nav-cta" href="#golden-mug" onclick="closeNav()">Golden Mug Opening</a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+<main>
+<section class="hero" aria-labelledby="heroTitle">
+    <div>
+        <div class="hero-eyebrow">
+            <div class="hero-eyebrow-pill"></div>
+            <span>Version 2.5 · RFN</span>
         </div>
-        <div class="announcement-sub">
-            May this launch be the first of many milestones, and may every guest who steps into The Golden Mug feel the
-            care, professionalism, and passion behind your work.
-            <span class="announcement-highlight">Congratulations on your Grand Opening.</span>
+        <h1 class="hero-title" id="heroTitle">
+            A new standard for
+            <span>Roblox franchises.</span>
+        </h1>
+        <p class="hero-subtitle">
+            RFN gives you more than a logo and a dream. It gives you infrastructure:
+            systems, support, and a launchpad built for creators who want to build
+            something that actually lasts.
+        </p>
+
+        <div class="hero-badges">
+            <div class="hero-badge">
+                <div class="hero-badge-dot"></div>
+                Structured onboarding for every partner
+            </div>
+            <div class="hero-badge">
+                <div class="hero-badge-dot"></div>
+                Built around long-term stability
+            </div>
         </div>
-        <div class="press-release-toggle">
-            <button class="btn" type="button" onclick="togglePressRelease()">View Press Release</button>
+
+        <div class="hero-actions">
+            <a class="btn-primary" href="https://forms.gle/ZRQwYsTGavBx7gKz9" target="_blank" rel="noopener noreferrer">
+                Apply for a Franchise
+            </a>
+            <a class="btn-ghost" href="#features">
+                Explore RFN Features
+            </a>
         </div>
-        <div id="pressReleasePanel" class="press-release-panel">
-            <div class="press-release-placeholder">
-                OFFICIAL RFN PRESS RELEASE
-From the Office of the Ownership Team of The Robloxian Franchise Network
+
+        <div class="hero-ribbon">
+            <span>Announcement</span>
+            <a href="#golden-mug" style="color: var(--muted); text-decoration: none;">
+                Personal congratulations to The Golden Mug on its Grand Opening →
+            </a>
+        </div>
+    </div>
+
+    <aside class="hero-orbit" aria-label="RFN snapshot">
+        <div class="hero-card">
+            <div class="hero-card-inner">
+                <div class="hero-card-header">
+                    <div class="hero-card-title">Network snapshot</div>
+                    <div class="hero-card-tag">Live · RFN v2.5</div>
+                </div>
+
+                <div class="hero-orbit-ring">
+                    <div class="hero-orbit-center">
+                        <div class="hero-orbit-core">RFN</div>
+                        <div class="hero-orbit-text">
+                            One framework, many brands.
+                            RFN holds the structure so each partner can focus on craft, culture, and community.
+                        </div>
+                    </div>
+
+                    <div class="hero-orbit-meta">
+                        <div class="hero-orbit-pill">Franchise Infrastructure</div>
+                        <div class="hero-orbit-pill">Customer & Staff Portals</div>
+                        <div class="hero-orbit-pill">Long-term Support</div>
+                    </div>
+                </div>
+
+                <div class="hero-card-footer">
+                    <span>Ready to formalize your game into a franchise?</span>
+                    <a href="https://forms.gle/c9K4Xh6i7BNyiBo38" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-size:0.78rem;padding:6px 10px;">
+                        Employment Application
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<!-- GOLDEN MUG ANNOUNCEMENT -->
+<section id="golden-mug" class="section" aria-labelledby="goldenTitle">
+    <div class="section-header">
+        <div>
+            <div class="section-eyebrow">Official RFN Announcement</div>
+            <h2 class="section-title" id="goldenTitle">
+                Celebrating <span>The Golden Mug</span>
+            </h2>
+        </div>
+        <p class="section-subtitle">
+            A massive, personal congratulations from RFN leadership on your Grand Opening.
+            This is more than a launch; it is the beginning of a legacy.
+        </p>
+    </div>
+
+    <article class="golden-card">
+        <div class="golden-card-inner">
+            <div class="golden-tagline">Grand opening · milestone</div>
+            <h3 class="golden-headline">The Golden Mug has officially opened its doors.</h3>
+            <p class="golden-body">
+                To The Golden Mug team: we are incredibly proud to stand beside you on this day.
+                From concept to first guest, you have built something warm, inviting, and worthy of the RFN family.
+                May every order served carry the same intention, excellence, and heart that brought you to launch.
+            </p>
+            <p class="golden-body">
+                Here is to late nights of planning that finally paid off, to the guests who will make this place their
+                routine, and to a future where The Golden Mug becomes a name people say with a smile.
+                Congratulations on your Grand Opening.
+            </p>
+
+            <div class="golden-pill-row">
+                <div class="golden-pill">Official RFN Endorsement</div>
+                <div class="golden-pill">Grand Opening Celebration</div>
+                <div class="golden-pill">Built under RFN Structure</div>
+            </div>
+
+            <div class="press-toggle">
+                <button class="btn-press" type="button" onclick="togglePress()">
+                    View Press Release
+                </button>
+            </div>
+            <div id="pressPanel" class="press-panel" aria-hidden="true">
+                <div class="press-text">
+**OFFICIAL RFN PRESS RELEASE**
+From the Office of the Ownership Team of The Robloxian Franchise Network.
 For Immediate Release.
 On behalf of the Robloxian Franchise Network, we want to extend a formal congratulations to The Golden Mug for their official grand opening. The ceremony was held today (January 11, 2026) at 2:00 PM Eastern Standard Time. The opening ceremony was tied together with wonderful speeches by members of their staff team. It was not only a pleasure to be there but also to help them to better themselves and us.
 We want to congratulate them on the many hours and all of the hard work that went into the development of their game. It has truly been a pleasure to work alongside the many hands that made it possible. 
@@ -586,179 +1008,257 @@ Executive_Eagle,
 Chief Executive Officer of the Robloxian Franchise Network,
 Office of the Ownership for RFN.
 
+
+Replace this text when you are ready to publish.
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- FEATURES -->
+<section id="features" class="section" aria-labelledby="featuresTitle">
+    <div class="section-header">
+        <div>
+            <div class="section-eyebrow">What RFN provides</div>
+            <h2 class="section-title" id="featuresTitle">
+                Features that turn ideas into <span>infrastructure</span>
+            </h2>
+        </div>
+        <p class="section-subtitle">
+            RFN connects the pieces: onboarding, structure, technology, and accessible tools for owners and staff.
+        </p>
+    </div>
+
+    <div class="features-grid">
+        <article class="feature-card">
+            <div class="feature-pill">I</div>
+            <h3 class="feature-title">Franchise infrastructure</h3>
+            <p class="feature-body">
+                Full onboarding, support, and operational systems so your game can function like a franchise, not just a project.
+            </p>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-pill">M</div>
+            <h3 class="feature-title">Modern, mobile-first design</h3>
+            <p class="feature-body">
+                From customer portals to internal dashboards, RFN tools are crafted to work seamlessly across devices.
+            </p>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-pill">U</div>
+            <h3 class="feature-title">Elevated user experience</h3>
+            <p class="feature-body">
+                Clean glassmorphism, clear structure, and intuitive layouts that respect staff, customers, and owners.
+            </p>
+        </article>
+
+        <article class="feature-card">
+            <div class="feature-pill">A</div>
+            <h3 class="feature-title">Accessibility & performance</h3>
+            <p class="feature-body">
+                Font controls, high contrast, and reduced-motion options keep your experience usable for more people.
+            </p>
+        </article>
+    </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- WHY RFN -->
+<section class="section" aria-labelledby="whyTitle">
+    <div class="section-header">
+        <div>
+            <div class="section-eyebrow">Why it matters</div>
+            <h2 class="section-title" id="whyTitle">
+                Why creators choose <span>RFN</span>
+            </h2>
+        </div>
+        <p class="section-subtitle">
+            RFN is built for people who care about more than a single launch day.
+            It is for those who want structure, clarity, and a path to longevity.
+        </p>
+    </div>
+
+    <div class="why-layout">
+        <div class="why-main">
+            <p>
+                RFN exists to solve a specific problem: great ideas without a framework to hold them.
+                By pairing Roblox creators with professional-grade systems, RFN makes it possible to launch,
+                grow, and sustain experiences that feel intentional from day one.
+                Everything you see here—from agreements and applications to customer portals and onboarding—
+                is designed around one question: what will still be working in a year, not just a week from now?
+            </p>
+        </div>
+        <div class="why-list">
+            <div class="why-item">
+                Clear, documented processes for owners, staff, and partners so nobody has to guess what comes next.
+            </div>
+            <div class="why-item">
+                Centralized tools for agreements, applications, renewals, and customer interaction.
+            </div>
+            <div class="why-item">
+                A focus on sustainable, healthy operations instead of short-term hype and burnout.
             </div>
         </div>
     </div>
 </section>
 
-<!-- INTRO MONOGRAM -->
-<section id="intro">
-    <svg viewBox="0 0 200 200" aria-labelledby="rfnMonogramTitle">
-        <title id="rfnMonogramTitle">RFN Monogram</title>
-        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-              fill="none" stroke="gold" stroke-width="6" font-size="90"
-              font-family="Arial" letter-spacing="8">
-            RFN
-        </text>
-    </svg>
-</section>
-
-<!-- HERO SLIDES -->
-<section class="hero parallax" id="hero">
-    <div class="slide active">
-        <div class="slide-inner">
-            <h1>A New Way to Start a Game</h1>
-            <p>Professional support for every creator.</p>
-        </div>
-    </div>
-    <div class="slide">
-        <div class="slide-inner">
-            <h1>A System Built for Growth</h1>
-            <p>Tools, structure, and guidance.</p>
-        </div>
-    </div>
-    <div class="slide">
-        <div class="slide-inner">
-            <h1>Version 2 — The Future of Creators</h1>
-            <p>Here now.</p>
-        </div>
-    </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- FEATURES -->
-<section id="features">
-    <h2>RFN Features</h2>
-
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>Franchise Infrastructure</h3>
-            <p>Full onboarding, support, and systems to launch your own project under RFN.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Mobile Optimization</h3>
-            <p>A fully adaptive website crafted to look and function well on all devices.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Glass-Morphism UI</h3>
-            <p>A premium, modern aesthetic built for professionalism and clarity.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Accessibility Tools</h3>
-            <p>Font controls, contrast mode, and performance mode for a smoother experience.</p>
-        </div>
-    </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- WHY RFN -->
-<section id="why">
-    <h2>Why Choose RFN?</h2>
-    <div class="why-box glass">
-        RFN is built on structure, reliability, and long-term success.
-        Every system we create is designed to give developers and owners a stable pathway
-        to launch, grow, and manage their experiences professionally.
-        From foundational support to ongoing guidance, RFN exists to help creators build
-        projects that last.
-    </div>
-</section>
-
-<div class="divider"></div>
+<div class="divider"><div class="divider-line"></div></div>
 
 <!-- TEAM -->
-<section id="team">
-    <h2>Meet Our Team</h2>
+<section id="team" class="section" aria-labelledby="teamTitle">
+    <div class="section-header">
+        <div>
+            <div class="section-eyebrow">Leadership</div>
+            <h2 class="section-title" id="teamTitle">
+                The team behind <span>RFN</span>
+            </h2>
+        </div>
+        <p class="section-subtitle">
+            People who care about doing things the right way, not just the easy way.
+        </p>
+    </div>
 
-    <div class="team-row">
-        <div class="team-card glass">
-            <img src="https://crummer.rollins.edu/resources/how-to-become-a-ceo-of-a-company-in-5-steps/" alt="Executive_Eagle avatar">
-            <h3>Executive_Eagle</h3>
-            <p>Founder & Chief Executive Officer</p>
-        </div>
-        <div class="team-card glass">
-            <img src="https://magicdecor.in/collections/anime-wallpapers-for-wall/?srsltid=AfmBOoouHs8y9aENmtUSjX0v-_C72NA7LDANvpX80LDdrYUK8cKx4CWt" alt="Cadeynm1 avatar">
-            <h3>Cadeynm1</h3>
-            <p>President and Temporary Director of Operations</p>
-        </div>
-        <div class="team-card glass">
-            <img src="https://www.dreamstime.com/stunning-cosmic-images-image351308392" alt="Cami avatar">
-            <h3>Cami</h3>
-            <p>Vice President and Temporary Director of Relations</p>
-        </div>
-        <div class="team-card glass">
-            <img src="https://en.wikiquote.org/wiki/Black" alt="Morgan avatar">
-            <h3>Morgan</h3>
-            <p>Vice President</p>
-        </div>
+    <div class="team-grid">
+        <article class="team-card">
+            <img class="team-avatar" src="https://crummer.rollins.edu/resources/how-to-become-a-ceo-of-a-company-in-5-steps/" alt="Avatar for Executive_Eagle">
+            <div>
+                <div class="team-name">Executive_Eagle</div>
+                <div class="team-role">Founder & Chief Executive Officer</div>
+            </div>
+        </article>
+
+        <article class="team-card">
+            <img class="team-avatar" src="https://magicdecor.in/collections/anime-wallpapers-for-wall/?srsltid=AfmBOoouHs8y9aENmtUSjX0v-_C72NA7LDANvpX80LDdrYUK8cKx4CWt" alt="Avatar for Cadeynm1">
+            <div>
+                <div class="team-name">Cadeynm1</div>
+                <div class="team-role">President & Temporary Director of Operations</div>
+            </div>
+        </article>
+
+        <article class="team-card">
+            <img class="team-avatar" src="https://www.dreamstime.com/stunning-cosmic-images-image351308392" alt="Avatar for Cami">
+            <div>
+                <div class="team-name">Cami</div>
+                <div class="team-role">Vice President & Temporary Director of Relations</div>
+            </div>
+        </article>
+
+        <article class="team-card">
+            <img class="team-avatar" src="https://en.wikiquote.org/wiki/Black" alt="Avatar for Morgan">
+            <div>
+                <div class="team-name">Morgan</div>
+                <div class="team-role">Vice President</div>
+            </div>
+        </article>
     </div>
 </section>
 
-<div class="divider"></div>
+<div class="divider"><div class="divider-line"></div></div>
 
-<!-- ACTION BUTTONS -->
-<section class="action-section">
-    <a class="btn" href="https://forms.gle/c9K4Xh6i7BNyiBo38" target="_blank" rel="noopener noreferrer">Employment Application</a>
-    <a class="btn" href="https://forms.gle/Coe8GAuuuXrgWTyx9" target="_blank" rel="noopener noreferrer">Agreement Renewal Request</a>
-    <a class="btn" href="https://forms.gle/ZRQwYsTGavBx7gKz9" target="_blank" rel="noopener noreferrer">Franchise Application</a>
-    <a class="btn" href="https://script.google.com/macros/s/AKfycbzm8hE-CWZbs5xx-E8LEDUuGiqr5l-fEZNytZgzOCaGqnsgyDwU6elkohpDNa4f4A1LkA/exec" target="_blank" rel="noopener noreferrer">Customer Portal</a>
+<!-- ACTIONS -->
+<section class="section" aria-label="Key RFN actions">
+    <div class="section-header">
+        <div>
+            <div class="section-eyebrow">Take the next step</div>
+            <h2 class="section-title">
+                Ready when you are<span>.</span>
+            </h2>
+        </div>
+        <p class="section-subtitle">
+            Applications, renewals, and customer access are all available from here.
+        </p>
+    </div>
+
+    <div class="actions-grid">
+        <a class="btn-primary" href="https://forms.gle/c9K4Xh6i7BNyiBo38" target="_blank" rel="noopener noreferrer">
+            Employment Application
+        </a>
+        <a class="btn-ghost" href="https://forms.gle/Coe8GAuuuXrgWTyx9" target="_blank" rel="noopener noreferrer">
+            Agreement Renewal Request
+        </a>
+        <a class="btn-ghost" href="https://forms.gle/ZRQwYsTGavBx7gKz9" target="_blank" rel="noopener noreferrer">
+            Franchise Application
+        </a>
+        <a class="btn-ghost" href="https://script.google.com/macros/s/AKfycbzm8hE-CWZbs5xx-E8LEDUuGiqr5l-fEZNytZgzOCaGqnsgyDwU6elkohpDNa4f4A1LkA/exec" target="_blank" rel="noopener noreferrer">
+            Customer Portal
+        </a>
+    </div>
 </section>
-
-<!-- ACCESSIBILITY -->
-<button id="accessibilityToggle" type="button">☰</button>
-<div id="accessibilityMenu">
-    <button type="button" onclick="increaseFont()">Increase Text</button>
-    <button type="button" onclick="decreaseFont()">Decrease Text</button>
-    <button type="button" onclick="toggleContrast()">High Contrast</button>
-    <button type="button" onclick="togglePerf()">Performance Mode</button>
-</div>
+</main>
 
 <!-- FOOTER -->
-<footer>
-    © 2025 RFN — Designed for the future of Roblox game creation.
+<footer class="footer">
+    <div>© 2025 RFN — Designed for the future of Roblox game creation.</div>
+    <div id="tos">
+        Terms of Service & Privacy Policy available via the navigation bar.
+    </div>
 </footer>
 
+<!-- ACCESSIBILITY -->
+<button class="access-fab" type="button" aria-label="Accessibility controls" onclick="toggleAccess()">☰</button>
+<div class="access-panel" id="accessPanel">
+    <div class="access-panel-title">Accessibility</div>
+    <div class="access-row">
+        <button class="access-btn" type="button" onclick="increaseFont()">Text +</button>
+        <button class="access-btn" type="button" onclick="decreaseFont()">Text −</button>
+        <button class="access-btn" type="button" onclick="toggleContrast()">High contrast</button>
+        <button class="access-btn" type="button" onclick="toggleMotion()">Reduce motion</button>
+    </div>
+</div>
+
 <script>
-// HERO SLIDESHOW
-let slides = document.querySelectorAll('.slide');
-let slideIndex = 0;
-setInterval(() => {
-    if (!slides.length) return;
-    slides[slideIndex].classList.remove('active');
-    slideIndex = (slideIndex + 1) % slides.length;
-    slides[slideIndex].classList.add('active');
-}, 5000);
+let reducedMotion = false;
 
-// ACCESSIBILITY MENU TOGGLE
-document.getElementById("accessibilityToggle").onclick = () => {
-    const menu = document.getElementById("accessibilityMenu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-};
+function toggleNav() {
+    const mobile = document.getElementById('navMobile');
+    if (mobile.style.display === 'none' || mobile.style.display === '') {
+        mobile.style.display = 'block';
+    } else {
+        mobile.style.display = 'none';
+    }
+}
+function closeNav() {
+    const mobile = document.getElementById('navMobile');
+    mobile.style.display = 'none';
+}
 
-// FONT SIZE CONTROLS
+function togglePress() {
+    const panel = document.getElementById('pressPanel');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open');
+    panel.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+}
+
+function toggleAccess() {
+    const panel = document.getElementById('accessPanel');
+    panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+}
+
 function increaseFont() {
-    document.body.style.fontSize = "larger";
+    document.body.style.fontSize = 'larger';
 }
 function decreaseFont() {
-    document.body.style.fontSize = "smaller";
+    document.body.style.fontSize = 'smaller';
 }
 
-// CONTRAST & PERFORMANCE MODE TOGGLES
 function toggleContrast() {
-    document.body.classList.toggle("contrast-mode");
-}
-function togglePerf() {
-    document.body.classList.toggle("performance-mode");
+    document.body.classList.toggle('contrast');
+    // optional: add a CSS rule for .contrast if you want a different palette
 }
 
-// PRESS RELEASE TOGGLE
-function togglePressRelease() {
-    const panel = document.getElementById("pressReleasePanel");
-    panel.classList.toggle("open");
+function toggleMotion() {
+    reducedMotion = !reducedMotion;
+    if (reducedMotion) {
+        document.body.style.transition = 'none';
+    } else {
+        document.body.style.transition = '';
+    }
 }
 </script>
 
