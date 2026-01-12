@@ -6,7 +6,7 @@
 <title>RFN — Version 2.5</title>
 
 <style>
-/* RESET */
+/* ========== RESET ========== */
 *,
 *::before,
 *::after {
@@ -25,16 +25,16 @@ body {
     line-height: 1.6;
     color: #e5e7eb;
     background:
-        radial-gradient(circle at 0% 0%, rgba(251, 191, 36, 0.08), transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.2), transparent 55%),
-        radial-gradient(circle at 50% 100%, rgba(34, 197, 94, 0.25), transparent 55%),
+        radial-gradient(circle at 0% 0%, rgba(251, 191, 36, 0.09), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.22), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(34, 197, 94, 0.23), transparent 55%),
         #020617;
     min-height: 100vh;
     overflow-x: hidden;
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* ACCESSIBLE ROOT STATES */
+/* ========== ACCESSIBLE STATES ========== */
 body.contrast-mode {
     background: #000000;
     color: #ffffff;
@@ -45,20 +45,20 @@ body.reduced-motion * {
     transition: none !important;
 }
 
-/* DECOR LAYERS */
-.layer-stars {
+/* ========== DECOR LAYERS ========== */
+.bg-stars {
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: -3;
     background-image:
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.20) 0, transparent 50px),
-        radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.15) 0, transparent 50px),
-        radial-gradient(circle at 40% 80%, rgba(251, 191, 36, 0.20) 0, transparent 60px);
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.23) 0, transparent 50px),
+        radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.16) 0, transparent 50px),
+        radial-gradient(circle at 40% 80%, rgba(251, 191, 36, 0.21) 0, transparent 60px);
     opacity: 0.18;
 }
 
-.layer-orb {
+.bg-orb {
     position: fixed;
     width: 420px;
     height: 420px;
@@ -68,75 +68,76 @@ body.reduced-motion * {
     opacity: 0.25;
     z-index: -2;
 }
-.layer-orb.orb-1 {
+.bg-orb.orb-green {
     top: -120px;
     left: -160px;
     background: #22c55e;
 }
-.layer-orb.orb-2 {
+.bg-orb.orb-gold {
     bottom: -200px;
     right: -140px;
     background: #fbbf24;
 }
-.layer-orb.orb-3 {
-    top: 40%;
-    left: 70%;
+.bg-orb.orb-blue {
+    top: 45%;
+    left: 72%;
     transform: translate(-50%, -50%);
     background: #3b82f6;
 }
 
-/* GLOBAL WRAPPER */
+/* ========== SHELL ========== */
 .shell {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
     padding-inline: 24px;
 }
 
-/* NAVBAR */
+/* ========== NAVBAR ========== */
 .nav {
     position: fixed;
     inset: 0 auto auto 0;
-    height: 68px;
+    height: 76px;
     width: 100%;
     z-index: 40;
-    backdrop-filter: blur(20px);
-    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.88));
-    border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    backdrop-filter: blur(22px);
+    background:
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9));
+    border-bottom: 1px solid rgba(148, 163, 184, 0.35);
 }
 
 .nav-inner {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
-    height: 68px;
+    height: 76px;
+    padding-inline: 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-inline: 24px;
 }
 
 .nav-left {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
-.nav-mark {
-    width: 38px;
-    height: 38px;
+.nav-badge {
+    width: 42px;
+    height: 42px;
     border-radius: 999px;
     background: radial-gradient(circle at 18% 0%, #facc15, #f97316);
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow:
-        0 0 0 1px rgba(15, 23, 42, 0.7),
-        0 18px 40px rgba(0, 0, 0, 0.8);
+        0 0 0 1px rgba(15, 23, 42, 0.75),
+        0 18px 46px rgba(0, 0, 0, 0.9);
 }
 
-.nav-mark span {
-    font-size: 0.82rem;
+.nav-badge span {
+    font-size: 0.84rem;
     font-weight: 800;
-    letter-spacing: 0.21em;
+    letter-spacing: 0.22em;
     color: #111827;
 }
 
@@ -146,9 +147,9 @@ body.reduced-motion * {
 }
 
 .nav-title-main {
-    font-size: 1.05rem;
+    font-size: 1.06rem;
     font-weight: 600;
-    letter-spacing: 0.17em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
 }
 
@@ -160,7 +161,7 @@ body.reduced-motion * {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 22px;
 }
 
 .nav-link {
@@ -193,22 +194,22 @@ body.reduced-motion * {
 }
 
 .nav-cta {
-    padding: 8px 14px;
+    padding: 9px 16px;
     border-radius: 999px;
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 600;
     border: none;
     text-decoration: none;
     color: #111827;
     background: radial-gradient(circle at 0 0, #facc15, #f97316);
-    box-shadow: 0 15px 36px rgba(0, 0, 0, 0.85);
+    box-shadow: 0 15px 38px rgba(0, 0, 0, 0.88);
 }
 
 /* NAV MOBILE TOGGLE */
 .nav-toggle {
     display: none;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 999px;
     border: 1px solid rgba(148, 163, 184, 0.7);
     background: #020617;
@@ -227,7 +228,7 @@ body.reduced-motion * {
 }
 
 .nav-mobile-inner {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
     padding: 8px 24px 16px 24px;
     display: flex;
@@ -235,16 +236,118 @@ body.reduced-motion * {
     gap: 8px;
 }
 
-/* HERO */
+/* ========== LOADING OVERLAY ========== */
+.loader {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at top, #020617, #020617 45%, #020617 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-panel {
+    padding: 24px 26px 20px 26px;
+    border-radius: 24px;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(148, 163, 184, 0.8);
+    box-shadow: 0 26px 76px rgba(0, 0, 0, 0.96);
+    min-width: 290px;
+}
+
+.loader-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.loader-logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 20% 0%, #facc15, #f97316);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111827;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.loader-title {
+    font-size: 0.86rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #e5e7eb;
+}
+
+.loader-sub {
+    font-size: 0.86rem;
+    color: #9ca3af;
+    margin-bottom: 10px;
+}
+
+.loader-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.loader-bar-outer {
+    flex: 1;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(31, 41, 55, 0.95);
+    overflow: hidden;
+}
+
+.loader-bar-inner {
+    width: 0%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #facc15, #f97316);
+    animation: loaderProgress 3.2s ease-in-out infinite;
+}
+
+.loader-label {
+    font-size: 0.78rem;
+    color: #9ca3af;
+}
+
+.loader-foot {
+    font-size: 0.8rem;
+    color: #facc15;
+}
+
+@keyframes loaderProgress {
+    0% { width: 12%; }
+    40% { width: 72%; }
+    80% { width: 97%; }
+    100% { width: 100%; }
+}
+
+/* ========== HERO ========== */
 .hero {
-    padding-top: 112px;
-    padding-bottom: 72px;
+    padding-top: 120px;
+    padding-bottom: 80px;
 }
 
 .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.3fr);
-    gap: 46px;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.35fr);
+    gap: 48px;
     align-items: center;
 }
 
@@ -267,7 +370,7 @@ body.reduced-motion * {
 }
 
 .hero-title {
-    font-size: clamp(2.6rem, 4.2vw, 3.6rem);
+    font-size: clamp(2.6rem, 4.4vw, 3.7rem);
     line-height: 1.05;
     letter-spacing: 0.02em;
     margin-bottom: 12px;
@@ -282,7 +385,7 @@ body.reduced-motion * {
 .hero-subtitle {
     font-size: 1rem;
     color: #9ca3af;
-    max-width: 34rem;
+    max-width: 36rem;
     margin-bottom: 24px;
 }
 
@@ -329,7 +432,7 @@ body.reduced-motion * {
     text-decoration: none;
     cursor: pointer;
     background: radial-gradient(circle at 0 0, #facc15, #f97316);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.88);
 }
 
 .btn-ghost {
@@ -356,7 +459,7 @@ body.reduced-motion * {
     padding: 3px 10px;
     border-radius: 999px;
     border: 1px solid rgba(250, 204, 21, 0.6);
-    background: rgba(250, 204, 21, 0.12);
+    background: rgba(250, 204, 21, 0.14);
     color: #facc15;
 }
 
@@ -365,75 +468,75 @@ body.reduced-motion * {
     position: relative;
 }
 
-.hero-card {
+.hero-panel {
     position: relative;
     padding: 22px 22px 20px 22px;
-    border-radius: 28px;
-    background: radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.15), rgba(15, 23, 42, 0.96));
-    border: 1px solid rgba(148, 163, 184, 0.5);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9);
+    border-radius: 30px;
+    background:
+        radial-gradient(circle at 0 0, rgba(250, 204, 21, 0.16), rgba(15, 23, 42, 0.97));
+    border: 1px solid rgba(148, 163, 184, 0.52);
+    box-shadow: 0 32px 82px rgba(0, 0, 0, 0.95);
     overflow: hidden;
 }
 
-.hero-card::before {
+.hero-panel::before {
     content: "";
     position: absolute;
     inset: -40%;
     background:
-        radial-gradient(circle at 0% 0%, rgba(250, 204, 21, 0.25), transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.35), transparent 55%);
+        radial-gradient(circle at 0% 0%, rgba(250, 204, 21, 0.26), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.32), transparent 55%);
     mix-blend-mode: screen;
-    opacity: 0.9;
+    opacity: 0.92;
     pointer-events: none;
 }
 
-.hero-card-inner {
+.hero-panel-inner {
     position: relative;
     z-index: 1;
 }
 
-.hero-card-head {
+.hero-panel-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 16px;
 }
 
-.hero-card-title {
-    font-size: 0.88rem;
+.hero-panel-title {
+    font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #e5e7eb;
 }
 
-.hero-card-chip {
+.hero-panel-chip {
     font-size: 0.76rem;
     padding: 4px 10px;
     border-radius: 999px;
-    border: 1px solid rgba(148, 163, 184, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.8);
     background: rgba(15, 23, 42, 0.9);
     color: #9ca3af;
 }
 
-.hero-orbit-ring {
+.network-ring {
     border-radius: 999px;
-    border: 1px dashed rgba(148, 163, 184, 0.6);
+    border: 1px dashed rgba(148, 163, 184, 0.68);
     padding: 18px 18px 10px 18px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.hero-orbit-core-row {
+.network-row {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-.hero-orbit-core {
-    width: 56px;
-    height: 56px;
+.network-core {
+    width: 58px;
+    height: 58px;
     border-radius: 999px;
     background: radial-gradient(circle at 18% 0%, #facc15, #f97316);
     display: flex;
@@ -445,38 +548,37 @@ body.reduced-motion * {
     letter-spacing: 0.12em;
 }
 
-.hero-orbit-text {
+.network-text {
     font-size: 0.88rem;
-    color: #e5e7eb;
 }
 
-.hero-orbit-meta {
+.network-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
 }
 
-.hero-orbit-pill {
+.network-pill {
     padding: 4px 10px;
     border-radius: 999px;
-    border: 1px solid rgba(148, 163, 184, 0.7);
-    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.78);
+    background: rgba(15, 23, 42, 0.95);
     font-size: 0.74rem;
     color: #9ca3af;
 }
 
-.hero-card-foot {
+.hero-panel-foot {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 14px;
     font-size: 0.78rem;
-    color: #9ca3af;
+    color: #d1d5db;
 }
 
-/* SECTION SHELLS */
+/* ========== SECTIONS / HEADERS ========== */
 .section {
-    padding-block: 36px;
+    padding-block: 40px;
 }
 
 .section-head {
@@ -512,8 +614,7 @@ body.reduced-motion * {
 
 /* DIVIDER */
 .divider {
-    margin-block: 34px;
-    opacity: 0.85;
+    margin-block: 36px;
 }
 .divider-line {
     height: 1px;
@@ -521,14 +622,15 @@ body.reduced-motion * {
     background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.7), transparent);
 }
 
-/* GOLDEN MUG ANNOUNCEMENT */
+/* ========== GOLDEN MUG ========== */
 .golden-card {
     position: relative;
-    padding: 20px 20px 18px 20px;
+    padding: 22px 22px 18px 22px;
     border-radius: 28px;
-    background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.08), rgba(15, 23, 42, 0.96));
-    border: 1px solid rgba(250, 204, 21, 0.55);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+    background:
+        radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.08), rgba(15, 23, 42, 0.97));
+    border: 1px solid rgba(250, 204, 21, 0.6);
+    box-shadow: 0 32px 86px rgba(0, 0, 0, 0.96);
     overflow: hidden;
 }
 
@@ -537,11 +639,11 @@ body.reduced-motion * {
     position: absolute;
     inset: -30%;
     background:
-        radial-gradient(circle at 0% 0%, rgba(250, 204, 21, 0.18), transparent 55%),
+        radial-gradient(circle at 0% 0%, rgba(250, 204, 21, 0.19), transparent 55%),
         radial-gradient(circle at 100% 0%, rgba(248, 250, 252, 0.18), transparent 55%);
     pointer-events: none;
     mix-blend-mode: screen;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 .golden-inner {
@@ -579,13 +681,12 @@ body.reduced-motion * {
 .golden-chip {
     padding: 4px 10px;
     border-radius: 999px;
-    border: 1px solid rgba(250, 204, 21, 0.75);
-    background: rgba(24, 16, 4, 0.95);
+    border: 1px solid rgba(250, 204, 21, 0.8);
+    background: rgba(24, 16, 4, 0.96);
     font-size: 0.76rem;
     color: #fef9c3;
 }
 
-/* PRESS PANEL */
 .press-toggle {
     margin-top: 4px;
 }
@@ -593,9 +694,9 @@ body.reduced-motion * {
 .btn-press {
     padding: 7px 12px;
     border-radius: 999px;
-    border: 1px solid rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(15, 23, 42, 0.9);
     font-size: 0.8rem;
-    background: rgba(248, 250, 252, 0.92);
+    background: rgba(248, 250, 252, 0.94);
     color: #111827;
     cursor: pointer;
 }
@@ -604,7 +705,7 @@ body.reduced-motion * {
     margin-top: 10px;
     padding: 0 12px;
     border-radius: 16px;
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(15, 23, 42, 0.97);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.35s ease, padding-top 0.35s ease, padding-bottom 0.35s ease;
@@ -622,18 +723,18 @@ body.reduced-motion * {
     white-space: pre-wrap;
 }
 
-/* FEATURES */
+/* ========== FEATURES ========== */
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
     gap: 18px;
 }
 
 .feature-card {
     padding: 18px 18px 16px 18px;
     border-radius: 22px;
-    background: rgba(15, 23, 42, 0.92);
-    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.62);
     box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
 }
 
@@ -661,21 +762,21 @@ body.reduced-motion * {
     color: #9ca3af;
 }
 
-/* WHY RFN */
+/* ========== WHY RFN ========== */
 .why-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.05fr);
     gap: 22px;
 }
 
-.why-card-main {
+.why-main {
     padding: 20px 20px 18px 20px;
     border-radius: 22px;
-    background: rgba(15, 23, 42, 0.96);
-    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.97);
+    border: 1px solid rgba(148, 163, 184, 0.64);
 }
 
-.why-card-main p {
+.why-main p {
     font-size: 0.93rem;
 }
 
@@ -687,13 +788,61 @@ body.reduced-motion * {
 .why-item {
     padding: 12px 14px;
     border-radius: 18px;
-    background: rgba(15, 23, 42, 0.95);
-    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.97);
+    border: 1px solid rgba(148, 163, 184, 0.68);
     font-size: 0.86rem;
     color: #9ca3af;
 }
 
-/* TEAM */
+/* ========== TESTIMONIALS ========== */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+    gap: 22px;
+}
+
+.testimonials-intro {
+    padding: 20px 20px 18px 20px;
+    border-radius: 22px;
+    background: rgba(15, 23, 42, 0.97);
+    border: 1px solid rgba(148, 163, 184, 0.64);
+    font-size: 0.93rem;
+}
+
+.testimonials-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+}
+
+.testimonial-card {
+    position: relative;
+    padding: 16px 16px 14px 16px;
+    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.97);
+    border: 1px solid rgba(148, 163, 184, 0.68);
+    box-shadow: 0 20px 48px rgba(15, 23, 42, 0.9);
+}
+
+.testimonial-quote-mark {
+    font-size: 1.4rem;
+    line-height: 1;
+    color: #facc15;
+    margin-bottom: 4px;
+}
+
+.testimonial-text {
+    font-size: 0.9rem;
+    color: #e5e7eb;
+    margin-bottom: 8px;
+}
+
+.testimonial-meta {
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+/* ========== TEAM ========== */
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -703,8 +852,8 @@ body.reduced-motion * {
 .team-card {
     padding: 16px 18px 14px 18px;
     border-radius: 20px;
-    background: rgba(15, 23, 42, 0.96);
-    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.97);
+    border: 1px solid rgba(148, 163, 184, 0.66);
 }
 
 .team-name {
@@ -717,18 +866,18 @@ body.reduced-motion * {
     color: #9ca3af;
 }
 
-/* ACTIONS */
+/* ========== ACTIONS ========== */
 .actions-row {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-/* FOOTER */
+/* ========== FOOTER ========== */
 .footer {
     margin-top: 40px;
     padding-block: 26px 40px;
-    border-top: 1px solid rgba(148, 163, 184, 0.35);
+    border-top: 1px solid rgba(148, 163, 184, 0.36);
     font-size: 0.82rem;
     color: #9ca3af;
     display: flex;
@@ -737,7 +886,7 @@ body.reduced-motion * {
     gap: 12px;
 }
 
-/* ACCESSIBILITY FLOAT */
+/* ========== ACCESSIBILITY FLOAT ========== */
 .access-fab {
     position: fixed;
     bottom: 18px;
@@ -745,7 +894,7 @@ body.reduced-motion * {
     width: 40px;
     height: 40px;
     border-radius: 999px;
-    background: rgba(15, 23, 42, 0.97);
+    background: rgba(15, 23, 42, 0.98);
     border: 1px solid rgba(148, 163, 184, 0.7);
     color: #f9fafb;
     display: flex;
@@ -794,109 +943,8 @@ body.reduced-motion * {
     cursor: pointer;
 }
 
-/* LOADING OVERLAY */
-.loader {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at top, #020617, #020617 40%, #020617 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
-
-.loader.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.loader-inner {
-    padding: 22px 24px 18px 24px;
-    border-radius: 22px;
-    background: rgba(15, 23, 42, 0.98);
-    border: 1px solid rgba(148, 163, 184, 0.8);
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95);
-    min-width: 280px;
-}
-
-.loader-top {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-.loader-logo {
-    width: 34px;
-    height: 34px;
-    border-radius: 999px;
-    background: radial-gradient(circle at 20% 0%, #facc15, #f97316);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #111827;
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-}
-
-.loader-title-text {
-    font-size: 0.86rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #e5e7eb;
-}
-
-.loader-sub {
-    font-size: 0.86rem;
-    color: #9ca3af;
-    margin-bottom: 10px;
-}
-
-.loader-progress {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-}
-
-.loader-bar-outer {
-    flex: 1;
-    height: 4px;
-    border-radius: 999px;
-    background: rgba(31, 41, 55, 0.9);
-    overflow: hidden;
-}
-
-.loader-bar-inner {
-    width: 0%;
-    height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #facc15, #f97316);
-    animation: progressPulse 3s ease-in-out infinite;
-}
-
-.loader-label {
-    font-size: 0.78rem;
-    color: #9ca3af;
-}
-
-.loader-footer {
-    font-size: 0.8rem;
-    color: #facc15;
-}
-
-@keyframes progressPulse {
-    0% { width: 10%; }
-    40% { width: 70%; }
-    80% { width: 95%; }
-    100% { width: 100%; }
-}
-
-/* RESPONSIVE */
-@media (max-width: 960px) {
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
     .hero-grid {
         grid-template-columns: minmax(0, 1fr);
         gap: 32px;
@@ -920,44 +968,49 @@ body.reduced-motion * {
         flex-direction: column;
         align-items: flex-start;
     }
+    .testimonials-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
+
+/* END OF STYLES */
 </style>
 </head>
 <body>
 
 <!-- LOADING OVERLAY -->
 <div id="loader" class="loader" aria-hidden="false">
-    <div class="loader-inner">
-        <div class="loader-top">
+    <div class="loader-panel">
+        <div class="loader-head">
             <div class="loader-logo">RFN</div>
-            <div class="loader-title-text">Preparing v2.5</div>
+            <div class="loader-title">Preparing v2.5</div>
         </div>
         <div class="loader-sub">
-            Building your RFN experience and brewing a special congratulations for The Golden Mug.
+            Building your RFN hub and brewing a special congratulations for The Golden Mug.
         </div>
         <div class="loader-progress">
             <div class="loader-bar-outer">
                 <div class="loader-bar-inner"></div>
             </div>
-            <div class="loader-label" id="loaderLabel">Starting…</div>
+            <div id="loaderLabel" class="loader-label">Starting…</div>
         </div>
-        <div class="loader-footer">
+        <div class="loader-foot">
             A personal nod to The Golden Mug on its Grand Opening.
         </div>
     </div>
 </div>
 
 <!-- BACKGROUND DECOR -->
-<div class="layer-stars"></div>
-<div class="layer-orb orb-1"></div>
-<div class="layer-orb orb-2"></div>
-<div class="layer-orb orb-3"></div>
+<div class="bg-stars"></div>
+<div class="bg-orb orb-green"></div>
+<div class="bg-orb orb-gold"></div>
+<div class="bg-orb orb-blue"></div>
 
 <!-- NAVBAR -->
 <header class="nav">
     <div class="nav-inner">
         <div class="nav-left">
-            <div class="nav-mark">
+            <div class="nav-badge">
                 <span>RFN</span>
             </div>
             <div class="nav-title">
@@ -1043,27 +1096,27 @@ body.reduced-motion * {
             </div>
 
             <aside class="hero-orbit" aria-label="RFN snapshot">
-                <div class="hero-card">
-                    <div class="hero-card-inner">
-                        <div class="hero-card-head">
-                            <div class="hero-card-title">Network Snapshot</div>
-                            <div class="hero-card-chip">Live · RFN v2.5</div>
+                <div class="hero-panel">
+                    <div class="hero-panel-inner">
+                        <div class="hero-panel-head">
+                            <div class="hero-panel-title">Network snapshot</div>
+                            <div class="hero-panel-chip">Live · RFN v2.5</div>
                         </div>
-                        <div class="hero-orbit-ring">
-                            <div class="hero-orbit-core-row">
-                                <div class="hero-orbit-core">RFN</div>
-                                <div class="hero-orbit-text">
+                        <div class="network-ring">
+                            <div class="network-row">
+                                <div class="network-core">RFN</div>
+                                <div class="network-text">
                                     One framework, many brands. RFN holds the structure so each partner can focus on craft,
                                     culture, and community.
                                 </div>
                             </div>
-                            <div class="hero-orbit-meta">
-                                <div class="hero-orbit-pill">Franchise Infrastructure</div>
-                                <div class="hero-orbit-pill">Customer & Staff Portals</div>
-                                <div class="hero-orbit-pill">Long-Term Operational Support</div>
+                            <div class="network-tags">
+                                <div class="network-pill">Franchise Infrastructure</div>
+                                <div class="network-pill">Customer & Staff Portals</div>
+                                <div class="network-pill">Long-Term Operational Support</div>
                             </div>
                         </div>
-                        <div class="hero-card-foot">
+                        <div class="hero-panel-foot">
                             <span>Ready to formalize your game into a franchise?</span>
                             <a href="https://forms.gle/c9K4Xh6i7BNyiBo38" target="_blank" rel="noopener noreferrer"
                                class="btn-ghost" style="padding:6px 10px; font-size:0.78rem;">
@@ -1101,7 +1154,8 @@ body.reduced-motion * {
                 </p>
                 <p class="golden-text">
                     Here is to long nights of planning that finally paid off, to returning guests who turn into regulars,
-                    and to a future where people say “Let’s meet at The Golden Mug” with a smile. Congratulations on your Grand Opening.
+                    and to a future where people say “Let’s meet at The Golden Mug” with a smile.
+                    Congratulations on your Grand Opening.
                 </p>
 
                 <div class="golden-chips">
@@ -1136,7 +1190,6 @@ Signed,
 Executive_Eagle
 Chief Executive Officer of the Robloxian Franchise Network
 Office of the Ownership for RFN
-
                     </div>
                 </div>
             </div>
@@ -1213,13 +1266,13 @@ Office of the Ownership for RFN
         </div>
 
         <div class="why-grid">
-            <div class="why-card-main">
+            <div class="why-main">
                 <p>
                     RFN exists to solve a specific problem: great ideas without a framework to hold them.
                     By pairing Roblox creators with professional-grade systems, RFN makes it possible to launch,
                     grow, and sustain experiences that feel intentional from day one.
-                    Everything—from agreements and applications to customer portals and onboarding—is designed around a simple question:
-                    what will still be working a year from now, not just a week from now?
+                    Everything—from agreements and applications to customer portals and onboarding—is designed
+                    around a simple question: what will still be working a year from now, not just a week from now?
                 </p>
             </div>
             <div class="why-list">
@@ -1232,6 +1285,66 @@ Office of the Ownership for RFN
                 <div class="why-item">
                     A focus on healthy, sustainable operations instead of short-term hype and burnout.
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider shell"><div class="divider-line"></div></div>
+
+    <!-- TESTIMONIALS -->
+    <section class="section shell" aria-labelledby="testimonialsTitle">
+        <div class="section-head">
+            <div>
+                <div class="section-label">Voices from the network</div>
+                <h2 class="section-title" id="testimonialsTitle">
+                    What our partners <span>are saying</span>
+                </h2>
+            </div>
+            <p class="section-sub">
+                RFN is more than paperwork and portals. It is a framework that real owners and teams have built on.
+            </p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonials-intro">
+                <p>
+                    Every RFN partner starts with the same thing: an idea worth taking seriously.
+                    The difference is that they do not have to figure out the structure alone.
+                    From first staff hire to customer portals and agreements, RFN is designed so owners can
+                    spend more time leading people and less time fighting systems.
+                </p>
+            </div>
+
+            <div class="testimonials-cards">
+                <article class="testimonial-card">
+                    <div class="testimonial-quote-mark">“</div>
+                    <div class="testimonial-text">
+                        COMING SOON
+                    </div>
+                    <div class="testimonial-meta">
+                        COMING SOON
+                    </div>
+                </article>
+
+                <article class="testimonial-card">
+                    <div class="testimonial-quote-mark">“</div>
+                    <div class="testimonial-text">
+                        COMING SOON
+                    </div>
+                    <div class="testimonial-meta">
+                        COMING SOON
+                    </div>
+                </article>
+
+                <article class="testimonial-card">
+                    <div class="testimonial-quote-mark">“</div>
+                    <div class="testimonial-text">
+                       COMING SOON
+                    </div>
+                    <div class="testimonial-meta">
+                        COMING SOON
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -1260,12 +1373,12 @@ Office of the Ownership for RFN
 
             <article class="team-card">
                 <div class="team-name">Cadeynm1</div>
-                <div class="team-role">President & Temporary Director of Operations</div>
+                <div class="team-role">President</div>
             </article>
 
             <article class="team-card">
                 <div class="team-name">Cami</div>
-                <div class="team-role">Vice President & Temporary Director of Relations</div>
+                <div class="team-role">Vice President</div>
             </article>
 
             <article class="team-card">
@@ -1379,7 +1492,7 @@ function toggleReducedMotion() {
 
 /* LOADER BEHAVIOR */
 var loaderStart = Date.now();
-var MIN_LOADER_TIME = 2000; // milliseconds
+var MIN_LOADER_TIME = 2600; // ms
 var loaderTexts = [
     'Starting…',
     'Linking franchises…',
