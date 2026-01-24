@@ -569,96 +569,6 @@ body.reduced-motion *{
     background:linear-gradient(90deg,transparent,rgba(148,163,184,.75),transparent);
 }
 
-/* =============== GOLDEN MUG SECTION =============== */
-.golden-card{
-    position:relative;
-    padding:22px 24px 20px 24px;
-    border-radius:28px;
-    background:linear-gradient(150deg,#0b1120,#020617 60%,#111827 100%);
-    border:1px solid rgba(250,204,21,.6);
-    box-shadow:0 32px 90px rgba(0,0,0,.96);
-    overflow:hidden;
-}
-.golden-card::before{
-    content:"";
-    position:absolute;
-    inset:-25%;
-    background:
-        radial-gradient(circle at 0% 0%,rgba(250,204,21,.2),transparent 55%),
-        radial-gradient(circle at 100% 0%,rgba(248,250,252,.18),transparent 55%);
-    mix-blend-mode:screen;
-    opacity:.9;
-    pointer-events:none;
-}
-.golden-inner{
-    position:relative;
-    z-index:1;
-}
-.golden-tag{
-    font-size:.78rem;
-    text-transform:uppercase;
-    letter-spacing:.16em;
-    color:#fef9c3;
-    margin-bottom:6px;
-}
-.golden-heading{
-    font-size:1.3rem;
-    color:#fefce8;
-    margin-bottom:6px;
-}
-.golden-text{
-    font-size:.9rem;
-    color:#fefce8;
-    margin-bottom:10px;
-}
-.golden-chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:10px;
-}
-.golden-chip{
-    padding:4px 10px;
-    border-radius:999px;
-    border:1px solid rgba(250,204,21,.8);
-    background:rgba(24,16,4,.96);
-    font-size:.76rem;
-    color:#fef9c3;
-}
-
-/* PRESS PANEL */
-.press-toggle{
-    margin-top:4px;
-}
-.btn-press{
-    padding:7px 12px;
-    border-radius:999px;
-    border:1px solid rgba(15,23,42,.9);
-    font-size:.8rem;
-    background:rgba(248,250,252,.96);
-    color:#111827;
-    cursor:pointer;
-}
-.press-panel{
-    margin-top:10px;
-    padding:0 12px;
-    border-radius:16px;
-    background:rgba(15,23,42,.98);
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .35s ease,padding-top .35s ease,padding-bottom .35s ease;
-}
-.press-panel.open{
-    max-height:540px;
-    padding-top:10px;
-    padding-bottom:10px;
-}
-.press-text{
-    font-size:.88rem;
-    color:#e5e7eb;
-    white-space:pre-wrap;
-}
-
 /* =============== FEATURES =============== */
 .features-grid{
     display:grid;
@@ -900,7 +810,7 @@ body.reduced-motion *{
             <div class="loader-title">Loading RFN v2.5</div>
         </div>
         <div class="loader-sub">
-            Preparing your RFN control center and celebrating The Golden Mug’s Grand Opening.
+            Preparing your RFN control center.
         </div>
         <div class="loader-progress">
             <div class="loader-bar-outer">
@@ -909,7 +819,7 @@ body.reduced-motion *{
             <div id="loaderLabel" class="loader-label">Starting…</div>
         </div>
         <div class="loader-foot">
-            A personal congratulations to The Golden Mug on its Grand Opening.
+            Structure. Accountability. Longevity.
         </div>
     </div>
 </div>
@@ -942,7 +852,6 @@ body.reduced-motion *{
             <a class="nav-link" href="https://forms.gle/YicvDZ7UUN51y7xw6" target="_blank" rel="noopener noreferrer">
                 Renew Agreement
             </a>
-            <a class="nav-cta" href="#golden-mug">Golden Mug Grand Opening</a>
         </nav>
 
         <button class="nav-toggle" type="button" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
@@ -958,7 +867,6 @@ body.reduced-motion *{
             <a class="nav-link" href="https://forms.gle/YicvDZ7UUN51y7xw6" target="_blank" rel="noopener noreferrer" onclick="closeNav()">
                 Renew Agreement
             </a>
-            <a class="nav-cta" href="#golden-mug" onclick="closeNav()">Golden Mug Opening</a>
         </div>
     </div>
 </header>
@@ -1000,13 +908,6 @@ body.reduced-motion *{
                         Explore RFN Features
                     </a>
                 </div>
-
-                <div class="hero-ribbon">
-                    <span class="hero-ribbon-pill">Announcement</span>
-                    <a href="#golden-mug" style="color:#9ca3af;text-decoration:none;">
-                        Personal congratulations to The Golden Mug on its Grand Opening →
-                    </a>
-                </div>
             </div>
 
             <aside class="hero-orbit" aria-label="RFN snapshot">
@@ -1042,72 +943,6 @@ body.reduced-motion *{
                 </div>
             </aside>
         </div>
-    </section>
-
-    <!-- GOLDEN MUG -->
-    <section id="golden-mug" class="section page-shell" aria-labelledby="goldenTitle">
-        <div class="section-head">
-            <div>
-                <div class="section-label">Official RFN announcement</div>
-                <h2 class="section-title" id="goldenTitle">
-                    Celebrating <span>The Golden Mug</span>
-                </h2>
-            </div>
-            <p class="section-sub">
-                A massive, personal congratulations from RFN leadership on your Grand Opening.
-                This is more than a launch; it is the beginning of a legacy.
-            </p>
-        </div>
-
-        <article class="golden-card">
-            <div class="golden-inner">
-                <div class="golden-tag">Grand opening · milestone</div>
-                <h3 class="golden-heading">The Golden Mug has officially opened its doors.</h3>
-                <p class="golden-text">
-                    To The Golden Mug team: RFN is incredibly proud to stand beside you on this day.
-                    From first concept to first guest, you have built something warm, intentional, and worthy of the RFN family.
-                </p>
-                <p class="golden-text">
-                    Here is to long nights of planning that finally paid off, to returning guests who turn into regulars,
-                    and to a future where people say “Let’s meet at The Golden Mug” with a smile.
-                    Congratulations on your Grand Opening.
-                </p>
-
-                <div class="golden-chips">
-                    <div class="golden-chip">Official RFN Endorsement</div>
-                    <div class="golden-chip">Grand Opening Celebration</div>
-                    <div class="golden-chip">Built under RFN Structure</div>
-                </div>
-
-                <div class="press-toggle">
-                    <button class="btn-press" type="button" onclick="togglePress()">
-                        View Press Release
-                    </button>
-                </div>
-                <div id="pressPanel" class="press-panel" aria-hidden="true">
-                    <div class="press-text">
-OFFICIAL RFN PRESS RELEASE
-From the Office of the Ownership Team of The Robloxian Franchise Network
-For Immediate Release.
-
-On behalf of the Robloxian Franchise Network, we want to extend a formal congratulations to The Golden Mug for their official grand opening. The ceremony was held today (January 11, 2026) at 2:00 PM Eastern Standard Time. The opening ceremony was tied together with wonderful speeches by members of their staff team. It was not only a pleasure to be there but also to help them to better themselves.
-
-We want to congratulate them on the many hours and all of the hard work that went into the development of their game. It has truly been a pleasure to work alongside the many hands that made it possible. 
-
-We want to especially recognize the hard work of the group’s owner, RDAWG1112, for his never-ending support, development, and overall leadership of The Golden Mug. This launch serves not only as a new chapter for TGM but also as a great accomplishment to RDAWG1112
-
-We continue to support The Golden Mug as it moves onto its next chapter.
-
-Once again, the Robloxian Franchise Network extends a most sincere congratulations.
-
-Signed,
-Executive_Eagle
-Chief Executive Officer of the Robloxian Franchise Network
-Office of the Ownership for RFN
-                    </div>
-                </div>
-            </div>
-        </article>
     </section>
 
     <div class="divider page-shell"><div class="divider-line"></div></div>
@@ -1211,7 +1046,7 @@ Office of the Ownership for RFN
             <div>
                 <div class="section-label">Voices from the network</div>
                 <h2 class="section-title" id="testimonialsTitle">
-                    Testimonials <span>coming soon</span>
+                    Testimonials <span>Here now!</span>
                 </h2>
             </div>
             <p class="section-sub">
@@ -1230,13 +1065,15 @@ Office of the Ownership for RFN
 
             <div class="testimonial-cards">
                 <article class="testimonial-card">
-                    <div class="testimonial-label">Owner feedback</div>
-                    <div class="testimonial-coming">COMING SOON</div>
-                </article>
-
-                <article class="testimonial-card">
-                    <div class="testimonial-label">Staff experience</div>
-                    <div class="testimonial-coming">COMING SOON</div>
+                    <div class="testimonial-label">Customer Experience</div>
+                    <div class="testimonial-coming">"Hello, I am RDAWG1112.
+                        I just wanted to briefly recommend RFN. RFN has been part of my company for a few weeks now. 
+                        I believe that they have helped me in making it better; I have gotten many upon many ideas from them. 
+                        They are ALWAYS professional, no matter what. I appreciate everything they do, if you need a web development team or any type of development.
+                        Choose RFN, if I do not get any other message out please choose RFN. I have had an awesome experience with them in these past weeks. 
+                        But I just wanted to write this. Thank you!" 
+                        -RDAWG1113 (The Golden Mug Owner)
+                    </div>
                 </article>
             </div>
         </div>
@@ -1266,16 +1103,16 @@ Office of the Ownership for RFN
 
             <article class="team-card">
                 <div class="team-name">Cadeynm1</div>
-                <div class="team-role">President & Temporary Director of Operations</div>
+                <div class="team-role">President</div>
             </article>
 
             <article class="team-card">
                 <div class="team-name">Cami</div>
-                <div class="team-role">Vice President & Temporary Director of Relations</div>
+                <div class="team-role">Vice President</div>
             </article>
 
             <article class="team-card">
-                <div class="team-name">Morgan</div>
+                <div class="team-name">Vacant, to be filled</div>
                 <div class="team-role">Vice President</div>
             </article>
         </div>
@@ -1316,7 +1153,7 @@ Office of the Ownership for RFN
 
 <!-- FOOTER -->
 <footer class="footer page-shell">
-    <div>© 2025 RFN — Designed for the future of Roblox game creation.</div>
+    <div>© 2026 RFN — Designed for the future of Roblox game creation.</div>
     <div>Terms of Service & Privacy Policy available via the navigation bar.</div>
 </footer>
 
@@ -1343,15 +1180,6 @@ function closeNav(){
     var mobile=document.getElementById('navMobile');
     if(!mobile)return;
     mobile.style.display='none';
-}
-
-/* PRESS PANEL */
-function togglePress(){
-    var panel=document.getElementById('pressPanel');
-    if(!panel)return;
-    var isOpen=panel.classList.contains('open');
-    panel.classList.toggle('open');
-    panel.setAttribute('aria-hidden',isOpen?'true':'false');
 }
 
 /* ACCESSIBILITY PANEL */
